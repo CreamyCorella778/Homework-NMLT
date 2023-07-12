@@ -1,0 +1,12 @@
+Email,Password
+ltathao@fit.hcmus.edu.vn,ltathao
+ntmphuc@fit.hcmus.edu.vn,ntmphuc
+hatu@fit.hcmus.edu.vn,hatu
+nlhdung@fit.hcmus.edu.vn,nlhdung
+ptnghia@fit.hcmus.edu.vn,ptnghia
+htbtran@fit.hcmus.edu.vn,htbtran
+kvmduc@fit.hcmus.edu.vn,kvmduc
+ctlinh@fit.hcmus.edu.vn,ctlinh
+lnnam@fit.hcmus.edu.vn,lnnnam
+ndloc@fit.hcmus.edu.vn,ndloc
+ltthu@fit.hcmus.edu.vn,ltthu
