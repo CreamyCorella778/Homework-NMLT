@@ -4,3 +4,6 @@
 #include <string>
 #include <cstring>
 #include <math.h>
+#include <fstream>
+
+using namespace std;
