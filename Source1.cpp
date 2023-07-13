@@ -2,40 +2,35 @@
 
 int countLinesInCSV(string fname)
 {
-	ofstream fp;
+	ifstream fp;
 	fp.open(fname, ios::in);
 	if (fp.is_open() == false)
 		return -1;
 	else
 	{
-		int count = 0; char a;
-		while(!fp.eof())
-		{
-			fp << a;
-			if (a - '\n' == 0)
-				count++;
-		}
+		int count = 0; string a;
+		while (getline(fp, a))
+			count++;
 		fp.close();
-		return count + 1;
+		return count;
 	}
 }
 
 bool readLoginIn4(string fname, string** &container, int& col, int& row)
 {
+	row = countLinesInCSV(fname); col = 2;
 	ifstream fp;
 	fp.open(fname, ios::in);
 	if (fp.is_open() == false)
 		return false;
 	else
 	{
-		row = countLinesInCSV(fname), col = 2;
 		container = new string * [row];
 		for (int i = 0; i < row; ++i)
 		{
 			container[i] = new string[col];
-			fp.ignore();
-			fp.getline(container[i][0], 40, ',');
-			fp.getline(container[i][1], 40, '\n');
+			getline(fp, container[i][0], ',');
+			getline(fp, container[i][1], '\n');
 		}
 		fp.close();
 		return true;
@@ -50,7 +45,7 @@ int checkExistEmail(string** container, int row, string email)
 	return -1;
 }
 
-bool loginSystem(string fname)
+bool loginSystem(string fname, string &email)
 {
 	string** loginData; int row = 0, col = 0;
 	bool doc = readLoginIn4(fname, loginData, col, row);
@@ -61,32 +56,32 @@ bool loginSystem(string fname)
 	}
 	else
 	{
-		string email, pass;
+		string pass;
 		int email_exist, count = 0;
 		do
 		{
-			cout << "So lan co dang nhap: " << count << ". Ban chi co 5 lan thu. Nhap email: "; cin.getline(email, 40);
+			cout << "So lan da dang nhap: " << count << ". Ban chi co 5 lan thu. Nhap email: "; getline(cin, email, '\n');
 			email_exist = checkExistEmail(loginData, row, email);
 			count++;
 		} while (email_exist == -1 && count != 5);
-		if (count == 5)
-		{
-			cout << "Ban da het so lan dang nhap. Chuc ban may man lan sau. ";
-			return false;
-		}
-		else if (email_exist != 1)
+		if (email_exist != -1)
 		{
 			count = 0;
 			do
 			{
-				cout << "So lan co dang nhap: " << count << ". Ban chi co 5 lan thu. Nhap mat khau: "; cin.getline(pass, 40);
+				cout << "So lan co dang nhap: " << count << ". Ban chi co 5 lan thu. Nhap mat khau: "; getline(cin, pass, '\n');
 				count++;
 			} while (pass.compare(loginData[email_exist][1]) != 0 && count != 5);
-		}
-		if (pass.compare(loginData[email_exist][1]) == 0)
-		{
-			cout << "Dang nhap thanh cong. " << endl;
-			return true;
+			if (pass.compare(loginData[email_exist][1]) == 0)
+			{
+				cout << "Dang nhap thanh cong. " << endl;
+				return true;
+			}
+			else if (count == 5)
+			{
+				cout << "Ban da het so lan dang nhap. Chuc ban may man lan sau. ";
+				return false;
+			}
 		}
 		else if (count == 5)
 		{
@@ -96,14 +91,54 @@ bool loginSystem(string fname)
 	}
 }
 
-void changePassword()
+void changePassword(string fname, string email)
 {
-
+	string pass, pass_again; int count = 0;
+	cout << "Nhap mat khau moi: "; cin >> pass;
+	do
+	{
+		cout << "Ban co " << 5 - count << " lan nhap. Nhap lai mat khau moi : "; cin >> pass_again;
+		count++;
+	} 
+	while (pass.compare(pass_again) != 0 && count != 5);
+	if (pass.compare(pass_again) == 0)
+	{
+		string** container; int row = 0, col = 0;
+		readLoginIn4(fname, container, col, row);
+		int i = 0;
+		for (i; container[i][0].compare(email) != 0; ++i);
+		container[i][1] = pass_again;
+		ofstream fp;
+		fp.open(fname, ios::trunc);
+		if (fp.is_open() == false)
+		{
+			cout << "Mo tep that bai. Chuc ban may man lan sau. ";
+			return;
+		}
+		else
+		{
+			for (i = 0; i < row; ++i)
+			{
+				fp << container[i][0];
+				fp << ",";
+				fp << container[i][1];
+				fp << "\n";
+			}
+			fp.close();
+			cout << "Doi mat khau thanh cong." << endl;
+			return;
+		}
+	}
+	else if (count == 5)
+	{
+		cout << "Ban da het so lan nhap. Chuc ban may man lan sau. " << endl;
+		return;
+	}
 }
 
 void printProfileInfo()
 {
-
+	
 }
 
 void logout()
