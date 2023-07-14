@@ -15,6 +15,21 @@ struct Date
 	int year;
 };
 
+struct SchoolYear
+{
+	int yStart;
+	int yEnd;
+	string schYr;
+};
+
+struct Class
+{
+	SchoolYear year;
+	string eduProgr;
+	int no;
+	string cls;
+};
+
 struct Course
 {
 	string id;
@@ -42,16 +57,29 @@ struct Student
 	bool gender; //true = male, false = female
 	Date birth;
 	string socialID;
+	string eduProgr;
+	Class cls;
+	void addClass(Class a)
+	{
+		this->cls = a;
+	}
 };
 
 struct Semester
 {
 	int order;
-	int yearStart;
-	int yearEnd;
+	SchoolYear sy;
 	Date startDate;
 	Date endDate;
 };
 
 bool loginSystem(string fname, string& email);
 void changePassword(string fname, string email);
+int countLinesInCSV(string fname);
+
+//---------------------------------------------------------------------
+
+SchoolYear createSchoolYear(int yearStart, int yearEnd);
+void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end);
+Class* createClasses(SchoolYear sy, string eduProg, int start, int end);
+Student* addStudentsFromCSV(string fname, int& n);
