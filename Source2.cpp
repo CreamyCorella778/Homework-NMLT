@@ -63,6 +63,8 @@ Class* createClasses(SchoolYear sy, string eduProg, int start, int end)
 		a[i].year = sy;
 		a[i].no = start + i;
 		a[i].cls = to_string(sy.yStart % 100).append(eduProg).append(to_string(start + i));
+		Node<Class> b; b.init(a[i]);
+		addLast(system.allClass, b);
 	}
 	return a;
 }
@@ -94,6 +96,16 @@ int extractNo(string fname)
 	return atoi(a.c_str());
 }
 
+Class createClass(string cl)
+{
+	Class a;
+	a.eduProgr = extractEduProg(cl);
+	a.year = extractSchoolYear(cl);
+	a.no = extractNo(cl);
+	a.cls = cl;
+	return a;
+}
+
 Date getNS(string birth) 
 {
 	int* ngay_sinh = new int[2]; int j = 0; char* ngsinh = new char[birth.length()];
@@ -122,9 +134,8 @@ Date getNS(string birth)
 	return ket_qua;
 }
 
-Student* addStudentsFromCSV(string fname, int& n)
+Student* addStudentsFromCSV(string fname, int& n, Class &lop)
 {
-	Class lop;
 	lop.eduProgr = extractEduProg(fname);
 	lop.year = extractSchoolYear(fname);
 	lop.no = extractNo(fname);
@@ -151,7 +162,6 @@ Student* addStudentsFromCSV(string fname, int& n)
 			getline(fp, title, ',');
 			stuList[i].birth = getNS(title);
 			getline(fp, stuList[i].socialID, '\n');
-			stuList[i].eduProgr = lop.eduProgr;
 			stuList[i].addClass(lop);
 		}
 		fp.close();
