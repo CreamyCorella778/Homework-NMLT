@@ -1,4 +1,5 @@
 #include "Header1.h"
+#include "Header2.h"
 
 void getYears(int& yearStart, int& yearEnd)
 {
@@ -63,8 +64,8 @@ Class* createClasses(SchoolYear sy, string eduProg, int start, int end)
 		a[i].year = sy;
 		a[i].no = start + i;
 		a[i].cls = to_string(sy.yStart % 100).append(eduProg).append(to_string(start + i));
-		Node<Class> b; b.init(a[i]);
-		addLast(system.allClass, b);
+		Node<Class>* b; b->init(a[i]);
+		addLast(systems.allClass, b);
 	}
 	return a;
 }
@@ -134,7 +135,7 @@ Date getNS(string birth)
 	return ket_qua;
 }
 
-Student* addStudentsFromCSV(string fname, int& n, Class &lop)
+bool addStudentsFromCSV(string fname, int& n, Class &lop)
 {
 	lop.eduProgr = extractEduProg(fname);
 	lop.year = extractSchoolYear(fname);
@@ -142,30 +143,31 @@ Student* addStudentsFromCSV(string fname, int& n, Class &lop)
 	ifstream fp;
 	fp.open(fname, ios::in);
 	if (fp.is_open() == false)
-		return nullptr;
+		return false;
 	else
 	{
 		n = countLinesInCSV(fname) - 1;
-		Student* stuList = new Student[n];
-		string title; getline(fp, title, '\n');
-		for (int i = 0; i < n; ++i)
+		string container; getline(fp, container, '\n');
+		while (fp.eof() == false)
 		{
-			getline(fp, title, ','); stuList[i].no = atoi(title.c_str());
-			getline(fp, stuList[i].stuID, ',');
-			getline(fp, stuList[i].firstName, ',');
-			getline(fp, stuList[i].lastName, ',');
-			getline(fp, title, ',');
-			if (title.compare("nam") == 0 || title.compare("Nam") == 0)
-				stuList[i].gender = true;
+			Student stu;
+			getline(fp, container, ','); stu.no = atoi(container.c_str());
+			getline(fp, stu.stuID, ',');
+			getline(fp, stu.firstName, ',');
+			getline(fp, stu.lastName, ',');
+			getline(fp, container, ',');
+			if (container.compare("nam") == 0 || container.compare("Nam") == 0)
+				stu.gender = true;
 			else
-				stuList[i].gender = false;
-			getline(fp, title, ',');
-			stuList[i].birth = getNS(title);
-			getline(fp, stuList[i].socialID, '\n');
-			stuList[i].addClass(lop);
+				stu.gender = false;
+			getline(fp, container, ',');
+			stu.birth = getNS(container);
+			getline(fp, stu.socialID, '\n');
+			Node<Student>* node; node->init(stu);
+			addLast(lop.stuList, node);
 		}
 		fp.close();
-		return stuList;
+		return true;
 	}
 }
 

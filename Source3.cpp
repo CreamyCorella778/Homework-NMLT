@@ -1,4 +1,5 @@
 #include "Header1.h"
+#include "Header2.h"
 
 void getSemesterIn4(int& no, SchoolYear& sy, Date& sd, Date& ed)
 {
@@ -24,10 +25,10 @@ Semester createSemester(int no, SchoolYear sy, Date sd, Date ed)
 	return sem;
 }
 
-string* extractCId_cl_sno_sy(string fname) // CSV file is courseid_classname_semnumber_schoolyear.txt
+string* extractCId_cl_sno_sy(string fname) // CSV file is courseid_classname_semnumber.txt
 {
-	int j = 0; string* idAndName = new string[4];
-	for (int i = 0; i < 4; ++i)
+	int j = 0; string* idAndName = new string[3];
+	for (int i = 0; i < 3; ++i)
 		for (j; fname[j] - '_' == 0 || fname[j] - '.' == 0; ++j)
 			idAndName[i].push_back(fname[j]);
 	return idAndName;
@@ -51,7 +52,86 @@ void getCourseIn4(Course &a)
 	cin >> a.session;
 }
 
-void addCoursetoSemester(string fname) // CSV file is semesternumber_schoolyear.txt
+void addCoursetoSemester(Course a, Semester sem) 
 {
-
+	Node<Course> node; node.init(a);
+	addLast(systems.allCourse[sem.number - 1], node);
 }
+
+void viewCourse(Course a)
+{
+	cout << a.id
+		<< " - " << a.courseName
+		<< ", cua giang vien " << a.teacher << ", lop " << a.lop.cls
+		<< ", " << a.credits
+		<< " tin chi, toi da " << a.capacity << " hoc sinh, thoi gian: thu "
+		<< a.dayInWeek << ", tiet " << a.session << ", hoc ki " << a.sem.number << endl;
+}
+
+void viewCourses(Semester sem)
+{
+	cout << "Cac khoa hoc cua hoc ki " << sem.number << ", nam hoc " << sem.sy.schYr << ":" << endl;
+	for (Node<Course>* i = systems.allCourse[sem.number - 1].head; i != nullptr; i = i->next)
+		viewCourse(i->data);
+	cout << endl << endl;
+}
+
+void getIn4toUpdateCourse(string& courseID, string& cl)
+{
+	cout << "Nhap ma hoc phan can cap nhat: "; cin >> courseID;
+	cout << "Nhap ten lop hoc cua hoc phan: "; cin >> cl;
+}
+
+void updateCourse(string courseID, string cl, Semester sem)
+{
+	Node<Course>* i = systems.allCourse[sem.number - 1].head;
+	for (i; !(i->data.id == courseID && i->data.lop.cls == cl); i = i->next)
+		continue;
+	i->data.id = courseID;
+	i->data.lop = createClass(cl);
+}
+
+string* extractFirstLastName(string name)
+{
+	string* names = new string[2]; string last_space = " ";
+	int index = name.find_last_of(last_space);
+	for (int i = 0; i < index; ++i)
+		names[0].push_back(name[i]);
+	for (int i = index + 1; i < name.length(); ++i)
+		names[1].push_back(name[i]);
+	return names;
+}
+
+void getStudentIn4(Student& a)
+{
+	string container;
+	cout << "Nhap ten sinh vien: "; getline(cin, container);
+	a.firstName = extractFirstLastName(container)[0];
+	a.lastName = extractFirstLastName(container)[1];
+	cout << "Nhap ma so sinh vien: "; getline(cin, a.stuID);
+	int i = 0;
+	cout << "Nhap gioi tinh: 1 neu a nam, 0 neu la nu: "; cin >> i;
+	a.gender = i == 0 ? false : true;
+	cout << "Nhap ngay thang nam sinh (dang dd/mm/yyyy): "; cin >> container;
+	a.birth = getNS(container);
+	cout << "Nhap so can cuoc cong dan: "; getline(cin, a.socialID);
+}
+
+void addStudentToCourse(Student st, Course& c)
+{
+	st.no = countNodes(c.stuList.head) + 1;
+	Node<Student>* node; node->init(st);
+	addLast(c.stuList, node);
+}
+
+void removeStudentFromCourse(Student st, Course& c)
+{
+	st.no = 0;
+	removeRandomNode(c.stuList, st);
+}
+
+void removeCourse(Course c, Semester sem)
+{
+	removeRandomNode(systems.allCourse[sem.number - 1], c)
+}
+
