@@ -134,6 +134,9 @@
     <ClCompile Include="Source4.cpp" />
     <ClCompile Include="Source5.cpp" />
     <ClCompile Include="Source6.cpp" />
+    <ClCompile Include="Source7.cpp" />
+    <ClCompile Include="Source8.cpp" />
+    <ClCompile Include="Source9.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header1.h" />

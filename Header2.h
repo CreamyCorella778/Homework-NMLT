@@ -1,4 +1,7 @@
 #pragma once
+#include <string>
+#include <cstring>
+#include <math.h>
 #include "Header1.h"
 
 void initSystems();

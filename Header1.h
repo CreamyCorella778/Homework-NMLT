@@ -1,9 +1,6 @@
 #pragma once
 #include <iostream>
 #include <iomanip>
-#include <string>
-#include <cstring>
-#include <math.h>
 #include <fstream>
 #include "Header2.h"
 
@@ -132,3 +129,4 @@ void removeCourse(Course c, Semester sem);
 //----------------------------------------------------------------------
 
 
+#include "Source4.cpp"
