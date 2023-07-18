@@ -1,15 +1,15 @@
 #include "Header1.h"
 #include "Header2.h"
 
-bool writeStudentsInCourse(string fname, Course cour)
+bool writeStudentsInCourse(string fname, Course cour) // fname = courseid_classname_semnumber.txt
 {
 	ofstream fp;
-	fp.open(fname, ios::trunc); // fname = courseid_classname.txt
+	fp.open(fname, ios::trunc); 
 	if (fp.is_open() == false)
 		return false;
 	else
 	{
-		fp << "No,Student ID,First name,Last name,Gender,Date of Birth,SocialID\n";
+		fp << "No,Student ID,First name,Last name,Gender,Date of Birth,SocialID,MidTerm,Final,Other,Total\n";
 		if (cour.stuList.head == cour.stuList.tail && cour.stuList.head == nullptr)
 		{
 			fp.close();
@@ -35,3 +35,149 @@ bool writeStudentsInCourse(string fname, Course cour)
 		}
 	}
 }
+
+bool findCourse(string courseID, string className, int semNum, Course& found)
+{
+	for (Node<Course>* i = systems.allCourse[semNum - 1].head; i != nullptr; i = i->next)
+		if (i->data.id.compare(courseID) == 0 && i->data.lop.cls.compare(className) == 0)
+		{
+			found = i->data;
+			return true;
+		}
+	return false;
+}
+
+LList<Scoreboard> readScoreBoard(string fname, bool& isDone) // fname = courseid_classname_semnumber.txt
+{
+	LList<Scoreboard> scb; scb.init();
+	string* in4 = extractCId_cl_sno(fname);
+	ifstream fp;
+	fp.open(fname, ios::in);
+	if (!fp.is_open())
+	{
+		isDone = false;
+		return scb;
+	}
+	else
+	{
+		string container;
+		getline(container, '\n');
+		while (!fp.eof())
+		{
+			Scoreboard a; findCourse(in4[0], in4[1], stoi(in4[2][0]), a.course);
+			getline(fp, container, ','); a.student.no = atoi(container.c_str());
+			getline(fp, a.student.stuID, ",");
+			getline(fp, a.student.firstName, ",");
+			getline(fp, a.student.lastName, ",");
+			getline(fp, container, ',');
+			if (container.compare("nam") == 0 || container.compare("Nam") == 0)
+				a.student.gender = true;
+			else
+				a.student.gender = false;
+			getline(fp, container, ',');
+			a.student.birth = getNS(container);
+			getline(fp, a.student.socialID, ',');
+			getline(fp, container, ','); a.midTerm = atof(container.c_str());
+			getline(fp, container, ','); a.Final = atof(container.c_str());
+			getline(fp, container, ','); a.Other = atof(container.c_str());
+			getline(fp, container, '\n'); a.Total = atof(container.c_str());
+			Node<Scoreboard>* node; node->init(a);
+			addLast(scb, node);
+		}
+		fp.close();
+		isDone = true;
+		return scb;
+	}
+}
+
+void viewScoreBoard(Student a)
+{
+	cout << "bang diem cua hoc sinh " << a.firstName << " " << a.lastName << ":" << endl;
+	{
+		cout << fixed << setprecision(3);
+		cout << "Diem giua ky: " << a.marks.midTerm << endl;
+		cout << "Diem cuoi ky: " << a.marks.Final << endl;
+		cout << "Diem khac: " << a.marks.Other << endl;
+		cout << "Diem tong: " << a.marks.Total << endl;
+	}
+}
+
+void viewScoreBoards(Course a)
+{
+	cout << "Bang diem cua hoc phan " << a.courseName << " cua lop " << a.lop.cls << ":" << endl;
+	for (Node<Scoreboard>* i = a.score.head; i != nullptr; i = i->next)
+		viewScoreBoard(i->data.student);
+	cout << endl << endl;
+}
+
+template <class T>
+T* realloc(T* ptr, size_t old_size, size_t new_size) {
+	if (ptr == nullptr) 
+		return new T[size];
+	if (new_size == 0) {
+		delete[] ptr;
+		return nullptr;
+	}
+	T* new_ptr = new T[new_size];
+	if (new_ptr != nullptr) 
+		memcpy(new_ptr, ptr, (new_size < old_size ? new_size : old_size) * sizeof(T));
+	delete[] ptr;
+	return new_ptr;
+}
+
+void getUpdateScbIn4(Student a, Course& cour, int*& option, float*& in4, int& n, int& semNum)
+{
+	option = new int[4]; in4 = new float[4]; n = 0; int temp = 0; bool yamete_kudasai = false; 
+	cout << "Hoc ki nay la hoc ki may?"; cin >> semNum; 
+	string tempp;
+	cout << "Nhap ma hoc phan cua hoc phan ban muon cap nhat diem: "; cin >> tempp;
+	findCourse(tempp, a.cl, semNum, cour);
+	do
+	{
+		cout << "Ban muon cap nhat diem nao cua sinh vien? Chon so tuong ung: " << endl;
+		cout << "1. Diem giua ki" << endl;
+		cout << "2. Diem cuoi ki" << endl;
+		cout << "3. Diem khac" << endl;
+		cout << "4. Diem tong: ";
+		cin >> option[n];
+		cout << "Nhap diem moi: "; cin >> in4[n]; ++n;
+		if (n == 4)
+			break;
+		cout << "Ban chi co toi da 4 lan cap nhat. So lan ban da dung la " << n << endl;
+		cout << "Ban co muon tiep tuc cap nhat nua khong? Chon so tuong ung: " << endl;
+		cin >> temp;
+		yamete_kudasai = temp == 0 ? false : true;
+	} while (yamete_kudasai);
+	if (n < 4)
+	{
+		option = realloc(option, 4, n);
+		in4 = realloc(in4, 4, n);
+	}
+}
+
+void updateScoreBoard(Student stu, Course cour, int* option, float* in4, int n)
+{
+	Node<Scoreboard>* node = stu.marks.head;
+	for (node; node != nullptr; node = node->next)
+		if (node->data.course.id == cour.id)
+			break;
+	if (node == nullptr)
+		return;
+	for (int i = 0; i < n; i++)
+		switch (option[i])
+		{
+		case 1:
+			node->data.midTerm = in4[i];
+			break;
+		case 2:
+			node->data.Final = in4[i];
+			break;
+		case 3:
+			node->data.Other = in4[i];
+			break;
+		case 4:
+			node->data.Total = in4[i];
+			break;
+		}
+}
+

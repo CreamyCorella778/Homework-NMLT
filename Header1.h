@@ -29,6 +29,10 @@ struct LList
 	}
 };
 
+struct Class;
+struct Scoreboard;
+struct Course;
+
 struct Date
 {
 	int day;
@@ -51,13 +55,6 @@ struct Semester
 	Date endDate;
 };
 
-struct Staff
-{
-	string name;
-	string email;
-	string address;
-};
-
 struct Student
 {
 	int no;
@@ -67,33 +64,9 @@ struct Student
 	bool gender; // true = male, false = female
 	Date birth;
 	string socialID;
-};
-
-struct Class
-{
-	SchoolYear year;
-	string eduProgr;
-	int no;
-	string cls;
-	LList<Student> stuList;
-};
-
-struct Course
-{
-	string id;
-	string courseName;
-	string teacher;
-	int credits;
-	int capacity;
-	Class lop;
-	int dayInWeek;
-	int session;
-	/* sess 1 starts at 7:30
-	*  sess 2 starts at 9:30
-	*  sess 3 starts at 13:30
-	*  sess 4 starts at 15:30 */
-	Semester sem;
-	LList<Student> stuList;
+	Class cl;
+	LList<Course> courses;
+	LList<Scoreboard> marks;
 };
 
 struct System
