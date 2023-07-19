@@ -44,3 +44,12 @@ Node<a>* findNode(LList<a> l, a data)
 			return i;
 	return nullptr;
 }
+
+template <class a>
+Node<a>* findNode(LList<a> l, int index)
+{
+	Node<a>* i = l.head; int j = 0;
+	for (i; j != index; i = i->next)
+		continue;
+	return i;
+}

@@ -15,7 +15,7 @@ LList<Course> courseAttending(Student stu, Semester sem)
 	for (Node<Course>* i = systems.allCourse[sem.number - 1].head; i != nullptr; i = i->next)
 		if (findNode(i->data.stuList, stu) != nullptr)
 		{
-			Node<Course>* node; node->init(i->data);
+			Node<Course>* node = new Node<Course>; node->init(i->data);
 			addLast(courseList, node);
 		}
 	return courseList;

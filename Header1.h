@@ -38,6 +38,10 @@ struct Date
 	int day;
 	int month;
 	int year;
+	bool isEqual(Date another)
+	{
+		return this->day == another.day && this->month == another.month && this->year == another.year;
+	}
 };
 
 struct SchoolYear
@@ -45,7 +49,12 @@ struct SchoolYear
 	int yStart;
 	int yEnd;
 	string schYr;
+	bool isEqual(SchoolYear another)
+	{
+		return this->yStart == another.yStart && this->yEnd == another.yEnd && this->schYr == another.schYr;
+	}
 };
+
 
 struct Semester
 {
@@ -53,6 +62,10 @@ struct Semester
 	SchoolYear sy;
 	Date startDate;
 	Date endDate;
+	bool isEqual(Semester another)
+	{
+		return this->number == another.number && this->sy.isEqual(another.sy) && this->startDate.isEqual(another.startDate) && this->endDate.isEqual(another.endDate);
+	}
 };
 
 struct Student

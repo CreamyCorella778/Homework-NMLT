@@ -11,6 +11,10 @@ struct Class
 	int no;
 	string cls;
 	LList<Student> stuList;
+	bool isEqual(Class another)
+	{
+		return (this->year.isEqual(another.year)) && (this->eduProgr == another.eduProgr) && this->no == another.no && this->cls == another.cls;
+	}
 };
 
 struct Scoreboard
@@ -60,5 +64,6 @@ void getYears(int& yearStart, int& yearEnd);
 Class createClass(string cl);
 void viewCourse(Course a);
 string* extractCId_cl_sno(string fname);
+void viewScoreBoards(Course a);
 
 #include "Source4.cpp"

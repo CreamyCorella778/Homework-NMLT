@@ -64,7 +64,7 @@ LList<Scoreboard> readScoreBoard(string fname, bool& isDone) // fname = courseid
 		getline(container, '\n');
 		while (!fp.eof())
 		{
-			Scoreboard a; findCourse(in4[0], in4[1], stoi(in4[2][0]), a.course);
+			Scoreboard a; findCourse(in4[0], in4[1], atoi(in4[2][0]), a.course);
 			getline(fp, container, ','); a.student.no = atoi(container.c_str());
 			getline(fp, a.student.stuID, ",");
 			getline(fp, a.student.firstName, ",");
@@ -81,7 +81,7 @@ LList<Scoreboard> readScoreBoard(string fname, bool& isDone) // fname = courseid
 			getline(fp, container, ','); a.Final = atof(container.c_str());
 			getline(fp, container, ','); a.Other = atof(container.c_str());
 			getline(fp, container, '\n'); a.Total = atof(container.c_str());
-			Node<Scoreboard>* node; node->init(a);
+			Node<Scoreboard>* node = new Node<Scoreboard>; node->init(a);
 			addLast(scb, node);
 		}
 		fp.close();
@@ -90,23 +90,23 @@ LList<Scoreboard> readScoreBoard(string fname, bool& isDone) // fname = courseid
 	}
 }
 
-void viewScoreBoard(Student a)
+void viewScoreBoard(Scoreboard a)
 {
-	cout << "bang diem cua hoc sinh " << a.firstName << " " << a.lastName << ":" << endl;
-	{
-		cout << fixed << setprecision(3);
-		cout << "Diem giua ky: " << a.marks.midTerm << endl;
-		cout << "Diem cuoi ky: " << a.marks.Final << endl;
-		cout << "Diem khac: " << a.marks.Other << endl;
-		cout << "Diem tong: " << a.marks.Total << endl;
-	}
+	cout << fixed << setprecision(3);
+	cout << "Diem giua ky: " << a.midTerm << endl;
+	cout << "Diem cuoi ky: " << a.Final << endl;
+	cout << "Diem khac: " << a.Other << endl;
+	cout << "Diem tong: " << a.Total << endl;
 }
 
 void viewScoreBoards(Course a)
 {
 	cout << "Bang diem cua hoc phan " << a.courseName << " cua lop " << a.lop.cls << ":" << endl;
 	for (Node<Scoreboard>* i = a.score.head; i != nullptr; i = i->next)
-		viewScoreBoard(i->data.student);
+	{
+		cout << "Sinh vien " << i->data.student.firstName << " " << i->data.student.lastName << ", ma so " << i->data.student.stuID << ":" << endl;
+		viewScoreBoard(i->data);
+	}
 	cout << endl << endl;
 }
 
@@ -181,3 +181,12 @@ void updateScoreBoard(Student stu, Course cour, int* option, float* in4, int n)
 		}
 }
 
+void viewScoreboards(Student a)
+{
+	cout << "Bang diem cua sinh vien " << a.firstName << " " << a.lastName << ", ma so " << a.stuID << ":" << endl;
+	for (Node<Scoreboard>* i = a.marks.head; i != nullptr; i = i->next)
+	{
+		cout << "Hoc phan " << i->data.course.courseName << ":" << endl;
+		viewScoreBoard(i->data);
+	}
+}

@@ -54,7 +54,7 @@ void getCourseIn4(Course &a)
 
 void addCoursetoSemester(Course a, Semester sem) 
 {
-	Node<Course> node; node.init(a);
+	Node<Course>* node = new Node<Course>; node->init(a);
 	addLast(systems.allCourse[sem.number - 1], node);
 }
 

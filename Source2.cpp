@@ -18,7 +18,7 @@ SchoolYear createSchoolYear(int yearStart, int yearEnd)
 
 void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end)
 {
-	int year;
+	int year = 0;
 	cout << "Nhap nam nhap hoc cua hoc sinh nam nay: "; cin >> year;
 	sy = createSchoolYear(year, year + 1);
 	cout << "Chon so thu tu tuong ung voi loai chuong trinh day hoc: " << endl
@@ -64,7 +64,7 @@ Class* createClasses(SchoolYear sy, string eduProg, int start, int end)
 		a[i].year = sy;
 		a[i].no = start + i;
 		a[i].cls = to_string(sy.yStart % 100).append(eduProg).append(to_string(start + i));
-		Node<Class>* b; b->init(a[i]);
+		Node<Class>* b = new Node<Class>; b->init(a[i]);
 		addLast(systems.allClass, b);
 	}
 	return a;
@@ -163,7 +163,7 @@ bool addStudentsFromCSV(string fname, int& n, Class &lop)
 			getline(fp, container, ',');
 			stu.birth = getNS(container);
 			getline(fp, stu.socialID, '\n');
-			Node<Student>* node; node->init(stu);
+			Node<Student>* node = new Node<Student>; node->init(stu);
 			addLast(lop.stuList, node);
 		}
 		fp.close();
