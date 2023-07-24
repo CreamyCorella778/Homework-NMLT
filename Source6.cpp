@@ -31,13 +31,6 @@ void viewStudents(Class a)
 	cout << endl << endl;
 }
 
-void viewCourses(Semester sem)
-{
-	for (Node<Course>* i = systems.allCourse[sem.number - 1].head; i != nullptr; i = i->next)
-		viewCourse(i->data);
-	cout << endl << endl;
-}
-
 void viewCourses()
 {
 	for (int index = 0; index < 3; ++index)
@@ -54,4 +47,9 @@ void viewStudents(Course a)
 	for (Node<Student>* i = a.stuList.head; i != nullptr; i = i->next)
 		viewStudent(i->data);
 	cout << endl << endl;
+}
+
+void viewStaff(Staff a)
+{
+	cout << "Giang vien " << a.firstName << " " << a.lastName << ", ma so " << a.id << endl;
 }

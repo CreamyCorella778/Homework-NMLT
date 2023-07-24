@@ -159,8 +159,7 @@ string generateEmail(Staff sta)
 	return sta.id + "@teacher.hcmuf.edu.vn";
 }
 
-
-void printProfileIn4()
+void printProfileIn4(string email)
 {
 	
 }

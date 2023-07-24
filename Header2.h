@@ -33,11 +33,19 @@ struct Scoreboard
 	float Other;
 };
 
+struct Staff
+{
+	string firstName;
+	string lastName;
+	string id;
+	LList<Course> courses;
+};
+
 struct Course
 {
 	string id;
 	string courseName;
-	string teacher;
+	Staff teacher;
 	int credits;
 	int capacity;
 	Class lop;
@@ -50,14 +58,6 @@ struct Course
 	Semester sem;
 	LList<Student> stuList;
 	LList<Scoreboard> score;
-};
-
-struct Staff
-{
-	string firstName;
-	string lastName;
-
-	string id;
 };
 
 void initSystems();

@@ -34,14 +34,26 @@ string* extractCId_cl_sno(string fname) // CSV file is courseid_classname_semnum
 	return idAndName;
 }
 
-void getCourseIn4(Course &a)
+void getCourseIn4(Course &a, Semester sem)
 {
 	cout << "Nhap ma hoc phan: "; getline(cin, a.id);
 	cout << "Nhap ten hoc phan: "; getline(cin, a.courseName);
-	cout << "Nhap ten giao vien chinh day: "; getline(cin, a.teacher);
+	string container = ""; int so_lan = 5;
+	cout << "Nhap ma so giao vien chinh day: "; getline(cin, container);
+	Node<Course>* i = systems.allCourse[sem.number - 1].head;
+	for (i; i != nullptr; i = i->next)
+		if (i->data.teacher.id.compare(container) == 0)
+			a.teacher = i->data.teacher;
+	while (i == nullptr)
+	{
+		cout << "Nhap lai ma so giao vien chinh day: "; getline(cin, container);
+		Node<Course>* i = systems.allCourse[sem.number - 1].head;
+		for (i; i != nullptr; i = i->next)
+			if (i->data.teacher.id.compare(container) == 0)
+				a.teacher = i->data.teacher;
+	}
 	cout << "Nhap so tin chi: "; cin >> a.credits;
 	cout << "Nhap so hoc sinh toi da trong khoa hoc: "; cin >> a.capacity;
-	string container;
 	cout << "Nhap ten lop cua hoc phan: "; getline(cin, container); a.lop = createClass(container);
 	cout << "Nhap thu trong tuan cua hoc phan, tu thu 2 den thu 8 (chu nhat): "; cin >> a.dayInWeek;
 	cout << "Nhap tiet hoc trong ngay cua hoc phan:" << endl
@@ -62,8 +74,8 @@ void viewCourse(Course a)
 {
 	cout << a.id
 		<< " - " << a.courseName
-		<< ", cua giang vien " << a.teacher << ", lop " << a.lop.cls
-		<< ", " << a.credits
+		<< ", cua giang vien " << a.teacher.firstName << " " << a.teacher.lastName
+		<< ", lop " << a.lop.cls << ", " << a.credits
 		<< " tin chi, toi da " << a.capacity << " hoc sinh, thoi gian: thu "
 		<< a.dayInWeek << ", tiet " << a.session << ", hoc ki " << a.sem.number << endl;
 }

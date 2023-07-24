@@ -3,7 +3,6 @@
 #include <iomanip>
 #include <fstream>
 #include "Header2.h"
-
 using namespace std;
 
 template <typename a>
@@ -86,6 +85,7 @@ struct System
 {
 	LList<Course>* allCourse; // LList[0] = Semester 1, LList[1] = Semester 2, LList[2] = Semester 3
 	LList<Class> allClass;
+	LList<Staff> allStaff;
 }systems;
 
 bool loginSystem(string fname, string& email);
