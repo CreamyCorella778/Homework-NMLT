@@ -64,7 +64,7 @@ LList<Scoreboard> readScoreBoard(string fname, bool& isDone) // fname = courseid
 		getline(container, '\n');
 		while (!fp.eof())
 		{
-			Scoreboard a; findCourse(in4[0], in4[1], atoi(in4[2][0]), a.course);
+			Scoreboard a; findCourse(in4[0], in4[1], atoi(in4[2].c_str()), a.course);
 			getline(fp, container, ','); a.student.no = atoi(container.c_str());
 			getline(fp, a.student.stuID, ",");
 			getline(fp, a.student.firstName, ",");
@@ -131,7 +131,7 @@ void getUpdateScbIn4(Student a, Course& cour, int*& option, float*& in4, int& n,
 	cout << "Hoc ki nay la hoc ki may?"; cin >> semNum; 
 	string tempp;
 	cout << "Nhap ma hoc phan cua hoc phan ban muon cap nhat diem: "; cin >> tempp;
-	findCourse(tempp, a.cl, semNum, cour);
+	findCourse(tempp, a.cl.cls, semNum, cour);
 	do
 	{
 		cout << "Ban muon cap nhat diem nao cua sinh vien? Chon so tuong ung: " << endl;

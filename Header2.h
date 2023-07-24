@@ -3,6 +3,12 @@
 #include <cstring>
 #include <math.h>
 #include "Header1.h"
+using namespace std;
+
+struct Class;
+struct Scoreboard;
+struct Course;
+struct Date;
 
 struct Class
 {
@@ -44,6 +50,14 @@ struct Course
 	Semester sem;
 	LList<Student> stuList;
 	LList<Scoreboard> score;
+};
+
+struct Staff
+{
+	string firstName;
+	string lastName;
+
+	string id;
 };
 
 void initSystems();

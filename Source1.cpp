@@ -137,7 +137,30 @@ void changePassword(string fname, string email)
 	}
 }
 
-void printProfileInfo()
+
+Student extractStudentFromEnail(string email)
+{
+	string id;
+	for (int i = 0; email[i] - '@' != 0; ++i)
+		id.push_back(email[i]);
+	for (Node<Class>* i = systems.allClass.head; i != nullptr; i = i->next)
+		for (Node<Student>* j = i->data.stuList.head; j != nullptr; j = j->next)
+			if (j->data.stuID.compare(id) == 0)
+				return j->data;
+}
+
+string generateEmail(Student stu)
+{
+	return stu.stuID + "@student.hcmuf.edu.vn";
+}
+
+string generateEmail(Staff sta)
+{
+	return sta.id + "@teacher.hcmuf.edu.vn";
+}
+
+
+void printProfileIn4()
 {
 	
 }
