@@ -149,6 +149,27 @@ Student extractStudentFromEnail(string email)
 				return j->data;
 }
 
+Staff extractStaffFromEnail(string email)
+{
+	string id;
+	for (int i = 0; email[i] - '@' != 0; ++i)
+		id.push_back(email[i]);
+	for (Node<Staff>* i = systems.allStaff.head; i != nullptr; i = i->next)
+		if (j->data.id.compare(id) == 0)
+			return j->data;
+}
+
+bool identifyUserType(string email) // student = true, teacher/staff == false
+{
+	string temp;
+	for (int i = email.find_first_of('@') + 1; email[i] - '.' != 0; ++i)
+		temp.push_back(email[i]);
+	if (temp.compare("student") == 0)
+		return true;
+	else if (temp.compare("teacher") == 0)
+		return false;
+}
+
 string generateEmail(Student stu)
 {
 	return stu.stuID + "@student.hcmuf.edu.vn";
@@ -161,7 +182,10 @@ string generateEmail(Staff sta)
 
 void printProfileIn4(string email)
 {
-	
+	if (identifyUserType(email))
+		viewStudent(extractStudentFromEnail(email));
+	else
+		viewStaff(extractStaffFromEnail(email));
 }
 
 void logout()

@@ -44,14 +44,15 @@ void getCourseIn4(Course &a, Semester sem)
 	for (i; i != nullptr; i = i->next)
 		if (i->data.teacher.id.compare(container) == 0)
 			a.teacher = i->data.teacher;
-	while (i == nullptr)
+	do
 	{
-		cout << "Nhap lai ma so giao vien chinh day: "; getline(cin, container);
+		cout << "Ban co " << so_lan << "nhap. Nhap lai ma so giao vien chinh day : "; getline(cin, container);
 		Node<Course>* i = systems.allCourse[sem.number - 1].head;
 		for (i; i != nullptr; i = i->next)
 			if (i->data.teacher.id.compare(container) == 0)
 				a.teacher = i->data.teacher;
-	}
+		so_lan -= 1;
+	} while (i == nullptr && so_lan != 0);
 	cout << "Nhap so tin chi: "; cin >> a.credits;
 	cout << "Nhap so hoc sinh toi da trong khoa hoc: "; cin >> a.capacity;
 	cout << "Nhap ten lop cua hoc phan: "; getline(cin, container); a.lop = createClass(container);

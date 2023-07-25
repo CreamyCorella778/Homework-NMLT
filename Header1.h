@@ -114,5 +114,9 @@ void removeCourse(Course c, Semester sem);
 
 //----------------------------------------------------------------------
 
+//----------------------------------------------------------------------
+
+void viewStudent(Student a);
+void viewStaff(Staff a);
 
 #include "Source4.cpp"
