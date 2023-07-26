@@ -135,7 +135,7 @@ Date getNS(string birth)
 	return ket_qua;
 }
 
-bool addStudentsFromCSV(string fname, int& n, Class &lop)
+bool addStudentsFromCSV(string fname, int& n, Class &lop) // fname = classname.txt
 {
 	lop.eduProgr = extractEduProg(fname);
 	lop.year = extractSchoolYear(fname);

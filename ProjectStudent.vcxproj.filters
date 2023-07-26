@@ -45,6 +45,9 @@
     <ClCompile Include="Source9.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source10.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header1.h">

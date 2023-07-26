@@ -25,7 +25,7 @@ Semester createSemester(int no, SchoolYear sy, Date sd, Date ed)
 	return sem;
 }
 
-string* extractCId_cl_sno(string fname) // CSV file is courseid_classname_semnumber.txt
+string* extractCId_cl_sno(string fname) // fname = courseid_classname_semnumber.txt
 {
 	int j = 0; string* idAndName = new string[3];
 	for (int i = 0; i < 3; ++i)

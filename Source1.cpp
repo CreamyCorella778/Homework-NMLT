@@ -188,7 +188,7 @@ void printProfileIn4(string email)
 		viewStaff(extractStaffFromEnail(email));
 }
 
-void logout()
+void logout() // skip for now cuz of no idea and main func dependance.
 {
 
 }

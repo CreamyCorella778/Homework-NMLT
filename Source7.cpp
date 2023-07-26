@@ -61,14 +61,14 @@ LList<Scoreboard> readScoreBoard(string fname, bool& isDone) // fname = courseid
 	else
 	{
 		string container;
-		getline(container, '\n');
+		getline(fp, container, '\n');
 		while (!fp.eof())
 		{
 			Scoreboard a; findCourse(in4[0], in4[1], atoi(in4[2].c_str()), a.course);
 			getline(fp, container, ','); a.student.no = atoi(container.c_str());
-			getline(fp, a.student.stuID, ",");
-			getline(fp, a.student.firstName, ",");
-			getline(fp, a.student.lastName, ",");
+			getline(fp, a.student.stuID, ',');
+			getline(fp, a.student.firstName, ',');
+			getline(fp, a.student.lastName, ',');
 			getline(fp, container, ',');
 			if (container.compare("nam") == 0 || container.compare("Nam") == 0)
 				a.student.gender = true;
