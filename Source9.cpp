@@ -57,6 +57,42 @@ bool readStaffList(string fname)
 	}
 }
 
+Node<Staff>* findStaff(string id)
+{
+	for (Node<Staff>* i = systems.allStaff.head; i != nullptr; i = i->next)
+		if (i->data.id.compare(id) == 0)
+		{
+			Node<Staff>* res = new Node<Staff>;
+			res->init(i->data);
+			return res;
+		}
+	return nullptr;
+}
+
+int findSecondOccurrenceOfChar(const char* str, char c) 
+{
+	int index = -1;
+	for (int i = 0; i != strlen(str); i++) 
+		if (str[i] == c) 
+			if (index == -1) 
+				index = i;
+			else 
+				return i;
+	return -1;
+}
+
+SchoolYear extractSchoolyear(string fname)
+{
+	string res = ""; int startPoint = findSecondOccurrenceOfChar(fname.c_str(), '_') + 1;
+	for (int i = startPoint; i - startPoint < 2; ++i)
+		res.push_back(fname[i]);
+	int c = atoi(res.c_str());
+	if (c >= 77)
+		return createSchoolYear(1900 + c, 1901 + c);
+	else
+		return createSchoolYear(2000 + c, 2001 + c);
+}
+
 bool writeAllCourses(string fname) // fname = all_courses_schoolyear.txt
 {
 	ofstream fp;
@@ -65,7 +101,7 @@ bool writeAllCourses(string fname) // fname = all_courses_schoolyear.txt
 		return false;
 	else
 	{
-		fp << "No,ID,Course name,Teacher's first name,Teacher's last name,Credits,Capacity,Day in week,Session,Semester number\n";
+		fp << "No,ID,Course name,Teacher's id,Class,Credits,Capacity,Day in week,Session,Semester number\n";
 		bool written = false;
 		for (int index = 0; index < 3; ++index)
 			if (systems.allCourse[index].head == systems.allCourse[index].tail && systems.allCourse[index].head == nullptr)
@@ -78,8 +114,8 @@ bool writeAllCourses(string fname) // fname = all_courses_schoolyear.txt
 					fp << j << ","
 						<< i->data.id << ","
 						<< i->data.courseName << ","
-						<< i->data.teacher.firstName << ","
-						<< i->data.teacher.lastName << ","
+						<< i->data.teacher.id << ","
+						<< i->data.lop.cls << ","
 						<< i->data.credits << ","
 						<< i->data.capacity << ","
 						<< i->data.dayInWeek << ","
@@ -103,19 +139,169 @@ bool readAllCourses(string fname)
 		return false;
 	else
 	{
-		char* container = new char[100];
-		fp.getline(container, '\n');
+		string container = "";
+		getline(fp, container, '\n');
 		for (int i = 0; i < 2; ++i)
 			systems.allCourse[i].init();
 		while (!fp.eof())
 		{
 			Course a;
-			fp.getline(container, ',');
+			getline(fp, container, ',');
 			getline(fp, a.id, ',');
-			getline(fp, a.firstName  , ',');
-			getline(fp, a.lastName, '\n');
-			Node<Staff>* node = new Node<Staff>; node->init(a);
-			addLast(systems.allStaff, node);
+			getline(fp, a.courseName, ',');
+			getline(fp, container, ',');
+			Node<Staff>* node = findStaff(container);
+			if (node == nullptr)
+			{
+				fp.close();
+				return false;
+			}
+			else
+				a.teacher = node->data;
+			delete node; node = nullptr;
+			getline(fp, container, ',');
+			Node<Class>* nodE = findCLass(container);
+			if (nodE == nullptr)
+			{
+				fp.close();
+				return false;
+			}
+			else
+				a.lop = nodE->data;
+			delete nodE; nodE = 
+			getline(fp, container, ','); a.credits = atoi(container.c_str());
+			getline(fp, container, ','); a.capacity = atoi(container.c_str());
+			getline(fp, container, ','); a.dayInWeek = atoi(container.c_str());
+			getline(fp, container, ','); a.session = atoi(container.c_str());
+			getline(fp, container, '\n'); a.sem.number = atoi(container.c_str());
+			a.sem.sy = extractSchoolyear(fname);
+			Node<Course>* noDe = new Node<Course>; noDe->init(a);
+			addLast(systems.allCourse[a.sem.number - 1], noDe);
+		}
+		fp.close();
+		return true;
+	}
+}
+
+bool writeAllClasses(string fname) // fname = all_classes_schoolyear.txt
+{
+	ofstream fp;
+	fp.open(fname, ios::trunc);
+	if (fp.is_open() == false)
+		return false;
+	else
+	{
+		fp << "No,Class name\n";
+		bool written = false;
+		if (systems.allClass.head == systems.allClass.tail && systems.allClass.head == nullptr)
+			written = false;
+		else
+		{
+			int j = 1;
+			for (Node<Class>* i = systems.allClass.head; i != nullptr; i = i->next, ++j)
+			{
+				fp << j << ","
+					<< i->data.cls << ",";
+				if (!(i->next == nullptr))
+					fp << "\n";
+			}
+			written = true;
+		}
+		fp.close();
+		return written;
+	}
+}
+
+bool readAllClasses(string fname)
+{
+	ifstream fp;
+	fp.open(fname, ios::in);
+	if (!fp.is_open())
+		return false;
+	else
+	{
+		string container = "";
+		getline(fp, container, '\n');
+		systems.allClass.init();
+		while (!fp.eof())
+		{
+			Class a; string container2 = "";
+			getline(fp, container, ',');
+			getline(fp, container2, '\n');
+			a = createClass(container2);
+			Node<Class>* node = new Node<Class>; node->init(a);
+			addLast(systems.allClass, node);
+		}
+		fp.close();
+		return true;
+	}
+}
+
+bool writeAllCoursesByStaff(string fname, Staff st) // fname = staffid.txt
+{
+	ofstream fp;
+	fp.open(fname, ios::trunc);
+	if (fp.is_open() == false)
+		return false;
+	else
+	{
+		fp << "No,ID,Course name,Teacher's id,Class,Credits,Capacity,Day in week,Session,Semester number\n";
+		bool written = false;
+		if (st.courses.head == st.courses.tail && st.courses.head == nullptr)
+			written = false;
+		else
+		{
+			int j = 1;
+			for (Node<Course>* i = st.courses.head; i != nullptr; i = i->next, ++j)
+			{
+				fp << j << ","
+					<< i->data.id << ","
+					<< i->data.courseName << ","
+					<< i->data.teacher.id << ","
+					<< i->data.lop.cls << ","
+					<< i->data.credits << ","
+					<< i->data.capacity << ","
+					<< i->data.dayInWeek << ","
+					<< i->data.session << ","
+					<< i->data.sem.number;
+				if (!(i->next == nullptr))
+					fp << "\n";
+			}
+			written = true;
+		}
+		fp.close();
+		return written;
+	}
+}
+
+bool readAllCoursesByStaff(string fname, Staff& st)
+{
+	ifstream fp;
+	fp.open(fname, ios::in);
+	if (!fp.is_open())
+		return false;
+	else
+	{
+		string container = "";
+		getline(fp, container, '\n');
+		st.courses.init();
+		while (!fp.eof())
+		{
+			Course a;
+			getline(fp, container, ',');
+			getline(fp, a.id, ',');
+			getline(fp, a.courseName, ',');
+			getline(fp, container, ',');
+			a.teacher = st;
+
+			getline(fp, container, ','); a.credits = atoi(container.c_str());
+			getline(fp, container, ','); a.capacity = atoi(container.c_str());
+			getline(fp, container, ','); a.dayInWeek = atoi(container.c_str());
+			getline(fp, container, ','); a.session = atoi(container.c_str());
+			getline(fp, container, '\n'); a.sem.number = atoi(container.c_str());
+			a.sem.sy = extractSchoolyear(fname);
+			Node<Course>* nodE = new Node<Course>; nodE->init(a);
+			addLast(systems.allCourse[a.sem.number - 1], nodE);
 		}
 		fp.close();
 		return true;

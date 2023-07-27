@@ -81,7 +81,7 @@ string extractEduProg(string fname) // Assume that the file name part is the cla
 	return ep;
 }
 
-SchoolYear extractSchoolYear(string fname)
+SchoolYear extractSchoolYear(string fname) // fname = classname.txt
 {
 	string b; b.assign(fname, 2);
 	int c = atoi(b.c_str());

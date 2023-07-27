@@ -72,7 +72,7 @@ string generateFileName(Class cl, Semester sem)
 {
 	string res = "gpa";
 	res += cl.cls;
-	res += string(sem.number);
+	res += to_string(sem.number);
 	res += sem.sy.schYr;
 	res += ".txt";
 	return res;
@@ -140,7 +140,7 @@ Node<Class>* findCLass(string name)
 bool readGPAofClassInSem(string fname, LList<float>& gpas)
 {
 	ifstream fp;
-	fp.open(fname, ios::text | ios::in);
+	fp.open(fname, ios::in);
 	if (!fp.is_open())
 		return false;
 	else
@@ -154,7 +154,7 @@ bool readGPAofClassInSem(string fname, LList<float>& gpas)
 			float score = 0.0;
 			getline(fp, container[0], ',');
 			getline(fp, container[1], ',');
-			getline(fp, container[0], '\n'); score = atof(container[0]);
+			getline(fp, container[0], '\n'); score = atof(container[0].c_str());
 			Node<float>* node = new Node<float>; node->init(score);
 			addLast(gpas, node);
 		}
@@ -173,7 +173,8 @@ float* countOverallGPAInClass(Class cl, Semester currentSem)
 		{
 			delete[] fnameList;
 			delete[] semGPA;
-			semGPA = fnameList = nullptr;
+			semGPA = nullptr;
+			fnameList = nullptr;
 			return;
 		}
 	int numberOfStu = countNodes(semGPA[0].head);

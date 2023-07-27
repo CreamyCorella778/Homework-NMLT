@@ -79,5 +79,6 @@ Class createClass(string cl);
 void viewCourse(Course a);
 string* extractCId_cl_sno(string fname);
 void viewScoreBoards(Course a);
+Node<Class>* findCLass(string name);
 
 #include "Source4.cpp"

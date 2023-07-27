@@ -133,7 +133,7 @@ void getStudentIn4(Student& a)
 void addStudentToCourse(Student st, Course& c)
 {
 	st.no = countNodes(c.stuList.head) + 1;
-	Node<Student>* node; node->init(st);
+	Node<Student>* node = new Node<Student>; node->init(st);
 	addLast(c.stuList, node);
 }
 
