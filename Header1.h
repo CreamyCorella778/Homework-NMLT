@@ -93,6 +93,8 @@ void changePassword(string fname, string email);
 
 //---------------------------------------------------------------------
 
+void getYears(int& yearStart, int& yearEnd);
+SchoolYear createSchoolYear(string schy);
 SchoolYear createSchoolYear(int yearStart, int yearEnd);
 void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end);
 Class* createClasses(SchoolYear sy, string eduProg, int start, int end);

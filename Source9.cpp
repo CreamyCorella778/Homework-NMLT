@@ -158,7 +158,6 @@ bool readAllCourses(string fname)
 			}
 			else
 				a.teacher = node->data;
-			delete node; node = nullptr;
 			getline(fp, container, ',');
 			Node<Class>* nodE = findCLass(container);
 			if (nodE == nullptr)
@@ -168,7 +167,6 @@ bool readAllCourses(string fname)
 			}
 			else
 				a.lop = nodE->data;
-			delete nodE; nodE = 
 			getline(fp, container, ','); a.credits = atoi(container.c_str());
 			getline(fp, container, ','); a.capacity = atoi(container.c_str());
 			getline(fp, container, ','); a.dayInWeek = atoi(container.c_str());
@@ -287,23 +285,25 @@ bool readAllCoursesByStaff(string fname, Staff& st)
 		st.courses.init();
 		while (!fp.eof())
 		{
-			Course a;
+			Course a, b;
 			getline(fp, container, ',');
 			getline(fp, a.id, ',');
 			getline(fp, a.courseName, ',');
 			getline(fp, container, ',');
 			a.teacher = st;
-
+			getline(fp, container, ','); a.lop = createClass(container);
 			getline(fp, container, ','); a.credits = atoi(container.c_str());
 			getline(fp, container, ','); a.capacity = atoi(container.c_str());
 			getline(fp, container, ','); a.dayInWeek = atoi(container.c_str());
 			getline(fp, container, ','); a.session = atoi(container.c_str());
 			getline(fp, container, '\n'); a.sem.number = atoi(container.c_str());
-			a.sem.sy = extractSchoolyear(fname);
-			Node<Course>* nodE = new Node<Course>; nodE->init(a);
-			addLast(systems.allCourse[a.sem.number - 1], nodE);
+			if (findCourse(a.id, a.lop.cls, a.sem.number, b))
+				a.sem.sy = b.sem.sy;
+			Node<Course>* node = new Node<Course>; node->init(a);
+			addLast(systems.allCourse[a.sem.number - 1], node);
 		}
 		fp.close();
 		return true;
 	}
 }
+

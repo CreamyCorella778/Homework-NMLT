@@ -3,6 +3,8 @@
 #include <cstring>
 #include <math.h>
 #include "Header1.h"
+#include "Source4.cpp"
+#include "Source9.cpp"
 using namespace std;
 
 struct Class;
@@ -80,5 +82,6 @@ void viewCourse(Course a);
 string* extractCId_cl_sno(string fname);
 void viewScoreBoards(Course a);
 Node<Class>* findCLass(string name);
+bool findCourse(string courseID, string className, int semNum, Course& found);
+Node<Staff>* findStaff(string id);
 
-#include "Source4.cpp"

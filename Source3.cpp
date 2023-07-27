@@ -106,8 +106,8 @@ void updateCourse(string courseID, string cl, Semester sem)
 
 string* extractFirstLastName(string name)
 {
-	string* names = new string[2]; string last_space = " ";
-	int index = name.find_last_of(last_space);
+	string* names = new string[2]; string space = " ";
+	int index = name.find_last_of(space);
 	for (int i = 0; i < index; ++i)
 		names[0].push_back(name[i]);
 	for (int i = index + 1; i < name.length(); ++i)

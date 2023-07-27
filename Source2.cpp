@@ -16,6 +16,17 @@ SchoolYear createSchoolYear(int yearStart, int yearEnd)
 	return sy;
 }
 
+SchoolYear createSchoolYear(string schy)
+{
+	string ys, ye; int i = 0;
+	for (i; schy[i] - '-' != 0; ++i)
+		ys.push_back(schy[i]);
+	++i;
+	for (i; i < schy.size(); ++i)
+		ye.push_back(schy[i]);
+	return createSchoolYear(atoi(ys.c_str()), atoi(ye.c_str()));
+}
+
 void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end)
 {
 	int year = 0;
@@ -133,6 +144,11 @@ Date getNS(string birth)
 	*p = atoi(ngsinh);
 	delete[]ngay_sinh;
 	return ket_qua;
+}
+
+bool addStudentFromKeyboard(string fname, Student stu)
+{
+
 }
 
 bool addStudentsFromCSV(string fname, int& n, Class &lop) // fname = classname.txt
