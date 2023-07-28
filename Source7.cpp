@@ -28,7 +28,9 @@ bool writeStudentsInCourse(string fname, Course cour) // fname = courseid_classn
 				else
 					fp << "nu,";
 				fp << i->data.birth.day << "/" << i->data.birth.month << "/" << i->data.birth.year << ","
-					<< i->data.socialID << "\n";
+					<< i->data.socialID;
+				if (i->next != nullptr)
+					fp << "\n";
 			}
 			fp.close();
 			return true;
@@ -47,7 +49,7 @@ bool findCourse(string courseID, string className, int semNum, Course& found)
 	return false;
 }
 
-LList<Scoreboard> readScoreBoard(string fname, bool& isDone) // fname = courseid_classname_semnumber.txt
+LList<Scoreboard> readScoreBoard(string fname, Course& c, bool& isDone) // fname = courseid_classname_semnumber.txt
 {
 	LList<Scoreboard> scb; scb.init();
 	string* in4 = extractCId_cl_sno(fname);
@@ -86,6 +88,7 @@ LList<Scoreboard> readScoreBoard(string fname, bool& isDone) // fname = courseid
 		}
 		fp.close();
 		isDone = true;
+		c.score = scb;
 		return scb;
 	}
 }

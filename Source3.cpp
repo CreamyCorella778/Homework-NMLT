@@ -34,6 +34,15 @@ string* extractCId_cl_sno(string fname) // fname = courseid_classname_semnumber.
 	return idAndName;
 }
 
+string generateFileName(Course c, Class cl, Semester sem)
+{
+	string fname = "";
+	fname += c.id;
+	fname += cl.cls;
+	fname += to_string(sem.number);
+	return fname;
+}
+
 void getCourseIn4(Course &a, Semester sem)
 {
 	cout << "Nhap ma hoc phan: "; getline(cin, a.id);
@@ -69,6 +78,8 @@ void addCoursetoSemester(Course a, Semester sem)
 {
 	Node<Course>* node = new Node<Course>; node->init(a);
 	addLast(systems.allCourse[sem.number - 1], node);
+	string fname = "all_course_" + sem.sy.schYr + ".txt";
+	writeAllCourses(fname);
 }
 
 void viewCourse(Course a)
@@ -95,7 +106,7 @@ void getIn4toUpdateCourse(string& courseID, string& cl)
 	cout << "Nhap ten lop hoc cua hoc phan: "; cin >> cl;
 }
 
-void updateCourse(string courseID, string cl, Semester sem)
+void updateCourseIn4(string courseID, string cl, Semester sem) // ??? watch out this one
 {
 	Node<Course>* i = systems.allCourse[sem.number - 1].head;
 	for (i; !(i->data.id == courseID && i->data.lop.cls == cl); i = i->next)
@@ -130,21 +141,46 @@ void getStudentIn4(Student& a)
 	cout << "Nhap so can cuoc cong dan: "; getline(cin, a.socialID);
 }
 
-void addStudentToCourse(Student st, Course& c)
+void addStudentToCourse(Student st, Course& c) // fname = courseid_classname_semnumber.txt
 {
 	st.no = countNodes(c.stuList.head) + 1;
 	Node<Student>* node = new Node<Student>; node->init(st);
 	addLast(c.stuList, node);
+	string fname = generateFileName(c, st.cl, c.sem);
+	ofstream fp;
+	fp.open(fname, ios::app);
+	if (!fp.is_open())
+		return;
+	else
+	{
+		Node<Student>* node = new Node<Student>; node->init(st);
+		countNoInStudentList(c.stuList);
+		fp << "\n" << node->data.no << ","
+			<< st.stuID << ","
+			<< st.firstName << " " << st.lastName << ",";
+		if (st.gender)
+			fp << "nam,";
+		else
+			fp << "nu,";
+		fp << st.birth.day << "/" << st.birth.month << "/" << st.birth.year << ","
+			<< st.socialID;
+		fp.close();
+		return;
+	}
 }
 
 void removeStudentFromCourse(Student st, Course& c)
 {
 	st.no = 0;
 	removeRandomNode(c.stuList, st);
+	string fname = generateFileName(c, st.cl, c.sem);
+	writeStudentsInCourse(fname, c);
 }
 
 void removeCourse(Course c, Semester sem)
 {
-	removeRandomNode(systems.allCourse[sem.number - 1], c)
+	removeRandomNode(systems.allCourse[sem.number - 1], c);
+	string fname = "all_course_" + sem.sy.schYr + ".txt";
+	writeAllCourses(fname);
 }
 

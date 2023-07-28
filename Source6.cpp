@@ -31,7 +31,7 @@ void viewStudents(Class a)
 	cout << endl << endl;
 }
 
-void viewCourses()
+void viewAllCourses()
 {
 	for (int index = 0; index < 3; ++index)
 	{
@@ -40,6 +40,14 @@ void viewCourses()
 			viewCourse(i->data);
 		cout << endl;
 	}
+}
+
+void viewCourses(Semester sem)
+{
+	cout << "Danh sach cac hoc phan cua hoc ki " << sem.number;
+	for (Node<Course>* i = systems.allCourse[sem.number - 1].head; i != nullptr; i = i->next)
+		viewCourse(i->data);
+	cout << endl;
 }
 
 void viewStudents(Course a)

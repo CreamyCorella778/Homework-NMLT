@@ -18,6 +18,7 @@ LList<Course> courseAttending(Student stu, Semester sem)
 			Node<Course>* node = new Node<Course>; node->init(i->data);
 			addLast(courseList, node);
 		}
+	stu.courses = courseList;
 	return courseList;
 }
 

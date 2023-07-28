@@ -5,7 +5,7 @@
 #include "Header2.h"
 using namespace std;
 
-template <typename a>
+template <class a>
 struct Node
 {
 	a data;
@@ -17,7 +17,7 @@ struct Node
 	}
 };
 
-template <typename T>
+template <class T>
 struct LList
 {
 	Node<T>* head;
@@ -98,23 +98,49 @@ SchoolYear createSchoolYear(string schy);
 SchoolYear createSchoolYear(int yearStart, int yearEnd);
 void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end);
 Class* createClasses(SchoolYear sy, string eduProg, int start, int end);
-Student* addStudentsFromCSV(string fname, int& n);
+bool addStudentFromKeyboard(Student stu, Class cl);
+bool addStudentsFromCSV(string fname, int& n, Class& lop);
 
 //----------------------------------------------------------------------
 
 void getSemesterIn4(int& no, SchoolYear& sy, Date& sd, Date& ed);
 Semester createSemester(int no, SchoolYear sy, Date sd, Date ed);
-void getCourseIn4(Course& a);
+void getCourseIn4(Course& a, Semester sem);
 void addCoursetoSemester(Course a, Semester sem);
 void viewCourses(Semester sem);
 void getIn4toUpdateCourse(string& courseID, string& cl);
-void updateCourse(string courseID, string cl, Semester sem);
+void updateCourseIn4(string courseID, string cl, Semester sem); // check out this later
 void getStudentIn4(Student& a);
 void addStudentToCourse(Student st, Course& c);
 void removeStudentFromCourse(Student st, Course& c);
 void removeCourse(Course c, Semester sem);
 
 //----------------------------------------------------------------------
+
+void viewCourses(Student stu, Semester sem);
+
+//----------------------------------------------------------------------
+
+void viewClasses();
+void viewStudents(Class a);
+void viewAllCourses();
+void viewCourses(Semester sem);
+void viewStudents(Course a);
+
+//----------------------------------------------------------------------
+
+bool writeStudentsInCourse(string fname, Course cour);
+LList<Scoreboard> readScoreBoard(string fname, Course& c, bool& isDone);
+void viewScoreBoards(Course a);
+void getUpdateScbIn4(Student a, Course& cour, int*& option, float*& in4, int& n, int& semNum);
+void updateScoreBoard(Student stu, Course cour, int* option, float* in4, int n);
+void viewScoreBoards(Class cl, Semester sem);
+void viewGPAInSemester(Class cl, Semester sem);
+void viewOverallGPAInClass(Class cl, Semester currentSem);
+
+//----------------------------------------------------------------------
+
+void viewScoreboards(Student a);
 
 //----------------------------------------------------------------------
 

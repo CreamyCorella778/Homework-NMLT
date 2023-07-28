@@ -84,4 +84,6 @@ void viewScoreBoards(Course a);
 Node<Class>* findCLass(string name);
 bool findCourse(string courseID, string className, int semNum, Course& found);
 Node<Staff>* findStaff(string id);
+void countNoInStudentList(LList<Student>& l);
+bool writeAllCourses(string fname);
 

@@ -146,9 +146,30 @@ Date getNS(string birth)
 	return ket_qua;
 }
 
-bool addStudentFromKeyboard(string fname, Student stu)
+bool addStudentFromKeyboard(Student stu, Class cl) // fname = classname.txt
 {
-
+	string fname = cl.cls + ".txt";
+	ofstream fp;
+	fp.open(fname, ios::app);
+	if (!fp.is_open())
+		return false;
+	else
+	{
+		Node<Student>* node = new Node<Student>; node->init(stu);
+		addLast(cl.stuList, node);
+		countNoInStudentList(cl.stuList);
+		fp << "\n" << node->data.no << ","
+			<< stu.stuID << ","
+			<< stu.firstName << " " << stu.lastName << ",";
+			if (stu.gender)
+				fp << "nam,";
+			else
+				fp << "nu,";
+		fp << stu.birth.day << "/" << stu.birth.month << "/" << stu.birth.year << ","
+			<< stu.socialID;
+		fp.close();
+		return true;
+	}
 }
 
 bool addStudentsFromCSV(string fname, int& n, Class &lop) // fname = classname.txt
