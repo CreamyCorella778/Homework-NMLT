@@ -16,9 +16,15 @@ int testing2(string &email)
 	{
 		int func = 0;
 		Date today = getTodayIn4();
-		Semester curr = identifySemesterByToday(today)->data;
 		if (userType)
 		{
+			Node<Semester>* node = identifySemesterByToday(today);
+			if (node == nullptr)
+			{
+				cout << "Loi he thong. Chuc ban may man lan sau." << endl;
+				return -1;
+			}
+			Semester curr = node->data;
 			Student stu = extractStudentFromEmail(email);
 			cout << "Chon so thu tu tuong ung voi chuc nang: " << endl
 				<< "1. Xem danh sach khoa hoc dang theo" << endl

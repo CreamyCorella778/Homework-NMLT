@@ -102,19 +102,36 @@ void viewCourses(Semester sem)
 	cout << endl << endl;
 }
 
-void getIn4toUpdateCourse(string& courseID, string& cl)
+void getIn4toUpdateCourse(string& courseID, string& cl, int &option)
 {
 	cout << "Nhap ma hoc phan can cap nhat: "; cin >> courseID;
 	cout << "Nhap ten lop hoc cua hoc phan: "; cin >> cl;
+	do
+	{
+		cout << "Chon so thu tu tuong ung voi truong can cap nhat: " << endl
+			<< "1. Ten khoa hoc" << endl
+			<< "2. Giao vien day" << endl
+			<< "3. So tin chi" << endl
+			<< "4. So hoc sinh toi da" << endl
+			<< "5. Lop" << endl
+			<< "6. Thu trong tuan de hoc" << endl
+			<< "7. Buoi trong nay de hoc" << endl
+			<< "sess 1 starts at 7:30, sess 2 starts at 9:30, sess 3 starts at 13:30, sess 4 starts at 15:30" << endl
+			<< "8. Hoc ki de hoc: ";
+		cin >> option;
+	} while (option < 1 || option > 8);
 }
 
-void updateCourseIn4(string courseID, string cl, Semester sem) // ??? watch out this one
+void updateCourseIn4(string courseID, string cl, int option, Semester sem) // ??? watch out this one
 {
 	Node<Course>* i = systems.allCourse[sem.number - 1].head;
 	for (i; !(i->data.id == courseID && i->data.lop.cls == cl); i = i->next)
 		continue;
-	i->data.id = courseID;
-	i->data.lop = createClass(cl);
+	switch (option)
+	{
+	case 1:
+		// watch out this one weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee~~~~~~~~~~~~~~~~~~~~~~~~~~
+	}
 }
 
 string* extractFirstLastName(string name)

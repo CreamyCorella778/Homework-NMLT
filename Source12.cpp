@@ -58,6 +58,14 @@ bool readAllSemester(string fname)
 	}
 }
 
+void viewSemester(Semester sem)
+{
+	cout << "Hoc ki " << sem.number << ", thuoc nam hoc " << sem.sy.schYr << endl;
+	cout << "Bat dau tu " << sem.startDate.day << "/" << sem.startDate.month << "/" << sem.startDate.year
+		<< " den " << sem.endDate.day << "/" << sem.endDate.month << "/" << sem.endDate.year;
+	cout << endl;
+}
+
 int Check_Nhuan(Date yyyy)
 {
 	if (((yyyy.year % 4 == 0) && (yyyy.year % 100 != 0)) || (yyyy.year % 400 == 0))
