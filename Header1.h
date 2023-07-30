@@ -86,10 +86,12 @@ struct System
 	LList<Course>* allCourse; // LList[0] = Semester 1, LList[1] = Semester 2, LList[2] = Semester 3
 	LList<Class> allClass;
 	LList<Staff> allStaff;
+	LList<Semester> allSemester;
 }systems;
 
 bool loginSystem(string fname, string& email);
 void changePassword(string fname, string email);
+void printProfileIn4(string email);
 
 //---------------------------------------------------------------------
 

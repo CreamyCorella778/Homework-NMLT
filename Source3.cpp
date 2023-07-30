@@ -22,6 +22,8 @@ Semester createSemester(int no, SchoolYear sy, Date sd, Date ed)
 	sem.sy = sy;
 	sem.startDate = sd;
 	sem.endDate = ed;
+	Node<Semester>* node = new Node<Semester>; node->init(sem);
+	addLast(systems.allSemester, node);
 	return sem;
 }
 

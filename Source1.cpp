@@ -193,13 +193,39 @@ void logout() // skip for now cuz of no idea and main func dependance.
 
 }
 
-int testing1()
+int testing1(bool &userType, string &email)
 {
 	string fname = "login.csv.txt";
-	string email;
 	if (loginSystem(fname, email) == true)
-		changePassword(fname, email);
+	{
+		int func = 0; 
+		do
+		{
+			cout << "Chon so thu tu tuong ung voi chuc nang: " << endl
+				<< "1. Xem ho so ca nhan" << endl
+				<< "2. Doi mat khau" << endl
+				<< "3. Cac chuc nang khac" << endl
+				<< "Cac so khac. Dang xuat:";
+			cin >> func;
+			switch (func)
+			{
+			case 1:
+				printProfileIn4(email);
+				break;
+			case 2:
+				changePassword(fname, email);
+				break;
+			case 3:
+				return 3;
+			}
+		} while (func == 1 || func == 2);
+		userType = identifyUserType(email);
+		return 0;
+	}
 	else
-		cout << "Khong doi mat khau duoc.";
-	return 0;
+	{
+		cout << endl << "Dang nhap that bai! Chuc ban may man lan sau" << endl;
+		return -1;
+	}
 }
+

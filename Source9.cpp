@@ -81,7 +81,7 @@ int findSecondOccurrenceOfChar(const char* str, char c)
 	return -1;
 }
 
-SchoolYear extractSchoolyear(string fname)
+SchoolYear extractSchoolyear(string fname) // fname = all_courses_schoolyear.txt
 {
 	string res = ""; int startPoint = findSecondOccurrenceOfChar(fname.c_str(), '_') + 1;
 	for (int i = startPoint; i - startPoint < 2; ++i)
