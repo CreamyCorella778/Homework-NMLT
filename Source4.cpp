@@ -2,7 +2,7 @@
 #include "Header2.h"
 
 template <class a>
-void addLast(LList<a> l,  Node<a>* insert)
+void addLast(LList<a> l, Node<a>* insert)
 {
 	if (l.head == l.tail && l.head == nullptr)
 		l.head = l.tail = insert;

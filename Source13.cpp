@@ -31,9 +31,9 @@ int testing3(string& email)
 	{
 		int func = 0;
 		Date today = getTodayIn4();
+		Node<Semester>* node = identifySemesterByToday(today); 
 		if (!userType)
 		{
-			Node<Semester>* node = identifySemesterByToday(today); Semester curr;
 			if (node == nullptr)
 			{
 				do
@@ -45,11 +45,13 @@ int testing3(string& email)
 				} while (!(func == 1 || func == 2));
 				if (func == 1)
 				{
+					Semester curr;
 					int no = 0;  SchoolYear sy; Date sd, ed;
 					getSemesterIn4(no, sy, sd, ed);
 					curr = createSemester(no, sy, sd, ed);
 					cout << "Hoc ki vua them la: " << endl;
 					viewSemester(curr);
+					node->init(curr), addLast(systems.allSemester, node);
 				}
 				else
 				{
@@ -74,9 +76,7 @@ int testing3(string& email)
 					return 0;
 				}
 			}
-			else
-				curr = node->data;
-			int part = whenInSemester(curr, today);
+			int part = whenInSemester(node->data, today);
 			if (part < 1)
 			{
 				cout << "Loi he thong. Chuc ban may man lan sau" << endl;
@@ -84,37 +84,11 @@ int testing3(string& email)
 			}
 			else if (part == 1)
 			{
-				cout << "Chon so thu tu tuong ung voi chuc nang: " << endl
-					<< "1. Tao mot hoc ki moi" << endl
-					<< "2. Tao mot khoa hoc moi" << endl
-					<< "3. Tao danh sach hoc sinh trong khoa hoc" << endl
-					<< "4. Thay doi thong tin khoa hoc" << endl
-					<< "5. Them 1 hoc sinh vao khoa hoc" << endl
-					<< "6. Duoi 1 hoc sinh khoi khoa hoc" << endl
-					<< "7. Xoa 1 khoa hoc" << endl
-					<< "8. Xem danh sach khoa hoc trong hoc ki" << endl
-					<< "9. Xem danh sach cac lop nam nhat" << endl
-					<< "10. Xem danh sach cac hoc sinh trong lop" << endl
-					<< "11. Xem danh sach cac hoc sinh trong khoa hoc" << endl;
-				cin >> func;
-				switch (func)
-				{
-				case 1:
-				{
-					int no = 0;  SchoolYear sy; Date sd, ed;
-					getSemesterIn4(no, sy, sd, ed);
-					Semester sem = createSemester(no, sy, sd, ed);
-					cout << "Hoc ki vua them la: " << endl;
-					viewSemester(sem);
-					break;
-				}
-				case 2:
-				{
-					Course cour; 
-					getCourseIn4(cour, curr);
+				
+			}
+			else if (part == 3)
+			{
 
-				}
-				}
 			}
 		}
 	}

@@ -100,8 +100,8 @@ SchoolYear createSchoolYear(string schy);
 SchoolYear createSchoolYear(int yearStart, int yearEnd);
 void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end);
 Class* createClasses(SchoolYear sy, string eduProg, int start, int end);
-bool addStudentFromKeyboard(Student stu, Class cl);
-bool addStudentsFromCSV(string fname, int& n, Class& lop);
+bool addStudentToClass(Student stu, Class &cl);
+bool addStudentsToClass(string fname, Class& lop);
 
 //----------------------------------------------------------------------
 
@@ -110,12 +110,14 @@ Semester createSemester(int no, SchoolYear sy, Date sd, Date ed);
 void getCourseIn4(Course& a, Semester sem);
 void addCoursetoSemester(Course a, Semester sem);
 void viewCourses(Semester sem);
-void getIn4toUpdateCourse(string& courseID, string& cl);
-void updateCourseIn4(string courseID, string cl, Semester sem); // check out this later
+void getIn4toUpdateCourse(string& courseID, string& cl, int& option);
+CourseVarType getIn4toUpdateCourse(int option);
+bool updateCourseIn4(string courseID, string cl, int option, CourseVarType in4, Semester sem);
 void getStudentIn4(Student& a);
-void addStudentToCourse(Student st, Course& c);
-void removeStudentFromCourse(Student st, Course& c);
-void removeCourse(Course c, Semester sem);
+bool addStudentToCourse(Student st, Course& c);
+bool addStudentsToCourse(string fname, Course &cour);
+bool removeStudentFromCourse(Student st, Course& c);
+bool removeCourse(Course c, Semester sem);
 
 //----------------------------------------------------------------------
 

@@ -9,7 +9,7 @@ float calculateGPA(LList<Scoreboard> a)
 	return gpa / float(countNodes(a.head));
 }
 
-LList<Course> findCourseInClass(Class cl, Semester sem)
+LList<Course> findCoursesOfClass(Class cl, Semester sem)
 {
 	LList<Course> courseList; courseList.init();
 	for (Node<Course>* i = systems.allCourse[sem.number - 1].head; i != nullptr; i = i->next)
@@ -24,7 +24,7 @@ LList<Course> findCourseInClass(Class cl, Semester sem)
 void viewScoreBoards(Class cl, Semester sem)
 {
 	cout << "Bang diem cac hoc phan trong lop " << cl.cls << ":" << endl;
-	LList<Course> courseList = findCourseInClass(cl, sem);
+	LList<Course> courseList = findCoursesOfClass(cl, sem);
 	for (Node<Course>* i = courseList.head; i != nullptr; i = i->next)
 		viewScoreBoards(i->data);
 	cout << endl << endl;

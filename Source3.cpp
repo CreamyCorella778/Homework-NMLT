@@ -17,7 +17,6 @@ void getSemesterIn4(int& no, SchoolYear& sy, Date& sd, Date& ed)
 Semester createSemester(int no, SchoolYear sy, Date sd, Date ed)
 {
 	Semester sem;
-	getSemesterIn4(no, sy, sd, ed);
 	sem.number = no;
 	sem.sy = sy;
 	sem.startDate = sd;
@@ -102,7 +101,8 @@ void viewCourses(Semester sem)
 	cout << endl << endl;
 }
 
-void getIn4toUpdateCourse(string& courseID, string& cl, int &option)
+
+void getIn4toUpdateCourse(string& courseID, string& cl, int& option)
 {
 	cout << "Nhap ma hoc phan can cap nhat: "; cin >> courseID;
 	cout << "Nhap ten lop hoc cua hoc phan: "; cin >> cl;
@@ -115,23 +115,138 @@ void getIn4toUpdateCourse(string& courseID, string& cl, int &option)
 			<< "4. So hoc sinh toi da" << endl
 			<< "5. Lop" << endl
 			<< "6. Thu trong tuan de hoc" << endl
-			<< "7. Buoi trong nay de hoc" << endl
+			<< "7. Buoi trong ngay de hoc" << endl
 			<< "sess 1 starts at 7:30, sess 2 starts at 9:30, sess 3 starts at 13:30, sess 4 starts at 15:30" << endl
 			<< "8. Hoc ki de hoc: ";
 		cin >> option;
 	} while (option < 1 || option > 8);
 }
 
-void updateCourseIn4(string courseID, string cl, int option, Semester sem) // ??? watch out this one
+CourseVarType getIn4toUpdateCourse(int option)
 {
-	Node<Course>* i = systems.allCourse[sem.number - 1].head;
-	for (i; !(i->data.id == courseID && i->data.lop.cls == cl); i = i->next)
-		continue;
+	CourseVarType dataa;
 	switch (option)
 	{
 	case 1:
-		// watch out this one weeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee~~~~~~~~~~~~~~~~~~~~~~~~~~
+	{
+		cout << "Nhap ten khoa hoc moi: "; cin >> dataa.courseName;
 	}
+	break;
+	//////////////////////////////////////
+	case 2:
+	{
+		string temp = ""; int times = 5; dataa.teacher = new Node<Staff>;
+		do
+		{
+			cout << "Ban con " << times << " lan nhap. Nhap ma cua giao vien moi : "; cin >> temp;
+			--times;
+			dataa.teacher = findStaff(temp);
+		} while (dataa.teacher == nullptr && times > 0);
+		if (dataa.teacher == nullptr)
+			cout << "Khong ton tai giao vien. Chuc ban may man lan sau" << endl;
+	}
+	break;
+	//////////////////////////////////////
+	case 3:
+	{
+		cout << "Nhap so tin chi moi: "; cin >> dataa.credits;
+	}
+	break;
+	//////////////////////////////////////
+	case 4:
+	{
+		cout << "Nhap so hoc sinh toi da moi: "; cin >> dataa.capacity;
+	}
+	break;
+	//////////////////////////////////////
+	case 5:
+	{
+		string temp = ""; int times = 5; dataa.lop = new Node<Class>;
+		do
+		{
+			cout << "Ban con " << times << " lan nhap. Nhap ten lop moi : "; cin >> temp;
+			--times;
+			dataa.lop = findCLass(temp);
+		} while (dataa.lop == nullptr && times > 0);
+		if (dataa.lop == nullptr)
+			cout << "Khong ton tai lop. Chuc ban may man lan sau" << endl;
+	}
+	break;
+	////////////////////////////////////////
+	case 6:
+	{
+		cout << "Nhap thu trong tuan moi cho khoa hoc: "; cin >> dataa.dayInWeek;
+	}
+	break;
+	//////////////////////////////////////
+	case 7:
+	{
+		cout << "sess 1 starts at 7:30, sess 2 starts at 9:30, sess 3 starts at 13:30, sess 4 starts at 15:30" << endl;
+		cout << "Nhap buoi hoc moi trong ngay: "; cin >> dataa.session;
+	}
+	break;
+	////////////////////////////////////////
+	case 8:
+	{
+		cout << "Phan nhap hoc ki moi: " << endl;
+		int no = 0;  SchoolYear sy; Date sd, ed;
+		getSemesterIn4(no, sy, sd, ed);
+		Semester sem = { no, sy, sd, ed }; 
+		dataa.sem = new Node<Semester>;
+		dataa.sem = findNode(systems.allSemester, sem);
+		if (dataa.sem == nullptr)
+			dataa.sem->data = createSemester(no, sy, sd, ed);
+	}
+	break;
+	default:
+		dataa.sem = nullptr;
+	}
+	return dataa;
+}
+
+bool updateCourseIn4(string courseID, string cl, int option, CourseVarType in4, Semester sem) // ??? watch out this one
+{
+	Node<Course>* i = systems.allCourse[sem.number - 1].head;
+	for (i; !(i->data.id == courseID && i->data.lop.cls == cl) && i != nullptr; i = i->next)
+		continue;
+	if (i == nullptr)
+		return false;
+	switch (option)
+	{
+	case 1:
+		i->data.courseName = in4.courseName;
+		break;
+	case 2:
+		if (in4.teacher == nullptr)
+			return false;
+		else
+			i->data.teacher = in4.teacher->data;
+		break;
+	case 3:
+		i->data.credits = in4.credits;
+		break;
+	case 4:
+		i->data.capacity = in4.capacity;
+		break;
+	case 5:
+		if (in4.lop == nullptr)
+			return false;
+		else
+			i->data.lop = in4.lop->data;
+		break;
+	case 6:
+		i->data.dayInWeek = in4.dayInWeek;
+		break;
+	case 7:
+		i->data.session = in4.session;
+		break;
+	case 8:
+		i->data.sem = in4.sem->data;
+		break;
+	default:
+		return false;
+	}
+	return true;
 }
 
 string* extractFirstLastName(string name)
@@ -160,7 +275,7 @@ void getStudentIn4(Student& a)
 	cout << "Nhap so can cuoc cong dan: "; getline(cin, a.socialID);
 }
 
-void addStudentToCourse(Student st, Course& c) // fname = courseid_classname_semnumber.txt
+bool addStudentToCourse(Student st, Course& c) // fname = courseid_classname_semnumber.txt
 {
 	st.no = countNodes(c.stuList.head) + 1;
 	Node<Student>* node = new Node<Student>; node->init(st);
@@ -169,7 +284,7 @@ void addStudentToCourse(Student st, Course& c) // fname = courseid_classname_sem
 	ofstream fp;
 	fp.open(fname, ios::app);
 	if (!fp.is_open())
-		return;
+		return false;
 	else
 	{
 		Node<Student>* node = new Node<Student>; node->init(st);
@@ -184,22 +299,22 @@ void addStudentToCourse(Student st, Course& c) // fname = courseid_classname_sem
 		fp << st.birth.day << "/" << st.birth.month << "/" << st.birth.year << ","
 			<< st.socialID;
 		fp.close();
-		return;
+		return true;
 	}
 }
 
-void removeStudentFromCourse(Student st, Course& c)
+bool removeStudentFromCourse(Student st, Course& c)
 {
 	st.no = 0;
 	removeRandomNode(c.stuList, st);
 	string fname = generateFileName(c, st.cl, c.sem);
-	writeStudentsInCourse(fname, c);
+	return writeStudentsInCourse(fname, c);
 }
 
-void removeCourse(Course c, Semester sem)
+bool removeCourse(Course c, Semester sem)
 {
 	removeRandomNode(systems.allCourse[sem.number - 1], c);
 	string fname = "all_course_" + sem.sy.schYr + ".txt";
-	writeAllCourses(fname);
+	return writeAllCourses(fname);
 }
 

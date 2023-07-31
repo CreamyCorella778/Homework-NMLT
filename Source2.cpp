@@ -146,7 +146,7 @@ Date getNS(string birth)
 	return ket_qua;
 }
 
-bool addStudentFromKeyboard(Student stu, Class cl) // fname = classname.txt
+bool addStudentToClass(Student stu, Class &cl) // fname = classname.txt
 {
 	string fname = cl.cls + ".txt";
 	ofstream fp;
@@ -172,7 +172,7 @@ bool addStudentFromKeyboard(Student stu, Class cl) // fname = classname.txt
 	}
 }
 
-bool addStudentsFromCSV(string fname, int& n, Class &lop) // fname = classname.txt
+bool addStudentsToClass(string fname, Class &lop) // fname = classname.txt
 {
 	lop.eduProgr = extractEduProg(fname);
 	lop.year = extractSchoolYear(fname);
@@ -183,8 +183,7 @@ bool addStudentsFromCSV(string fname, int& n, Class &lop) // fname = classname.t
 		return false;
 	else
 	{
-		n = countLinesInCSV(fname) - 1;
-		string container; getline(fp, container, '\n');
+		string container = ""; getline(fp, container, '\n');
 		while (fp.eof() == false)
 		{
 			Student stu;

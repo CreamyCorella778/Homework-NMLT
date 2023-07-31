@@ -1,6 +1,39 @@
 #include "Header1.h"
 #include "Header2.h"
 
+bool addStudentsToCourse(string fname, Course &cour)  // fname = courseid_classname_semnumber.txt
+{
+	ifstream fp;
+	fp.open(fname, ios::in);
+	if (fp.is_open() == false)
+		return false;
+	else
+	{
+		string container = ""; getline(fp, container, '\n');
+		while (fp.eof() == false)
+		{
+			Student stu;
+			getline(fp, container, ','); stu.no = atoi(container.c_str());
+			getline(fp, stu.stuID, ',');
+			getline(fp, stu.firstName, ',');
+			getline(fp, stu.lastName, ',');
+			getline(fp, container, ',');
+			if (container.compare("nam") == 0 || container.compare("Nam") == 0)
+				stu.gender = true;
+			else
+				stu.gender = false;
+			getline(fp, container, ',');
+			stu.birth = getNS(container);
+			getline(fp, stu.socialID, ',');
+			getline(fp, container, '\n');
+			Node<Student>* node = new Node<Student>; node->init(stu);
+			addLast(cour.stuList, node);
+		}
+		fp.close();
+		return true;
+	}
+}
+
 bool writeStudentsInCourse(string fname, Course cour) // fname = courseid_classname_semnumber.txt
 {
 	ofstream fp;

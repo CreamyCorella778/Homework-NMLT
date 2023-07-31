@@ -62,6 +62,19 @@ struct Course
 	LList<Scoreboard> score;
 };
 
+union CourseVarType
+{
+	string id;
+	string courseName;
+	Node<Staff>* teacher;
+	int credits;
+	int capacity;
+	Node<Class>* lop;
+	int dayInWeek;
+	int session;
+	Node<Semester>* sem;
+};
+
 void initSystems();
 template <class a>
 void addLast(LList<a> l, Node<a>* insert);
@@ -86,4 +99,4 @@ bool findCourse(string courseID, string className, int semNum, Course& found);
 Node<Staff>* findStaff(string id);
 void countNoInStudentList(LList<Student>& l);
 bool writeAllCourses(string fname);
-
+Node<Class>* findCLass(string name);
