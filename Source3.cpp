@@ -75,12 +75,12 @@ void getCourseIn4(Course &a, Semester sem)
 	cin >> a.session;
 }
 
-void addCoursetoSemester(Course a, Semester sem) 
+bool addCoursetoSemester(Course a, Semester sem) 
 {
 	Node<Course>* node = new Node<Course>; node->init(a);
 	addLast(systems.allCourse[sem.number - 1], node);
 	string fname = "all_course_" + sem.sy.schYr + ".txt";
-	writeAllCourses(fname);
+	return writeAllCourses(fname);
 }
 
 void viewCourse(Course a)
@@ -192,10 +192,12 @@ CourseVarType getIn4toUpdateCourse(int option)
 		int no = 0;  SchoolYear sy; Date sd, ed;
 		getSemesterIn4(no, sy, sd, ed);
 		Semester sem = { no, sy, sd, ed }; 
-		dataa.sem = new Node<Semester>;
 		dataa.sem = findNode(systems.allSemester, sem);
 		if (dataa.sem == nullptr)
+		{
+			dataa.sem = new Node<Semester>;
 			dataa.sem->data = createSemester(no, sy, sd, ed);
+		}
 	}
 	break;
 	default:

@@ -108,7 +108,7 @@ bool addStudentsToClass(string fname, Class& lop);
 void getSemesterIn4(int& no, SchoolYear& sy, Date& sd, Date& ed);
 Semester createSemester(int no, SchoolYear sy, Date sd, Date ed);
 void getCourseIn4(Course& a, Semester sem);
-void addCoursetoSemester(Course a, Semester sem);
+bool addCoursetoSemester(Course a, Semester sem);
 void viewCourses(Semester sem);
 void getIn4toUpdateCourse(string& courseID, string& cl, int& option);
 CourseVarType getIn4toUpdateCourse(int option);
