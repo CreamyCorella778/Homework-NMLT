@@ -61,11 +61,7 @@ Node<Staff>* findStaff(string id)
 {
 	for (Node<Staff>* i = systems.allStaff.head; i != nullptr; i = i->next)
 		if (i->data.id.compare(id) == 0)
-		{
-			Node<Staff>* res = new Node<Staff>;
-			res->init(i->data);
-			return res;
-		}
+			return i;
 	return nullptr;
 }
 
@@ -235,8 +231,12 @@ bool readAllClasses(string fname)
 	}
 }
 
-bool writeAllCoursesByStaff(string fname, Staff st) // fname = staffid.txt
+bool writeAllCoursesByStaff(string fname) // fname = staffid.txt
 {
+	string staID = ""; staID.assign(fname, fname.find_last_of('.') + 1);
+	Node<Staff>* node = findStaff(staID);
+	if (node == nullptr)
+		return false;
 	ofstream fp;
 	fp.open(fname, ios::trunc);
 	if (fp.is_open() == false)
@@ -245,12 +245,12 @@ bool writeAllCoursesByStaff(string fname, Staff st) // fname = staffid.txt
 	{
 		fp << "No,ID,Course name,Teacher's id,Class,Credits,Capacity,Day in week,Session,Semester number\n";
 		bool written = false;
-		if (st.courses.head == st.courses.tail && st.courses.head == nullptr)
+		if (node->data.courses.head == node->data.courses.tail && node->data.courses.head == nullptr)
 			written = false;
 		else
 		{
 			int j = 1;
-			for (Node<Course>* i = st.courses.head; i != nullptr; i = i->next, ++j)
+			for (Node<Course>* i = node->data.courses.head; i != nullptr; i = i->next, ++j)
 			{
 				fp << j << ","
 					<< i->data.id << ","
@@ -272,8 +272,12 @@ bool writeAllCoursesByStaff(string fname, Staff st) // fname = staffid.txt
 	}
 }
 
-bool readAllCoursesByStaff(string fname, Staff& st)
+bool readAllCoursesByStaff(string fname)
 {
+	string staID = ""; staID.assign(fname, fname.find_last_of('.') + 1);
+	Node<Staff>* node = findStaff(staID);
+	if (node == nullptr)
+		return false;
 	ifstream fp;
 	fp.open(fname, ios::in);
 	if (!fp.is_open())
@@ -282,7 +286,7 @@ bool readAllCoursesByStaff(string fname, Staff& st)
 	{
 		string container = "";
 		getline(fp, container, '\n');
-		st.courses.init();
+		node->data.courses.init();
 		while (!fp.eof())
 		{
 			Course a, b;
@@ -290,7 +294,7 @@ bool readAllCoursesByStaff(string fname, Staff& st)
 			getline(fp, a.id, ',');
 			getline(fp, a.courseName, ',');
 			getline(fp, container, ',');
-			a.teacher = st;
+			a.teacher = node->data;
 			getline(fp, container, ','); a.lop = createClass(container);
 			getline(fp, container, ','); a.credits = atoi(container.c_str());
 			getline(fp, container, ','); a.capacity = atoi(container.c_str());
@@ -299,8 +303,8 @@ bool readAllCoursesByStaff(string fname, Staff& st)
 			getline(fp, container, '\n'); a.sem.number = atoi(container.c_str());
 			if (findCourse(a.id, a.lop.cls, a.sem.number, b))
 				a.sem.sy = b.sem.sy;
-			Node<Course>* node = new Node<Course>; node->init(a);
-			addLast(systems.allCourse[a.sem.number - 1], node);
+			Node<Course>* n0de = new Node<Course>; n0de->init(a);
+			addLast(node->data.courses, n0de);
 		}
 		fp.close();
 		return true;

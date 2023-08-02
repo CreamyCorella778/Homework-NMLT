@@ -1,8 +1,12 @@
 #include "Header1.h"
 #include "Header2.h"
 
-bool writeAllCoursesOfStudent(string fname, Student stu) // fname = studentid.txt
+bool writeAllCoursesOfStudent(string fname) // fname = studentid.txt
 {
+	string stuID = ""; stuID.assign(fname, fname.find_last_of('.') + 1);
+	Node<Student>* node = findStudent(stuID);
+	if (node == nullptr)
+		return false;
 	ofstream fp;
 	fp.open(fname, ios::trunc);
 	if (fp.is_open() == false)
@@ -11,12 +15,12 @@ bool writeAllCoursesOfStudent(string fname, Student stu) // fname = studentid.tx
 	{
 		fp << "No,ID,Course name,Teacher's id,Class,Credits,Capacity,Day in week,Session,Semester number,Midterm,Final,Other,Total\n";
 		bool written = false;
-		if ((stu.courses.head == stu.courses.tail && stu.courses.head == nullptr) || (stu.marks.head == stu.marks.tail && stu.marks.head == nullptr))
+		if ((node->data.courses.head == node->data.courses.tail && node->data.courses.head == nullptr) || (node->data.marks.head == node->data.marks.tail && node->data.marks.head == nullptr))
 			written = false;
 		else
 		{
 			int no = 1;
-			Node<Course>* i = stu.courses.head; Node<Scoreboard>* j = stu.marks.head;
+			Node<Course>* i = node->data.courses.head; Node<Scoreboard>* j = node->data.marks.head;
 			for (i, j; i != nullptr && j != nullptr; i = i->next, j = j->next, ++no)
 			{
 				fp << no << ","
@@ -43,8 +47,12 @@ bool writeAllCoursesOfStudent(string fname, Student stu) // fname = studentid.tx
 	}
 }
 
-bool readAllCoursesOfStudent(string fname, Student& stu)
+bool readAllCoursesOfStudent(string fname)
 {
+	string stuID = ""; stuID.assign(fname, fname.find_last_of('.') + 1);
+	Node<Student>* node = findStudent(stuID);
+	if (node == nullptr)
+		return false;
 	ifstream fp;
 	fp.open(fname, ios::in);
 	if (!fp.is_open())
@@ -53,8 +61,8 @@ bool readAllCoursesOfStudent(string fname, Student& stu)
 	{
 		string container = "";
 		getline(fp, container, '\n');
-		stu.courses.init();
-		stu.marks.init();
+		node->data.courses.init();
+		node->data.marks.init();
 		while (!fp.eof())
 		{
 			Course a, b;
@@ -71,17 +79,19 @@ bool readAllCoursesOfStudent(string fname, Student& stu)
 			getline(fp, container, ','); a.sem.number = atoi(container.c_str());
 			if (findCourse(a.id, a.lop.cls, a.sem.number, b))
 				a.sem.sy = b.sem.sy;
+			else
+				return false;
 			Scoreboard c; 
 			c.course = a;
-			c.student = stu;
+			c.student = node->data;
 			getline(fp, container, ','); c.midTerm= atof(container.c_str());
 			getline(fp, container, ','); c.Final = atof(container.c_str());
 			getline(fp, container, ','); c.Other = atof(container.c_str());
 			getline(fp, container, '\n'); c.Total = atof(container.c_str());
-			Node<Course>* node = new Node<Course>; node->init(a);
-			addLast(stu.courses, node);
+			Node<Course>* n0de = new Node<Course>; n0de->init(a);
+			addLast(node->data.courses, n0de);
 			Node<Scoreboard>* nodE = new Node<Scoreboard>; nodE->init(c);
-			addLast(stu.marks, nodE);
+			addLast(node->data.marks, nodE);
 		}
 		fp.close();
 		return true;

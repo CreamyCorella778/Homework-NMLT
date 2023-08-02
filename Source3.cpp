@@ -71,7 +71,7 @@ void getCourseIn4(Course &a, Semester sem)
 		<< "tiet 1 bat dau luc 7:30" << endl
 		<< "tiet 2 bat dau luc 9:30" << endl
 		<< "tiet 3 bat dau luc 13:30" << endl
-		<< "tiet 4 bat dau luc 15 30";
+		<< "tiet 4 bat dau luc 15 30: ";
 	cin >> a.session;
 }
 

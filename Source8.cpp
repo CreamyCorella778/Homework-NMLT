@@ -108,11 +108,7 @@ Node<Student>* findStudent(string id, Class cl)
 { 
 	for (Node<Student>* i = cl.stuList.head; i != nullptr; i = i->next)
 		if (i->data.stuID.compare(id) == 0)
-		{
-			Node<Student>* res = new Node<Student>;
-			res->init(i->data);
-			return res;
-		}
+			return i;
 	return nullptr;
 }
 
@@ -121,11 +117,7 @@ Node<Student>* findStudent(string id)
 	for (Node<Class>* cl = systems.allClass.head; cl != nullptr; cl = cl->next)
 		for (Node<Student>* i = cl->data.stuList.head; i != nullptr; i = i->next)
 			if (i->data.stuID.compare(id) == 0)
-			{
-				Node<Student>* res = new Node<Student>;
-				res->init(i->data);
-				return res;
-			}
+				return i;
 	return nullptr;
 }
 

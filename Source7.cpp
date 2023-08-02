@@ -18,7 +18,7 @@ bool addStudentsToCourse(string fname, Course &cour)  // fname = courseid_classn
 			getline(fp, stu.firstName, ',');
 			getline(fp, stu.lastName, ',');
 			getline(fp, container, ',');
-			if (container.compare("nam") == 0 || container.compare("Nam") == 0)
+			if (stricmp("nam", container.c_str()) == 0)
 				stu.gender = true;
 			else
 				stu.gender = false;
@@ -82,20 +82,21 @@ bool findCourse(string courseID, string className, int semNum, Course& found)
 	return false;
 }
 
-LList<Scoreboard> readScoreBoard(string fname, Course& c, bool& isDone) // fname = courseid_classname_semnumber.txt
+bool readScoreBoard(string fname) // fname = courseid_classname_semnumber.txt
 {
-	LList<Scoreboard> scb; scb.init();
+	string* in4 = extractCId_cl_sno(fname); Course c;
+	bool found = findCourse(in4[0], in4[1], atoi(in4[2].c_str()), c);
+	if (!found)
+		return false;
+	c.score.init();
 	string* in4 = extractCId_cl_sno(fname);
 	ifstream fp;
 	fp.open(fname, ios::in);
 	if (!fp.is_open())
-	{
-		isDone = false;
-		return scb;
-	}
+		return false;
 	else
 	{
-		string container;
+		string container = "";
 		getline(fp, container, '\n');
 		while (!fp.eof())
 		{
@@ -105,7 +106,7 @@ LList<Scoreboard> readScoreBoard(string fname, Course& c, bool& isDone) // fname
 			getline(fp, a.student.firstName, ',');
 			getline(fp, a.student.lastName, ',');
 			getline(fp, container, ',');
-			if (container.compare("nam") == 0 || container.compare("Nam") == 0)
+			if (stricmp("nam", container.c_str()) == 0)
 				a.student.gender = true;
 			else
 				a.student.gender = false;
@@ -117,12 +118,10 @@ LList<Scoreboard> readScoreBoard(string fname, Course& c, bool& isDone) // fname
 			getline(fp, container, ','); a.Other = atof(container.c_str());
 			getline(fp, container, '\n'); a.Total = atof(container.c_str());
 			Node<Scoreboard>* node = new Node<Scoreboard>; node->init(a);
-			addLast(scb, node);
+			addLast(c.score, node);
 		}
 		fp.close();
-		isDone = true;
-		c.score = scb;
-		return scb;
+		return true;
 	}
 }
 
@@ -140,7 +139,8 @@ void viewScoreBoards(Course a)
 	cout << "Bang diem cua hoc phan " << a.courseName << " cua lop " << a.lop.cls << ":" << endl;
 	for (Node<Scoreboard>* i = a.score.head; i != nullptr; i = i->next)
 	{
-		cout << "Sinh vien " << i->data.student.firstName << " " << i->data.student.lastName << ", ma so " << i->data.student.stuID << ":" << endl;
+		cout << "Sinh vien " << i->data.student.firstName << " " << i->data.student.lastName 
+			<< ", ma so " << i->data.student.stuID << ":" << endl;
 		viewScoreBoard(i->data);
 	}
 	cout << endl << endl;
@@ -164,13 +164,9 @@ T* realloc(T* ptr, size_t old_size, size_t new_size) {
 void getUpdateScbIn4(Student a, Course& cour, int*& option, float*& in4, int& n, int& semNum)
 {
 	option = new int[4]; in4 = new float[4]; n = 0; int temp = 0; bool yamete_kudasai = false; 
-	cout << "Hoc ki nay la hoc ki may?"; cin >> semNum; 
-	string tempp;
-	cout << "Nhap ma hoc phan cua hoc phan ban muon cap nhat diem: "; cin >> tempp;
-	findCourse(tempp, a.cl.cls, semNum, cour);
 	do
 	{
-		cout << "Ban muon cap nhat diem nao cua sinh vien? Chon so tuong ung: " << endl;
+		cout << "Ban muon cap nhat diem nao cua sinh vien? Chon so thu tu tuong ung: " << endl;
 		cout << "1. Diem giua ki" << endl;
 		cout << "2. Diem cuoi ki" << endl;
 		cout << "3. Diem khac" << endl;
@@ -180,9 +176,10 @@ void getUpdateScbIn4(Student a, Course& cour, int*& option, float*& in4, int& n,
 		if (n == 4)
 			break;
 		cout << "Ban chi co toi da 4 lan cap nhat. So lan ban da dung la " << n << endl;
-		cout << "Ban co muon tiep tuc cap nhat nua khong? Chon so tuong ung: " << endl;
+		cout << "Ban co muon tiep tuc cap nhat nua khong? Chon so tuong ung: " <<
+			"1. Co                            2. Khong: ";
 		cin >> temp;
-		yamete_kudasai = temp == 0 ? false : true;
+		yamete_kudasai = temp == 2 ? false : true;
 	} while (yamete_kudasai);
 	if (n < 4)
 	{
@@ -191,14 +188,14 @@ void getUpdateScbIn4(Student a, Course& cour, int*& option, float*& in4, int& n,
 	}
 }
 
-void updateScoreBoard(Student stu, Course cour, int* option, float* in4, int n)
+bool updateScoreBoard(Student& stu, Course cour, int* option, float* in4, int n) // Watch out this one, change the course scb too
 {
 	Node<Scoreboard>* node = stu.marks.head;
 	for (node; node != nullptr; node = node->next)
 		if (node->data.course.id == cour.id)
 			break;
 	if (node == nullptr)
-		return;
+		return false;
 	for (int i = 0; i < n; i++)
 		switch (option[i])
 		{
@@ -215,6 +212,8 @@ void updateScoreBoard(Student stu, Course cour, int* option, float* in4, int n)
 			node->data.Total = in4[i];
 			break;
 		}
+	// wweeeeeeeeeeeeeeeee~~~ change the scoreboard of the course, of the sstaff, of the class too, change the gpa too
+	return writeAllCoursesOfStudent(stu.stuID + ".txt");
 }
 
 void viewScoreboards(Student a)

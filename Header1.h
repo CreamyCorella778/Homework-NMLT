@@ -101,7 +101,7 @@ SchoolYear createSchoolYear(int yearStart, int yearEnd);
 void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end);
 Class* createClasses(SchoolYear sy, string eduProg, int start, int end);
 bool addStudentToClass(Student stu, Class &cl);
-bool addStudentsToClass(string fname, Class& lop);
+bool addStudentsToClass(string fname);
 
 //----------------------------------------------------------------------
 
@@ -134,10 +134,10 @@ void viewStudents(Course a);
 //----------------------------------------------------------------------
 
 bool writeStudentsInCourse(string fname, Course cour);
-LList<Scoreboard> readScoreBoard(string fname, Course& c, bool& isDone);
+bool readScoreBoard(string fname);
 void viewScoreBoards(Course a);
 void getUpdateScbIn4(Student a, Course& cour, int*& option, float*& in4, int& n, int& semNum);
-void updateScoreBoard(Student stu, Course cour, int* option, float* in4, int n);
+bool updateScoreBoard(Student& stu, Course cour, int* option, float* in4, int n);
 void viewScoreBoards(Class cl, Semester sem);
 void viewGPAInSemester(Class cl, Semester sem);
 void viewOverallGPAInClass(Class cl, Semester currentSem);

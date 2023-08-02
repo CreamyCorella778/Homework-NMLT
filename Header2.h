@@ -100,3 +100,6 @@ Node<Staff>* findStaff(string id);
 void countNoInStudentList(LList<Student>& l);
 bool writeAllCourses(string fname);
 Node<Class>* findCLass(string name);
+Node<Student>* findStudent(string id);
+bool writeAllCoursesOfStudent(string fname);
+

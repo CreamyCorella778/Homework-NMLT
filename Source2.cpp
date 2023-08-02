@@ -83,7 +83,7 @@ Class* createClasses(SchoolYear sy, string eduProg, int start, int end)
 
 string extractEduProg(string fname) // Assume that the file name part is the class name
 {
-	string ep = "\0";
+	string ep = "";
 	for (int i = 0; i < fname.size(); ++i)
 		if (isalpha(fname.at(i)))
 			ep.push_back(fname.at(i));
@@ -113,9 +113,16 @@ Class createClass(string cl)
 	Class a;
 	a.eduProgr = extractEduProg(cl);
 	a.year = extractSchoolYear(cl);
-	a.no = extractNo(cl);
+	string no = "";
+	a.no = atoi(no.assign(cl, 1 + a.eduProgr.size(), cl.size() - 2 - a.eduProgr.size()).c_str());
 	a.cls = cl;
 	return a;
+}
+
+Class createCLass(string fname)
+{
+	string a; a.assign(fname, fname.find_last_of('.') + 1);
+	return createClass(a);
 }
 
 Date getNS(string birth) 
@@ -172,11 +179,11 @@ bool addStudentToClass(Student stu, Class &cl) // fname = classname.txt
 	}
 }
 
-bool addStudentsToClass(string fname, Class &lop) // fname = classname.txt
+bool addStudentsToClass(string fname) // fname = classname.txt
 {
-	lop.eduProgr = extractEduProg(fname);
-	lop.year = extractSchoolYear(fname);
-	lop.no = extractNo(fname);
+	Node<Class>* node = findCLass(createCLass(fname).cls);
+	if (node == nullptr)
+		return false;
 	ifstream fp;
 	fp.open(fname, ios::in);
 	if (fp.is_open() == false)
@@ -192,15 +199,15 @@ bool addStudentsToClass(string fname, Class &lop) // fname = classname.txt
 			getline(fp, stu.firstName, ',');
 			getline(fp, stu.lastName, ',');
 			getline(fp, container, ',');
-			if (container.compare("nam") == 0 || container.compare("Nam") == 0)
+			if (stricmp("nam", container.c_str()) == 0)
 				stu.gender = true;
 			else
 				stu.gender = false;
 			getline(fp, container, ',');
 			stu.birth = getNS(container);
 			getline(fp, stu.socialID, '\n');
-			Node<Student>* node = new Node<Student>; node->init(stu);
-			addLast(lop.stuList, node);
+			Node<Student>* n0de = new Node<Student>; n0de->init(stu);
+			addLast(node->data.stuList, n0de);
 		}
 		fp.close();
 		return true;

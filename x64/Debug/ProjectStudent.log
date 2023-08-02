@@ -2,12 +2,12 @@
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -71,26 +71,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source1.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -154,26 +154,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source10.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -237,26 +237,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source11.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -320,26 +320,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source12.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -403,26 +403,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source13.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -486,26 +486,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source14.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -569,26 +569,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source2.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -652,26 +652,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source3.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -735,26 +735,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source4.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -818,26 +818,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source5.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -901,26 +901,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source6.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -984,26 +984,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source7.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -1067,26 +1067,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source8.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -1150,26 +1150,26 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Source9.cpp
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): error C2182: 'addLast': this use of 'void' is not valid
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C2065: 'LList': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C2065: 'insert': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,14): error C3861: 'LList': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,27): error C3861: 'Node': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,36): error C3861: 'insert': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,26): error C3861: 'Node': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,35): error C3861: 'insert': identifier not found
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(6,1): error C2447: '{': missing function header (old-style formal list?)
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,16): error C2065: 'Node': undeclared identifier
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(17,25): error C2065: 'head': undeclared identifier
@@ -1233,14 +1233,14 @@ C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,28): er
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(275,35): error C2146: syntax error: missing ')' before identifier 'fname'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2143: syntax error: missing ';' before '{'
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source9.cpp(276,1): error C2447: '{': missing function header (old-style formal list?)
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C2182: 'addLast': this use of 'void' is not valid
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,6): error C7571: 'addLast': variable template has already been initialized
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C2182: 'addLast': this use of 'void' is not valid
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,6): error C7571: 'addLast': variable template has already been initialized
 C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Source4.cpp(5,6): message : see declaration of 'addLast'
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C2065: 'LList': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C2065: 'l': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,26): error C2065: 'Node': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,35): error C2065: 'insert': undeclared identifier
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,14): error C3861: 'LList': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,23): error C3861: 'l': identifier not found
-C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(67,1): fatal  error C1003: error count exceeds 100; stopping compilation
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C2065: 'LList': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C2065: 'l': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,26): error C2065: 'Node': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,35): error C2065: 'insert': undeclared identifier
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,14): error C3861: 'LList': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,23): error C3861: 'l': identifier not found
+C:\Users\user\source\repos\ProjectStudent\ProjectStudent\Header2.h(80,1): fatal  error C1003: error count exceeds 100; stopping compilation
   Generating Code...
