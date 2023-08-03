@@ -79,6 +79,8 @@ struct Student
 	Class cl;
 	LList<Course> courses;
 	LList<Scoreboard> marks;
+	float semGPA;
+	float GPA;
 };
 
 struct System

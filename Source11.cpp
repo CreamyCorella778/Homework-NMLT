@@ -141,7 +141,7 @@ int testing6(string email, Semester currSem) // part 3
 			do
 			{
 				cout << "Nhap ma khoa hoc: "; getline(cin, course);
-				cout << "Nhap ma lop cua khoa hoc dang day: "; getline(cin, cls);
+				cout << "Nhap ten lop cua khoa hoc dang day: "; getline(cin, cls);
 				fname = course + cls + to_string(currSem.number) + ".txt";
 				no_good = !findCourse(course, cls, currSem.number, cour);
 				--so_lan;
@@ -200,7 +200,21 @@ int testing6(string email, Semester currSem) // part 3
 		}
 		case 5:
 		{
-
+			string cls = ""; int so_lan = 5; Node<Class>* node = new Node<Class>;
+			do
+			{
+				cout << "Nhap ten lop: "; getline(cin, cls);
+				node = findCLass(cls);
+				--so_lan;
+				if (node == nullptr)
+					cout << "Khong tim thay lop. Hay nhap lai. Ban con " << so_lan << " nhap." << endl;
+			} while (node == nullptr && so_lan > 0);
+			if (node == nullptr)
+			{
+				cout << "Khong tim thay lop. Chuc ban may man lan sau. " << endl;
+				return -1;
+			}
+			viewScoreBoards(node->data, currSem);
 			break;
 		}
 		case 6:

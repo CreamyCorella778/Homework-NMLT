@@ -1,12 +1,12 @@
 #include "Header1.h"
 #include "Header2.h"
 
-float calculateGPA(LList<Scoreboard> a)
+float calculateSemGPA(Student &stu)
 {
-	float gpa = 0.0;
-	for (Node<Scoreboard>* i = a.head; i != nullptr; i = i->next)
-		gpa += i->data.Total * float(i->data.course.credits);
-	return gpa / float(countNodes(a.head));
+	stu.semGPA = 0.0;
+	for (Node<Scoreboard>* i = stu.marks.head; i != nullptr; i = i->next)
+		stu.semGPA += i->data.Total * float(i->data.course.credits);
+	return stu.semGPA / float(countNodes(stu.marks.head));
 }
 
 LList<Course> findCoursesOfClass(Class cl, Semester sem)
@@ -21,20 +21,11 @@ LList<Course> findCoursesOfClass(Class cl, Semester sem)
 	return courseList;
 }
 
-void viewScoreBoards(Class cl, Semester sem)
-{
-	cout << "Bang diem cac hoc phan trong lop " << cl.cls << ":" << endl;
-	LList<Course> courseList = findCoursesOfClass(cl, sem);
-	for (Node<Course>* i = courseList.head; i != nullptr; i = i->next)
-		viewScoreBoards(i->data);
-	cout << endl << endl;
-}
-
 void viewGPAInSemester(Class cl, Semester sem)
 {
 	cout << "Diem trung binh hoc ki cua cac sinh vien lop " << cl.cls << ":" << endl;
 	for (Node<Student>* i = cl.stuList.head; i != nullptr; i = i->next)
-		cout << i->data.firstName << " " << i->data.lastName << ": " << calculateGPA(i->data.marks);
+		cout << i->data.firstName << " " << i->data.lastName << ": " << calculateSemGPA(i->data);
 	cout << endl << endl;
 }
 
@@ -45,7 +36,7 @@ void countNoInStudentList(LList<Student> &l)
 		i->data.no = index;
 }
 
-bool writeGPAofClassInSem(string fname, Class cl, Semester sem) // fname = gpa_classname_semnumber_schoolyear.txt (gpa is a literally a word)
+bool writeGPAofClassInSem(string fname, Class cl, Semester sem) // fname = gpa_classname_semnumber.txt (gpa is a literally a word)
 {
 	ofstream fp;
 	fp.open(fname, ios::trunc);
@@ -54,12 +45,12 @@ bool writeGPAofClassInSem(string fname, Class cl, Semester sem) // fname = gpa_c
 	else
 	{
 		countNoInStudentList(cl.stuList);
-		fp << "No,Student ID,GPA" << endl;
+		fp << "No,Student ID,Semester GPA" << endl;
 		for (Node<Student>* i = cl.stuList.head; i != nullptr; i = i->next)
 		{
 			fp << i->data.no << ","
 				<< i->data.stuID << ","
-				<< calculateGPA(i->data.marks);
+				<< calculateSemGPA(i->data);
 			if (i != cl.stuList.tail)
 				fp << "\n";
 		}
@@ -95,10 +86,10 @@ string* generateMoreFileNames(Class cl, Semester currentSem)
 	return fnameList;
 }
 
-string* extractCl_sno_schy(string fname) // fname = gpa_classname_semnumber_schoolyear.txt (gpa is a literally a word)
+string* extractCl_sno_schy(string fname) // fname = gpa_classname_semnumber.txt (gpa is a literally a word)
 {
-	int j = 4; string* res = new string[3];
-	for (int i = 0; i < 3; ++i)
+	int j = 4; string* res = new string[2];
+	for (int i = 0; i < 2; ++i)
 		for (j; fname[j] - '_' == 0 || fname[j] - '.' == 0; ++j)
 			res[i].push_back(fname[j]);
 	return res;
@@ -129,7 +120,7 @@ Node<Class>* findCLass(string name)
 	return nullptr;
 }
 
-bool readGPAofClassInSem(string fname, LList<float>& gpas)
+bool readGPAofClassInSem(string fname, LList<float>& semGPA) // fname = gpa_classname_semnumber.txt (gpa is a literally a word)
 {
 	ifstream fp;
 	fp.open(fname, ios::in);
@@ -139,16 +130,23 @@ bool readGPAofClassInSem(string fname, LList<float>& gpas)
 	{
 		string* container = new string[2];
 		string className = extractCl_sno_schy(fname)[0];
-		countNoInStudentList(findCLass(className)->data.stuList);
-		gpas.init();
+		Node<Class>* n0de = findCLass(className); semGPA.init();
+		if (n0de == nullptr)
+		{
+			fp.close();
+			return false;
+		}
+		Node<Student>* node = n0de->data.stuList.head;
 		while (!fp.eof())
 		{
 			float score = 0.0;
 			getline(fp, container[0], ',');
 			getline(fp, container[1], ',');
 			getline(fp, container[0], '\n'); score = atof(container[0].c_str());
-			Node<float>* node = new Node<float>; node->init(score);
-			addLast(gpas, node);
+			node->data.semGPA = score;
+			node = node->next;
+			Node<float>* i = new Node<float>; i->init(score);
+			addLast(semGPA, i);
 		}
 		fp.close();
 		return true;
@@ -167,15 +165,19 @@ float* countOverallGPAInClass(Class cl, Semester currentSem)
 			delete[] semGPA;
 			semGPA = nullptr;
 			fnameList = nullptr;
-			return;
+			return nullptr;
 		}
 	int numberOfStu = countNodes(semGPA[0].head);
 	float* overallGPA = new float[numberOfStu];
 	for (int i = 0; i < numberOfStu; ++i)
 		for (int j = 0; j < numberOfSem; ++j)
-			overallGPA[i] = findNode(semGPA[j], i)->data;
-	for (int i = 0; i < numberOfStu; ++i)
+			overallGPA[i] += findNode(semGPA[j], i)->data;
+	Node<Student>* node = cl.stuList.head;
+	for (int i = 0; i < numberOfStu && node != nullptr; ++i, node = node->next)
+	{
 		overallGPA[i] /= numberOfSem;
+		node->data.GPA = overallGPA[i];
+	}
 	return overallGPA;
 }
 
@@ -187,5 +189,35 @@ void viewOverallGPAInClass(Class cl, Semester currentSem)
 	for (int index = 0, Node<Student>* i = cl.stuList.head; index < numberOfStu; ++index, i = i->next)
 		cout << index + 1 << ". " << i->data.firstName << " "
 		<< i->data.lastName << ": " << overallGPA[index];
+	cout << endl << endl;
+}
+
+void viewScoreBoards(Class cl, Semester sem)
+{
+	cout << "Bang diem cua lop " << cl.cls << ": " << endl;
+	for (int i = 0; i < 40; ++i)
+		cout << " ";
+
+	LList<Course> courseList = findCoursesOfClass(cl, sem);
+	for (Node<Course>* i = courseList.head; i != nullptr; ++i)
+		cout << setw(50) << setfill('-') << left << i->data.courseName;
+	cout << setw(30) << setfill('-') << left << "Semester GPA";
+	cout << setw(30) << setfill('-') << left << "Overall GPA" << endl;
+
+	for (Node<Student>* index1 = cl.stuList.head; index1 != nullptr; index1 = index1->next)
+	{
+		cout << setw(40) << index1->data.firstName << " " << index1->data.lastName;
+		for (Node<Course>* index2 = courseList.head; index2 != nullptr; index2 = index2->next)
+		{
+			Node<Scoreboard>* node = index1->data.marks.head;
+			for (node; node->data.course.id.compare(index2->data.id) != 0; node = node->next)
+				continue;
+			cout << setw(50) << left << node->data.Final;
+		}
+		cout << setw(30) << left << index1->data.semGPA;
+		cout << setw(30) << left << index1->data.GPA;
+		if (index1->next != nullptr)
+			cout << endl;
+	}
 	cout << endl << endl;
 }

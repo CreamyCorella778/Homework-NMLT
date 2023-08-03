@@ -35,6 +35,14 @@ struct Scoreboard
 	float Other;
 };
 
+struct Scoreboard4Class
+{
+	Class cls;
+	float* Final;
+	float* semGPA;
+	float* overallGPA;
+};
+
 struct Staff
 {
 	string firstName;
