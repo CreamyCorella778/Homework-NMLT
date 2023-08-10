@@ -219,22 +219,56 @@ int testing6(string email, Semester currSem) // part 3
 		}
 		case 6:
 		{
-
+			viewCourses(currSem);
 			break;
 		}
 		case 7:
 		{
-
+			cout << "Danh sach cac lop nam nay: " << endl;
+			viewClasses();
 			break;
 		}
 		case 8:
 		{
-
+			string cls = "";
+			cout << "Nhap ten lop: "; cin >> cls; Class lop;
+			Node<Class>* node = findCLass(cls);
+			if (node == nullptr)
+			{
+				char a = 0;
+				cout << "Ban co muon tao lop moi voi ten vua roi khong? Chon so thu tu tuong ung voi lua chon: " << endl
+					<< "1. Co                                          2. Khong: "; cin >> a;
+				if (a == 2)
+				{
+					cout << "Loi he thong. Chuc ban may man lan sau" << endl;
+					no_good = true;
+					break;
+				}
+				else
+				{
+					lop = createClass(cls);
+					cout << "Tao thanh cong." << endl;
+				}
+			}
+			else
+				lop = node->data;
+			cout << "Danh sach cac hoc sinh cua lop " << lop.cls << ":\n";
+			viewStudents(lop);
 			break;
 		}
 		case 9:
 		{
-
+			cout << "Phan lay thong tin cua khoa hoc can xem: " << endl;
+			string cou = "", cls = ""; bool found = false; Course course;
+			do
+			{
+				cout << "Nhap ma khoa hoc: "; getline(cin, cou);
+				cout << "Nhap ten lop: "; getline(cin, cls);
+				found = findCourse(cou, cls, currSem.number, course);
+				if (!found)
+					cout << "Khong tim thay khoa hoc. Moi nhap lai: " << endl;
+			} while (!found);
+			viewStudents(course);
 			break;
 		}
 		case 10:
