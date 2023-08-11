@@ -1,5 +1,5 @@
-#include "Header1.h"
-#include "Header2.h"
+#include "Header1.hpp"
+#include "Header2.hpp"
 
 bool writeAllSemester(string fname) // fname = all_semester.txt // fname might be changed due to various reasons
 {
@@ -17,7 +17,7 @@ bool writeAllSemester(string fname) // fname = all_semester.txt // fname might b
 		}
 		else
 		{
-			for (Node<Semester>* i = systems.allSemester.head; i != nullptr; i = i->next, ++j)
+			for (Node<Semester>* i = systems.allSemester.head; i != nullptr; i = i->next)
 			{
 				fp << i->data.number << ","
 					<< i->data.sy.schYr << ","
@@ -166,9 +166,9 @@ Date* divideSemester(Semester sem)
 {
 	Date* parts = new Date[4];
 	int* parts_thutu = divideInto3Parts(ThuTu(sem.startDate), ThuTu(sem.endDate));
-	parts_thutu[1] += (0 < dayOfWeek(sem.startDate) + 1 < 5) ? 1 - dayOfWeek(sem.startDate) : 
+	parts_thutu[1] += ((0 < dayOfWeek(sem.startDate) + 1) && (dayOfWeek(sem.startDate) + 1 < 5)) ? 1 - dayOfWeek(sem.startDate) : 
 		(dayOfWeek(sem.startDate) == 0 ? 1 : 8 - dayOfWeek(sem.startDate));
-	parts_thutu[2] += (0 < dayOfWeek(sem.endDate) + 1 < 5) ? 1 - dayOfWeek(sem.endDate) :
+	parts_thutu[2] += ((0 < dayOfWeek(sem.startDate) + 1) && (dayOfWeek(sem.startDate) + 1 < 5)) ? 1 - dayOfWeek(sem.endDate) :
 		(dayOfWeek(sem.endDate) == 0 ? 1 : 8 - dayOfWeek(sem.endDate));
 	for (int i = 0; i < 4; ++i)
 		parts[i] = Reverse_ThuTu(sem.startDate.year, parts_thutu[i]);

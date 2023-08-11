@@ -2,7 +2,7 @@
 #include <iostream>
 #include <iomanip>
 #include <fstream>
-#include "Header2.h"
+#include "Header2.hpp"
 using namespace std;
 
 template <class a>
@@ -83,6 +83,77 @@ struct Student
 	float GPA;
 };
 
+struct Class
+{
+	SchoolYear year;
+	string eduProgr;
+	int no;
+	string cls;
+	LList<Student> stuList;
+	bool isEqual(Class another)
+	{
+		return (this->year.isEqual(another.year)) && (this->eduProgr == another.eduProgr) && this->no == another.no && this->cls == another.cls;
+	}
+};
+
+struct Scoreboard
+{
+	Student student;
+	Course course;
+	float Total;
+	float Final;
+	float midTerm;
+	float Other;
+};
+
+struct Scoreboard4Class
+{
+	Class cls;
+	float* Final;
+	float* semGPA;
+	float* overallGPA;
+};
+
+struct Staff
+{
+	string firstName;
+	string lastName;
+	string id;
+	LList<Course> courses;
+};
+
+struct Course
+{
+	string id;
+	string courseName;
+	Staff teacher;
+	int credits;
+	int capacity;
+	Class lop;
+	int dayInWeek;
+	int session;
+	/* sess 1 starts at 7:30
+	*  sess 2 starts at 9:30
+	*  sess 3 starts at 13:30
+	*  sess 4 starts at 15:30 */
+	Semester sem;
+	LList<Student> stuList;
+	LList<Scoreboard> score;
+};
+
+union CourseVarType
+{
+	char* id;
+	char* courseName;
+	Node<Staff>* teacher;
+	int credits;
+	int capacity;
+	Node<Class>* lop;
+	int dayInWeek;
+	int session;
+	Node<Semester>* sem;
+};
+
 struct System
 {
 	LList<Course>* allCourse; // LList[0] = Semester 1, LList[1] = Semester 2, LList[2] = Semester 3
@@ -132,6 +203,7 @@ void viewStudents(Class a);
 void viewAllCourses();
 void viewCourses(Semester sem);
 void viewStudents(Course a);
+void viewStaff(Staff a);
 
 //----------------------------------------------------------------------
 

@@ -1,5 +1,5 @@
-#include "Header1.h"
-#include "Header2.h"
+#include "Header1.hpp"
+#include "Header2.hpp"
 
 int countLinesInCSV(string fname)
 {
