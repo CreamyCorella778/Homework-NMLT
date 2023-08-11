@@ -31,8 +31,8 @@ void viewGPAInSemester(Class cl, Semester sem)
 
 void countNoInStudentList(LList<Student> &l)
 {
-	int n = countNodes(l.head);
-	for (Node<Student>* i = l.head, int index = 1; i != nullptr && index <= n; i = i->next, ++index)
+	int n = countNodes(l.head), index = 1;
+	for (Node<Student>* i = l.head; i != nullptr && index <= n; i = i->next, ++index)
 		i->data.no = index;
 }
 
@@ -171,7 +171,7 @@ float* countOverallGPAInClass(Class cl, Semester currentSem)
 	float* overallGPA = new float[numberOfStu];
 	for (int i = 0; i < numberOfStu; ++i)
 		for (int j = 0; j < numberOfSem; ++j)
-			overallGPA[i] += findNode(semGPA[j], i)->data;
+			overallGPA[i] += findNodeByIndex(semGPA[j], i)->data;
 	Node<Student>* node = cl.stuList.head;
 	for (int i = 0; i < numberOfStu && node != nullptr; ++i, node = node->next)
 	{
@@ -184,9 +184,9 @@ float* countOverallGPAInClass(Class cl, Semester currentSem)
 void viewOverallGPAInClass(Class cl, Semester currentSem)
 {
 	float* overallGPA = countOverallGPAInClass(cl, currentSem);
-	int numberOfStu = countNodes(cl.stuList.head);
+	int numberOfStu = countNodes(cl.stuList.head), index = 0;
 	cout << "Diem trung binh tich luy cua cac sinh vien trong lop " << cl.cls << ":" << endl;
-	for (int index = 0, Node<Student>* i = cl.stuList.head; index < numberOfStu; ++index, i = i->next)
+	for (Node<Student>* i = cl.stuList.head; index < numberOfStu; ++index, i = i->next)
 		cout << index + 1 << ". " << i->data.firstName << " "
 		<< i->data.lastName << ": " << overallGPA[index];
 	cout << endl << endl;

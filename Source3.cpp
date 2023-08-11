@@ -129,7 +129,8 @@ CourseVarType getIn4toUpdateCourse(int option)
 	{
 	case 1:
 	{
-		cout << "Nhap ten khoa hoc moi: "; cin >> dataa.courseName;
+		dataa.courseName = new string;
+		cout << "Nhap ten khoa hoc moi: "; getline(cin, *dataa.courseName);
 	}
 	break;
 	//////////////////////////////////////
@@ -216,7 +217,7 @@ bool updateCourseIn4(string courseID, string cl, int option, CourseVarType in4, 
 	switch (option)
 	{
 	case 1:
-		i->data.courseName = in4.courseName;
+		i->data.courseName = *in4.courseName;
 		break;
 	case 2:
 		if (in4.teacher == nullptr)

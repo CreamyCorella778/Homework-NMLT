@@ -138,7 +138,7 @@ void changePassword(string fname, string email)
 }
 
 
-Student extractStudentFromEnail(string email)
+Student extractStudentFromEmail(string email)
 {
 	string id;
 	for (int i = 0; email[i] - '@' != 0; ++i)
@@ -149,14 +149,14 @@ Student extractStudentFromEnail(string email)
 				return j->data;
 }
 
-Staff extractStaffFromEnail(string email)
+Staff extractStaffFromEmail(string email)
 {
 	string id;
 	for (int i = 0; email[i] - '@' != 0; ++i)
 		id.push_back(email[i]);
 	for (Node<Staff>* i = systems.allStaff.head; i != nullptr; i = i->next)
-		if (j->data.id.compare(id) == 0)
-			return j->data;
+		if (i->data.id.compare(id) == 0)
+			return i->data;
 }
 
 bool identifyUserType(string email) // student = true, teacher/staff == false
@@ -183,9 +183,9 @@ string generateEmail(Staff sta)
 void printProfileIn4(string email)
 {
 	if (identifyUserType(email))
-		viewStudent(extractStudentFromEnail(email));
+		viewStudent(extractStudentFromEmail(email));
 	else
-		viewStaff(extractStaffFromEnail(email));
+		viewStaff(extractStaffFromEmail(email));
 }
 
 void logout() // skip for now cuz of no idea and main func dependance.

@@ -47,7 +47,7 @@ bool readAllSemester(string fname)
 		{
 			Semester a;
 			getline(fp, container, ','); a.number = atoi(container.c_str());
-			getline(fp, a.sy.schYr, ','); container = "all_courses_" + a.sy.schYr; a.sy = extractSchoolyear(container);
+			getline(fp, a.sy.schYr, ','); container = "all_courses_" + a.sy.schYr; a.sy = extractSchoolYear(container);
 			getline(fp, container, ','); a.startDate = getNS(container);
 			getline(fp, container, '\n'); a.endDate = getNS(container);
 			Node<Semester>* node = new Node<Semester>; node->init(a);

@@ -12,7 +12,7 @@ void initSystems()
 LList<Course> courseAttending(Student stu, Semester sem)
 {
 	LList<Course> courseList; courseList.init();
-	for (Node<Course>* i = systems.allCourse[sem.number - 1].hppead; i != nullptr; i = i->next)
+	for (Node<Course>* i = systems.allCourse[sem.number - 1].head; i != nullptr; i = i->next)
 		if (findNode(i->data.stuList, stu) != nullptr)
 		{
 			Node<Course>* node = new Node<Course>; node->init(i->data);
@@ -27,6 +27,6 @@ void viewCourses(Student stu, Semester sem)
 	LList<Course> courseList = courseAttending(stu, sem);
 	cout << "Cac khoa hoc cua hoc sinh " << stu.firstName << " " << stu.lastName
 		<< " trong hoc ki " << sem.number << ":" << endl;
-	for (Node<Course>* i = courseList.hppead; i != nullptr; i = i->next)
+	for (Node<Course>* i = courseList.head; i != nullptr; i = i->next)
 		viewCourse(i->data);
 }

@@ -89,7 +89,6 @@ bool readScoreBoard(string fname) // fname = courseid_classname_semnumber.txt
 	if (!found)
 		return false;
 	c.score.init();
-	string* in4 = extractCId_cl_sno(fname);
 	ifstream fp;
 	fp.open(fname, ios::in);
 	if (!fp.is_open())
@@ -149,7 +148,7 @@ void viewScoreBoards(Course a)
 template <class T>
 T* realloc(T* ptr, size_t old_size, size_t new_size) {
 	if (ptr == nullptr) 
-		return new T[size];
+		return new T[new_size];
 	if (new_size == 0) {
 		delete[] ptr;
 		return nullptr;
