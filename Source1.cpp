@@ -89,6 +89,7 @@ bool loginSystem(string fname, string &email)
 			cout << "Ban da het so lan dang nhap. Chuc ban may man lan sau. ";
 			return false;
 		}
+		return true;
 	}
 }
 
@@ -107,7 +108,7 @@ void changePassword(string fname, string email)
 		string** container; int row = 0, col = 0;
 		readLoginIn4(fname, container, col, row);
 		int i = 0;
-		for (i; container[i][0].compare(email) != 0; ++i);
+		for (; container[i][0].compare(email) != 0; ++i);
 		container[i][1] = pass_again;
 		ofstream fp;
 		fp.open(fname, ios::trunc);
@@ -138,7 +139,7 @@ void changePassword(string fname, string email)
 }
 
 
-Student extractStudentFromEmail(string email)
+Node<Student>* extractStudentFromEmail(string email)
 {
 	string id;
 	for (int i = 0; email[i] - '@' != 0; ++i)
@@ -146,28 +147,32 @@ Student extractStudentFromEmail(string email)
 	for (Node<Class>* i = systems.allClass.head; i != nullptr; i = i->next)
 		for (Node<Student>* j = i->data.stuList.head; j != nullptr; j = j->next)
 			if (j->data.stuID.compare(id) == 0)
-				return j->data;
+				return j;
+	return nullptr;
 }
 
-Staff extractStaffFromEmail(string email)
+Node<Staff>* extractStaffFromEmail(string email)
 {
 	string id;
 	for (int i = 0; email[i] - '@' != 0; ++i)
 		id.push_back(email[i]);
 	for (Node<Staff>* i = systems.allStaff.head; i != nullptr; i = i->next)
 		if (i->data.id.compare(id) == 0)
-			return i->data;
+			return i;
+	return nullptr;
 }
 
-bool identifyUserType(string email) // student = true, teacher/staff == false
+int identifyUserType(string email) // student = 1, teacher/staff == 0
 {
 	string temp;
 	for (int i = email.find_first_of('@') + 1; email[i] - '.' != 0; ++i)
 		temp.push_back(email[i]);
 	if (temp.compare("student") == 0)
-		return true;
+		return 1;
 	else if (temp.compare("teacher") == 0)
-		return false;
+		return 0;
+	else
+		return -1;
 }
 
 string generateEmail(Student stu)
@@ -182,10 +187,13 @@ string generateEmail(Staff sta)
 
 void printProfileIn4(string email)
 {
-	if (identifyUserType(email))
-		viewStudent(extractStudentFromEmail(email));
+	int userType = identifyUserType(email);
+	if (userType == 1)
+		viewStudent(extractStudentFromEmail(email)->data);
+	else if (userType == 0)
+		viewStaff(extractStaffFromEmail(email)->data);
 	else
-		viewStaff(extractStaffFromEmail(email));
+		cout << "Loi email khong hop le" << endl;
 }
 
 void logout() // skip for now cuz of no idea and main func dependance.
@@ -193,7 +201,7 @@ void logout() // skip for now cuz of no idea and main func dependance.
 
 }
 
-int testing1(bool &userType, string &email)
+int testing1(int &userType, string &email)
 {
 	string fname = "login.csv.txt";
 	if (loginSystem(fname, email) == true)

@@ -19,10 +19,10 @@ SchoolYear createSchoolYear(int yearStart, int yearEnd)
 SchoolYear createSchoolYear(string schy)
 {
 	string ys, ye; int i = 0;
-	for (i; schy[i] - '-' != 0; ++i)
+	for (; schy[i] - '-' != 0; ++i)
 		ys.push_back(schy[i]);
 	++i;
-	for (i; i < schy.size(); ++i)
+	for (; i < schy.size(); ++i)
 		ye.push_back(schy[i]);
 	return createSchoolYear(atoi(ys.c_str()), atoi(ye.c_str()));
 }
@@ -85,9 +85,9 @@ string extractEduProg(string fname) // Assume that the file name part is the cla
 {
 	string ep = "";
 	for (int i = 0; i < fname.size(); ++i)
-		if (isalpha(fname.at(i)))
+		if (isalpha(fname.at(i)) != 0)
 			ep.push_back(fname.at(i));
-		else if (fname.at(i) - '.' == 0)
+		else if (fname[i] - '.' == 0)
 			break;
 	return ep;
 }

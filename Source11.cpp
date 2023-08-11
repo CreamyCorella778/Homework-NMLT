@@ -10,7 +10,7 @@ Date getTodayIn4()
 
 int testing2(string &email)
 {
-	bool userType = false;  string fname = "login.csv.txt";
+	int userType = -1;  string fname = "login.csv.txt";
 	int res_testing1 = testing1(userType, email);
 	if (res_testing1 == 3)
 	{
@@ -25,7 +25,7 @@ int testing2(string &email)
 				return -1;
 			}
 			Semester curr = node->data;
-			Student stu = extractStudentFromEmail(email);
+			Student stu = extractStudentFromEmail(email)->data;
 			cout << "Chon so thu tu tuong ung voi chuc nang: " << endl
 				<< "1. Xem danh sach khoa hoc dang theo" << endl
 				<< "2. Xem bang diem cac khoa hoc: ";
@@ -63,10 +63,11 @@ int testing2(string &email)
 					changePassword(fname, email);
 					break;
 				}
-			} while (1 <= func <= 4);
+			} while (1 <= func && func <= 4);
 			return 0;
 		}
 	}
+	return -1;
 }
 
 int testing6(string email, Semester currSem) // part 3
@@ -96,7 +97,7 @@ int testing6(string email, Semester currSem) // part 3
 		{
 		case 1:
 		{
-			string course = "", cls = "", fname = ""; int so_lan = 5; Course cour;
+			string course = "", cls = "", fname = ""; so_lan = 5; Course cour;
 			do
 			{
 				cout << "Nhap ma khoa hoc: "; getline(cin, course);
@@ -137,7 +138,7 @@ int testing6(string email, Semester currSem) // part 3
 		}
 		case 3:
 		{
-			string course = "", cls = "", fname = ""; int so_lan = 5; Course cour;
+			string course = "", cls = "", fname = ""; so_lan = 5; Course cour;
 			do
 			{
 				cout << "Nhap ma khoa hoc: "; getline(cin, course);
@@ -159,7 +160,7 @@ int testing6(string email, Semester currSem) // part 3
 		case 4:
 		{
 			Node<Student>* node = new Node<Student>; 
-			string course = "", cls = "", fname = ""; int so_lan = 5; Course cour;
+			string course = "", cls = "", fname = ""; so_lan = 5; Course cour;
 
 			do
 			{
@@ -190,7 +191,7 @@ int testing6(string email, Semester currSem) // part 3
 				return -1;
 			}
 			float* in4 = new float[4]; int* option = new int[4]; int n = 0;
-			getUpdateScbIn4(node->data, cour, option, in4, n, currSem.number);
+			getUpdateScbIn4(option, in4, n);
 			no_good = !updateScoreBoard(node->data, cour, option, in4, n);
 			if (no_good)
 				cout << "Loi he thong. Chuc ban may man lan sau" << endl;
@@ -200,7 +201,7 @@ int testing6(string email, Semester currSem) // part 3
 		}
 		case 5:
 		{
-			string cls = ""; int so_lan = 5; Node<Class>* node = new Node<Class>;
+			string cls = ""; so_lan = 5; Node<Class>* node = new Node<Class>;
 			do
 			{
 				cout << "Nhap ten lop: "; getline(cin, cls);
@@ -280,6 +281,6 @@ int testing6(string email, Semester currSem) // part 3
 			break;
 		}
 
-	} while (1 <= func <= 11);
+	} while (1 <= func && func <= 11);
 	return no_good ? -1 : 0;
 }

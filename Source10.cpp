@@ -21,7 +21,7 @@ bool writeAllCoursesOfStudent(string fname) // fname = studentid.txt
 		{
 			int no = 1;
 			Node<Course>* i = node->data.courses.head; Node<Scoreboard>* j = node->data.marks.head;
-			for (i, j; i != nullptr && j != nullptr; i = i->next, j = j->next, ++no)
+			for (;(i != nullptr) && (j != nullptr); i = i->next, j = j->next, ++no)
 			{
 				fp << no << ","
 					<< i->data.id << ","

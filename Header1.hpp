@@ -28,21 +28,9 @@ struct LList
 	}
 };
 
-struct Class;
-struct Scoreboard;
-struct Course;
-
-struct Date
-{
-	int day;
-	int month;
-	int year;
-	bool isEqual(Date another)
-	{
-		return this->day == another.day && this->month == another.month && this->year == another.year;
-	}
-};
-
+//struct Class;
+//struct Scoreboard;
+//struct Course;
 struct SchoolYear
 {
 	int yStart;
@@ -53,34 +41,12 @@ struct SchoolYear
 		return this->yStart == another.yStart && this->yEnd == another.yEnd && this->schYr == another.schYr;
 	}
 };
-
-
-struct Semester
+struct Staff
 {
-	int number;
-	SchoolYear sy;
-	Date startDate;
-	Date endDate;
-	bool isEqual(Semester another)
-	{
-		return this->number == another.number && this->sy.isEqual(another.sy) && this->startDate.isEqual(another.startDate) && this->endDate.isEqual(another.endDate);
-	}
-};
-
-struct Student
-{
-	int no;
-	string stuID;
 	string firstName;
 	string lastName;
-	bool gender; // true = male, false = female
-	Date birth;
-	string socialID;
-	Class cl;
+	string id;
 	LList<Course> courses;
-	LList<Scoreboard> marks;
-	float semGPA;
-	float GPA;
 };
 
 struct Class
@@ -96,30 +62,39 @@ struct Class
 	}
 };
 
-struct Scoreboard
+struct Date
 {
-	Student student;
-	Course course;
-	float Total;
-	float Final;
-	float midTerm;
-	float Other;
+	int day;
+	int month;
+	int year;
+	bool isEqual(Date another)
+	{
+		return this->day == another.day && this->month == another.month && this->year == another.year;
+	}
 };
 
-struct Scoreboard4Class
-{
-	Class cls;
-	float* Final;
-	float* semGPA;
-	float* overallGPA;
-};
+// struct SchoolYear
+// {
+// 	int yStart;
+// 	int yEnd;
+// 	string schYr;
+// 	bool isEqual(SchoolYear another)
+// 	{
+// 		return this->yStart == another.yStart && this->yEnd == another.yEnd && this->schYr == another.schYr;
+// 	}
+// };
 
-struct Staff
+
+struct Semester
 {
-	string firstName;
-	string lastName;
-	string id;
-	LList<Course> courses;
+	int number;
+	SchoolYear sy;
+	Date startDate;
+	Date endDate;
+	bool isEqual(Semester another)
+	{
+		return this->number == another.number && this->sy.isEqual(another.sy) && this->startDate.isEqual(another.startDate) && this->endDate.isEqual(another.endDate);
+	}
 };
 
 struct Course
@@ -140,6 +115,49 @@ struct Course
 	LList<Student> stuList;
 	LList<Scoreboard> score;
 };
+
+struct Student
+{
+	int no;
+	string stuID;
+	string firstName;
+	string lastName;
+	bool gender; // true = male, false = female
+	Date birth;
+	string socialID;
+	Class cl;
+	LList<Course> courses;
+	LList<Scoreboard> marks;
+	float semGPA;
+	float GPA;
+};
+
+struct Scoreboard
+{
+	Student student;
+	Course course;
+	float Total;
+	float Final;
+	float midTerm;
+	float Other;
+};
+
+struct Scoreboard4Class
+{
+	Class cls;
+	float* Final;
+	float* semGPA;
+	float* overallGPA;
+};
+
+// struct Staff
+// {
+// 	string firstName;
+// 	string lastName;
+// 	string id;
+// 	LList<Course> courses;
+// };
+
 
 union CourseVarType
 {

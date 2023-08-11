@@ -160,7 +160,7 @@ T* realloc(T* ptr, size_t old_size, size_t new_size) {
 	return new_ptr;
 }
 
-void getUpdateScbIn4(Student a, Course& cour, int*& option, float*& in4, int& n, int& semNum)
+void getUpdateScbIn4(int*& option, float*& in4, int& n)
 {
 	option = new int[4]; in4 = new float[4]; n = 0; int temp = 0; bool yamete_kudasai = false; 
 	do

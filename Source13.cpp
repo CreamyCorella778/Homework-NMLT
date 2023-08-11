@@ -122,20 +122,20 @@ int testing5(string email, SchoolYear &sy)
 		default:
 			no_good = true;
 		}
-	} while (1 <= func <= 6);
+	} while (1 <= func && func <= 6);
 	return no_good ? -1 : 0;
 }
 
 int testing3(string& email)
 {
-	bool userType = false;  string fname = "login.csv.txt";
+	int userType = -1;  string fname = "login.csv.txt";
 	int res_testing1 = testing1(userType, email);
 	if (res_testing1 == 3)
 	{
 		int func = 0;
 		Date today = getTodayIn4();
 		Node<Semester>* node = identifySemesterByToday(today); 
-		if (!userType)
+		if (userType == 0)
 		{
 			if (node == nullptr)
 			{

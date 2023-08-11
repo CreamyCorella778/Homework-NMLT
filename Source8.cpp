@@ -21,7 +21,7 @@ LList<Course> findCoursesOfClass(Class cl, Semester sem)
 	return courseList;
 }
 
-void viewGPAInSemester(Class cl, Semester sem)
+void viewGPAInSemester(Class cl, Semester sem) // watch out, something wrong here
 {
 	cout << "Diem trung binh hoc ki cua cac sinh vien lop " << cl.cls << ":" << endl;
 	for (Node<Student>* i = cl.stuList.head; i != nullptr; i = i->next)
@@ -37,7 +37,7 @@ void countNoInStudentList(LList<Student> &l)
 }
 
 bool writeGPAofClassInSem(string fname, Class cl, Semester sem) // fname = gpa_classname_semnumber.txt (gpa is a literally a word)
-{
+{ //watch out, something went wrong here
 	ofstream fp;
 	fp.open(fname, ios::trunc);
 	if (!fp.is_open())
@@ -175,7 +175,7 @@ float* countOverallGPAInClass(Class cl, Semester currentSem)
 	Node<Student>* node = cl.stuList.head;
 	for (int i = 0; i < numberOfStu && node != nullptr; ++i, node = node->next)
 	{
-		overallGPA[i] /= numberOfSem;
+		overallGPA[i] /= float(numberOfSem);
 		node->data.GPA = overallGPA[i];
 	}
 	return overallGPA;
@@ -184,9 +184,9 @@ float* countOverallGPAInClass(Class cl, Semester currentSem)
 void viewOverallGPAInClass(Class cl, Semester currentSem)
 {
 	float* overallGPA = countOverallGPAInClass(cl, currentSem);
-	int numberOfStu = countNodes(cl.stuList.head), index = 0;
+	int numberOfStu = countNodes(cl.stuList.head); int index = 0;
 	cout << "Diem trung binh tich luy cua cac sinh vien trong lop " << cl.cls << ":" << endl;
-	for (Node<Student>* i = cl.stuList.head; index < numberOfStu; ++index, i = i->next)
+	for (Node<Student>* i = cl.stuList.head; numberOfStu > index; ++index, i = i->next)
 		cout << index + 1 << ". " << i->data.firstName << " "
 		<< i->data.lastName << ": " << overallGPA[index];
 	cout << endl << endl;

@@ -55,7 +55,7 @@ int testing4(Semester currSem, string email)
 		}
 		case 3:
 		{
-			string fname = "", cou = "", cls = ""; bool found = false; Course course;
+			fname = ""; string cou = "", cls = ""; bool found = false; Course course;
 			do
 			{
 				cout << "Nhap ten tep can tai len: "; getline(cin, fname);
@@ -222,7 +222,7 @@ int testing4(Semester currSem, string email)
 			break;
 		}
 		++so_lan;
-	} while (1 <= func <= 13);
+	} while (1 <= func && func <= 13);
 	return no_good ? -1 : 0;
 }
 

@@ -7,9 +7,6 @@
 //#include "Source9.cpp"
 using namespace std;
 
-struct Class;
-struct Scoreboard;
-struct Course;
 struct Date;
 template <class a>
 struct Node;
@@ -21,6 +18,10 @@ struct Student;
 struct Scoreboard4Class;
 struct Staff;
 union CourseVarType;
+struct Class;
+struct Course;
+struct Scoreboard;
+
 
 bool loginSystem(string fname, string& email);
 void changePassword(string fname, string email);
@@ -70,7 +71,7 @@ void viewStaff(Staff a);
 bool writeStudentsInCourse(string fname, Course cour);
 bool readScoreBoard(string fname);
 void viewScoreBoards(Course a);
-void getUpdateScbIn4(Student a, Course& cour, int*& option, float*& in4, int& n, int& semNum);
+void getUpdateScbIn4(int*& option, float*& in4, int& n);
 bool updateScoreBoard(Student& stu, Course cour, int* option, float* in4, int n);
 void viewScoreBoards(Class cl, Semester sem);
 void viewGPAInSemester(Class cl, Semester sem);
@@ -87,7 +88,7 @@ void viewStaff(Staff a);
 
 //----------------------------------------------------------------------
 
-int testing1(bool &userType, string &email);
+int testing1(int &userType, string &email);
 int testing2(string &email);
 int testing3(string& email);
 int testing4(Semester currSem, string email);
@@ -129,6 +130,6 @@ Node<Semester>* identifySemesterByToday(Date today);
 int compareDate(Date dey1, Date dey2) ;
 SchoolYear extractSchoolYear(string fname);
 Date* divideSemester(Semester sem);
-Student extractStudentFromEmail(string email);
+Node<Student>* extractStudentFromEmail(string email);
 Date getTodayIn4();
 void viewSemester(Semester sem);

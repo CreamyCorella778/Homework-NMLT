@@ -30,7 +30,7 @@ string* extractCId_cl_sno(string fname) // fname = courseid_classname_semnumber.
 {
 	int j = 0; string* idAndName = new string[3];
 	for (int i = 0; i < 3; ++i)
-		for (j; fname[j] - '_' == 0 || fname[j] - '.' == 0; ++j)
+		for (; fname[j] - '_' == 0 || fname[j] - '.' == 0; ++j)
 			idAndName[i].push_back(fname[j]);
 	return idAndName;
 }
@@ -57,7 +57,7 @@ void getCourseIn4(Course &a, Semester sem)
 	do
 	{
 		cout << "Ban co " << so_lan << "nhap. Nhap lai ma so giao vien chinh day : "; getline(cin, container);
-		Node<Course>* i = systems.allCourse[sem.number - 1].head;
+		i = systems.allCourse[sem.number - 1].head;
 		for (i; i != nullptr; i = i->next)
 			if (i->data.teacher.id.compare(container) == 0)
 				a.teacher = i->data.teacher;
@@ -290,7 +290,6 @@ bool addStudentToCourse(Student st, Course& c) // fname = courseid_classname_sem
 		return false;
 	else
 	{
-		Node<Student>* node = new Node<Student>; node->init(st);
 		countNoInStudentList(c.stuList);
 		fp << "\n" << node->data.no << ","
 			<< st.stuID << ","

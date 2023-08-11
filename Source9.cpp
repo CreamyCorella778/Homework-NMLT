@@ -70,10 +70,12 @@ int findSecondOccurrenceOfChar(const char* str, char c)
 	int index = -1;
 	for (int i = 0; i != strlen(str); i++) 
 		if (str[i] == c) 
+		{
 			if (index == -1) 
 				index = i;
 			else 
 				return i;
+		}
 	return -1;
 }
 
