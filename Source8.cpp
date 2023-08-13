@@ -153,6 +153,27 @@ bool readGPAofClassInSem(string fname, LList<float>& semGPA) // fname = gpa_clas
 	}
 }
 
+float calculateOverallGPA(Student &stu, Semester currentSem)
+{
+	string* fnameList = generateMoreFileNames(stu.cl, currentSem);
+	int numberOfSem = (currentSem.sy.yStart - stu.cl.year.yStart) * 3 + currentSem.number;
+	LList<float>* semGPA = new LList<float>[numberOfSem];
+	for (int i = 0; i < numberOfSem; ++i)
+		if (!readGPAofClassInSem(fnameList[i], semGPA[i]))
+		{
+			delete[] fnameList;
+			delete[] semGPA;
+			semGPA = nullptr;
+			fnameList = nullptr;
+			return -1.0;
+		}
+	for (int j = 0; j < numberOfSem; ++j)
+		stu.GPA += findNodeByIndex(semGPA[j], stu.no)->data;
+	stu.GPA /= float(numberOfSem);
+	delete[] semGPA;
+	return stu.GPA;
+}
+
 float* countOverallGPAInClass(Class cl, Semester currentSem)
 {
 	string* fnameList = generateMoreFileNames(cl, currentSem); 
