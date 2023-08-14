@@ -187,7 +187,7 @@ void getUpdateScbIn4(int*& option, float*& in4, int& n)
 	}
 }
 
-bool updateScoreBoard(Student& stu, Course cour, int* option, float* in4, int n) // Watch out this one, change the course scb too
+bool updateScoreBoard(Student& stu, Course& cour, Semester currSem, int* option, float* in4, int n) // Watch out this one, change the course scb too
 {
 	Node<Scoreboard>* node = stu.marks.head;
 	for (node; node != nullptr; node = node->next)
@@ -211,7 +211,71 @@ bool updateScoreBoard(Student& stu, Course cour, int* option, float* in4, int n)
 			node->data.Total = in4[i];
 			break;
 		}
-	// wweeeeeeeeeeeeeeeee~~~ change the scoreboard of the course, of the sstaff, of the class too, change the gpa too
+	// cap nhat bang diem trong lop trong he thong
+	// cap nhat bang diem trong lop trong tep
+	// ccap nhat bang diem cua khoa hoc trong he thong
+	// cap nhat bang diem cua khoa hoc trong tep
+	// cap nhat semGPA cua hoc sinh
+	// cap nhat semGPA cua ca lop trong tep
+	// cap nhat gpa cua hoc sinh
+	// cap nhat gpa cua ca lop trong tep
+
+	calculateOverallGPA(stu, currSem);
+
+	node = cour.score.head;
+	for (node; node != nullptr; node = node->next)
+		if (node->data.student.stuID == stu.stuID)
+			break;
+	if (node == nullptr)
+		return false;
+	for (int i = 0; i < n; i++)
+		switch (option[i])
+		{
+		case 1:
+			node->data.midTerm = in4[i];
+			break;
+		case 2:
+			node->data.Final = in4[i];
+			break;
+		case 3:
+			node->data.Other = in4[i];
+			break;
+		case 4:
+			node->data.Total = in4[i];
+			break;
+		}
+	/////////////////////////////////////////////////
+	Node<Course>* n0de = cour.teacher.courses.head;
+	for (; n0de != nullptr; n0de = n0de->next)
+		if (n0de->data.id == cour.id)
+		{
+			node = stu.marks.head;
+			for (node; node != nullptr; node = node->next)
+				if (node->data.course.id == cour.id)
+					break;
+			if (node == nullptr)
+				return false;
+			for (int i = 0; i < n; i++)
+				switch (option[i])
+				{
+				case 1:
+					node->data.midTerm = in4[i];
+					break;
+				case 2:
+					node->data.Final = in4[i];
+					break;
+				case 3:
+					node->data.Other = in4[i];
+					break;
+				case 4:
+					node->data.Total = in4[i];
+					break;
+				}
+		}
+	if (n0de == nullptr)
+		return false;
+	//////////////////////////////////////////////
+
 	return writeAllCoursesOfStudent(stu.stuID + ".txt");
 }
 
