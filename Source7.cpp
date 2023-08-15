@@ -187,7 +187,7 @@ void getUpdateScbIn4(int*& option, float*& in4, int& n)
 	}
 }
 
-bool updateScoreBoard(Student& stu, Course& cour, Semester currSem, int* option, float* in4, int n) // Watch out this one, change the course scb too
+bool updateScoreBoard_aStudent(Student& stu, Course cour, int* option, float* in4, int n)
 {
 	Node<Scoreboard>* node = stu.marks.head;
 	for (node; node != nullptr; node = node->next)
@@ -211,18 +211,12 @@ bool updateScoreBoard(Student& stu, Course& cour, Semester currSem, int* option,
 			node->data.Total = in4[i];
 			break;
 		}
-	// cap nhat bang diem trong lop trong he thong
-	// cap nhat bang diem trong lop trong tep
-	// ccap nhat bang diem cua khoa hoc trong he thong
-	// cap nhat bang diem cua khoa hoc trong tep
-	// cap nhat semGPA cua hoc sinh
-	// cap nhat semGPA cua ca lop trong tep
-	// cap nhat gpa cua hoc sinh
-	// cap nhat gpa cua ca lop trong tep
+	return true;
+}
 
-	calculateOverallGPA(stu, currSem);
-
-	node = cour.score.head;
+bool updateScoreBoard_aCourse(Student& stu, Course& cour, int* option, float* in4, int n)
+{
+	Node<Scoreboard>* node = cour.score.head;
 	for (node; node != nullptr; node = node->next)
 		if (node->data.student.stuID == stu.stuID)
 			break;
@@ -244,38 +238,50 @@ bool updateScoreBoard(Student& stu, Course& cour, Semester currSem, int* option,
 			node->data.Total = in4[i];
 			break;
 		}
-	/////////////////////////////////////////////////
+	return true;
+}
+
+bool updateScoreBoard_aStaff(Student& stu, Course& cour, int* option, float* in4, int n)
+{
 	Node<Course>* n0de = cour.teacher.courses.head;
 	for (; n0de != nullptr; n0de = n0de->next)
 		if (n0de->data.id == cour.id)
-		{
-			node = stu.marks.head;
-			for (node; node != nullptr; node = node->next)
-				if (node->data.course.id == cour.id)
-					break;
-			if (node == nullptr)
-				return false;
-			for (int i = 0; i < n; i++)
-				switch (option[i])
-				{
-				case 1:
-					node->data.midTerm = in4[i];
-					break;
-				case 2:
-					node->data.Final = in4[i];
-					break;
-				case 3:
-					node->data.Other = in4[i];
-					break;
-				case 4:
-					node->data.Total = in4[i];
-					break;
-				}
-		}
+			return updateScoreBoard_aCourse(stu, n0de->data, option, in4, n);
 	if (n0de == nullptr)
 		return false;
-	//////////////////////////////////////////////
+}
 
+bool updateScoreBoard(Student& stu, Course& cour, Semester currSem, int* option, float* in4, int n) // Watch out this one, change the course scb too
+{
+	// cap nhat bang diem cua mot hoc sinh
+	if (!updateScoreBoard_aStudent(stu, cour, option, in4, n))
+		return false;
+	// cap nhat bang diem trong lop trong he thong
+	if (!updateScoreBoard_aStudent(findStudent(stu.stuID)->data, cour, option, in4, n))
+		return false;
+	// cap nhat bang diem cua khoa hoc trong he thong
+	if (!updateScoreBoard_aCourse(stu, cour, option, in4, n))
+		return false;
+	// cap nhat bang diem cua khoa hoc trong tep
+	if (!writeStudentsInCourse(generateFileName(cour, stu.cl, currSem), cour))
+		return false;
+	// cap nhat semGPA cua hoc sinh
+	stu.semGPA = calculateSemGPA(stu);
+	// cap nhat semGPA cua ca lop trong he thong
+	findStudent(stu.stuID)->data.semGPA = calculateSemGPA(stu);
+	// cap nhat semGPA cua ca lop trong tep
+	if(!writeGPAofClassInSem(generateFileName(stu.cl, currSem), stu.cl, currSem))
+		return false;
+	// cap nhat gpa cua hoc sinh
+	if (calculateOverallGPA(stu, currSem) < 0)
+		return false;
+	// cap nhat gpa cua ca lop trong tep
+	if (calculateOverallGPA(findStudent(stu.stuID)->data, currSem) < 0)
+		return false;
+	// cap nhat bang diem cua khoa hoc cua giao vien day
+	if (!updateScoreBoard_aStaff(stu, cour, option, in4, n))
+		return false;
+	// cap nhat bang diem cua hoc sinh trong tep
 	return writeAllCoursesOfStudent(stu.stuID + ".txt");
 }
 

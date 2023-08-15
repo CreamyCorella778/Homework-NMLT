@@ -223,6 +223,6 @@ int testing4(Semester currSem, string email)
 		}
 		++so_lan;
 	} while (1 <= func && func <= 13);
-	return no_good ? -1 : 0;
+	return no_good ? -1 : 0; // return -1 if user wants to exit the program and 0 otherwise
 }
 

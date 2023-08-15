@@ -6,7 +6,8 @@ float calculateSemGPA(Student &stu)
 	stu.semGPA = 0.0;
 	for (Node<Scoreboard>* i = stu.marks.head; i != nullptr; i = i->next)
 		stu.semGPA += i->data.Total * float(i->data.course.credits);
-	return stu.semGPA / float(countNodes(stu.marks.head));
+	stu.semGPA /= float(countNodes(stu.marks.head));
+	return stu.semGPA;
 }
 
 LList<Course> findCoursesOfClass(Class cl, Semester sem)
@@ -21,11 +22,17 @@ LList<Course> findCoursesOfClass(Class cl, Semester sem)
 	return courseList;
 }
 
-void viewGPAInSemester(Class cl, Semester sem) // watch out, something wrong here
+void calculateSemGPAforClass(Class cl)
 {
-	cout << "Diem trung binh hoc ki cua cac sinh vien lop " << cl.cls << ":" << endl;
 	for (Node<Student>* i = cl.stuList.head; i != nullptr; i = i->next)
-		cout << i->data.firstName << " " << i->data.lastName << ": " << calculateSemGPA(i->data);
+		calculateSemGPA(i->data);
+}
+
+void viewGPAInSemester(Class cl, Semester sem) 
+{
+	cout << "Diem trung binh hoc ki " << sem.number << " cua cac sinh vien lop " << cl.cls << ":" << endl;
+	for (Node<Student>* i = cl.stuList.head; i != nullptr; i = i->next)
+		cout << i->data.firstName << " " << i->data.lastName << ": " << i->data.semGPA;
 	cout << endl << endl;
 }
 
@@ -37,7 +44,7 @@ void countNoInStudentList(LList<Student> &l)
 }
 
 bool writeGPAofClassInSem(string fname, Class cl, Semester sem) // fname = gpa_classname_semnumber.txt (gpa is a literally a word)
-{ //watch out, something went wrong here
+{ 
 	ofstream fp;
 	fp.open(fname, ios::trunc);
 	if (!fp.is_open())
@@ -50,7 +57,7 @@ bool writeGPAofClassInSem(string fname, Class cl, Semester sem) // fname = gpa_c
 		{
 			fp << i->data.no << ","
 				<< i->data.stuID << ","
-				<< calculateSemGPA(i->data);
+				<< i->data.semGPA;
 			if (i != cl.stuList.tail)
 				fp << "\n";
 		}
@@ -61,9 +68,9 @@ bool writeGPAofClassInSem(string fname, Class cl, Semester sem) // fname = gpa_c
 
 string generateFileName(Class cl, Semester sem)
 {
-	string res = "gpa";
-	res += cl.cls;
-	res += to_string(sem.number);
+	string res = "gpa_";
+	res += cl.cls; res.push_back('_');
+	res += to_string(sem.number); res.push_back('_');
 	res += sem.sy.schYr;
 	res += ".txt";
 	return res;
@@ -199,6 +206,8 @@ float* countOverallGPAInClass(Class cl, Semester currentSem)
 		overallGPA[i] /= float(numberOfSem);
 		node->data.GPA = overallGPA[i];
 	}
+	delete[] fnameList;
+	delete[] semGPA;
 	return overallGPA;
 }
 

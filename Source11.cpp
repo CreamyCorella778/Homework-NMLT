@@ -192,7 +192,7 @@ int testing6(string email, Semester currSem) // part 3
 			}
 			float* in4 = new float[4]; int* option = new int[4]; int n = 0;
 			getUpdateScbIn4(option, in4, n);
-			no_good = !updateScoreBoard(node->data, cour, option, in4, n);
+			no_good = !updateScoreBoard(node->data, cour, currSem, option, in4, n);
 			if (no_good)
 				cout << "Loi he thong. Chuc ban may man lan sau" << endl;
 			else

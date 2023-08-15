@@ -37,9 +37,9 @@ bool writeAllCoursesOfStudent(string fname) // fname = studentid.txt
 					<< j->data.Final << ","
 					<< j->data.Other << ","
 					<< j->data.Total;
-				if (!(i->next == nullptr && j->next == nullptr))
 					fp << "\n";
 			}
+			fp << node->data.semGPA << "," << node->data.GPA;
 			written = true;
 		}
 		fp.close();
@@ -84,7 +84,7 @@ bool readAllCoursesOfStudent(string fname)
 			Scoreboard c; 
 			c.course = a;
 			c.student = node->data;
-			getline(fp, container, ','); c.midTerm= atof(container.c_str());
+			getline(fp, container, ','); c.midTerm = atof(container.c_str());
 			getline(fp, container, ','); c.Final = atof(container.c_str());
 			getline(fp, container, ','); c.Other = atof(container.c_str());
 			getline(fp, container, '\n'); c.Total = atof(container.c_str());
@@ -93,6 +93,8 @@ bool readAllCoursesOfStudent(string fname)
 			Node<Scoreboard>* nodE = new Node<Scoreboard>; nodE->init(c);
 			addLast(node->data.marks, nodE);
 		}
+		getline(fp, container, ','); node->data.semGPA = atof(container.c_str());
+		getline(fp, container); node->data.GPA = atof(container.c_str());
 		fp.close();
 		return true;
 	}

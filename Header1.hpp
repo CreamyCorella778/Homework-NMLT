@@ -140,6 +140,10 @@ struct Scoreboard
 	float Final;
 	float midTerm;
 	float Other;
+	void init()
+	{
+		this->Final = this->midTerm = this->Other = this->Total = 0;
+	}
 };
 
 struct Scoreboard4Class

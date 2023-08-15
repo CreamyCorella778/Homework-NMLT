@@ -38,8 +38,8 @@ string* extractCId_cl_sno(string fname) // fname = courseid_classname_semnumber.
 string generateFileName(Course c, Class cl, Semester sem)
 {
 	string fname = "";
-	fname += c.id;
-	fname += cl.cls;
+	fname += c.id; fname.push_back('_');
+	fname += cl.cls; fname.push_back('_');
 	fname += to_string(sem.number);
 	return fname;
 }
