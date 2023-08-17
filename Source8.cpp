@@ -102,31 +102,6 @@ string* extractCl_sno_schy(string fname) // fname = gpa_classname_semnumber.txt 
 	return res;
 }
 
-Node<Student>* findStudent(string id, Class cl)
-{ 
-	for (Node<Student>* i = cl.stuList.head; i != nullptr; i = i->next)
-		if (i->data.stuID.compare(id) == 0)
-			return i;
-	return nullptr;
-}
-
-Node<Student>* findStudent(string id)
-{
-	for (Node<Class>* cl = systems.allClass.head; cl != nullptr; cl = cl->next)
-		for (Node<Student>* i = cl->data.stuList.head; i != nullptr; i = i->next)
-			if (i->data.stuID.compare(id) == 0)
-				return i;
-	return nullptr;
-}
-
-Node<Class>* findCLass(string name)
-{
-	for (Node<Class>* i = systems.allClass.head; i != nullptr; i = i->next)
-		if (i->data.cls.compare(name) == 0)
-			return i;
-	return nullptr;
-}
-
 bool readGPAofClassInSem(string fname, LList<float>& semGPA) // fname = gpa_classname_semnumber.txt (gpa is a literally a word)
 {
 	ifstream fp;
@@ -209,45 +184,4 @@ float* countOverallGPAInClass(Class cl, Semester currentSem)
 	delete[] fnameList;
 	delete[] semGPA;
 	return overallGPA;
-}
-
-void viewOverallGPAInClass(Class cl, Semester currentSem)
-{
-	float* overallGPA = countOverallGPAInClass(cl, currentSem);
-	int numberOfStu = countNodes(cl.stuList.head); int index = 0;
-	cout << "Diem trung binh tich luy cua cac sinh vien trong lop " << cl.cls << ":" << endl;
-	for (Node<Student>* i = cl.stuList.head; numberOfStu > index; ++index, i = i->next)
-		cout << index + 1 << ". " << i->data.firstName << " "
-		<< i->data.lastName << ": " << overallGPA[index];
-	cout << endl << endl;
-}
-
-void viewScoreBoards(Class cl, Semester sem)
-{
-	cout << "Bang diem cua lop " << cl.cls << ": " << endl;
-	for (int i = 0; i < 40; ++i)
-		cout << " ";
-
-	LList<Course> courseList = findCoursesOfClass(cl, sem);
-	for (Node<Course>* i = courseList.head; i != nullptr; ++i)
-		cout << setw(50) << setfill('-') << left << i->data.courseName;
-	cout << setw(30) << setfill('-') << left << "Semester GPA";
-	cout << setw(30) << setfill('-') << left << "Overall GPA" << endl;
-
-	for (Node<Student>* index1 = cl.stuList.head; index1 != nullptr; index1 = index1->next)
-	{
-		cout << setw(40) << index1->data.firstName << " " << index1->data.lastName;
-		for (Node<Course>* index2 = courseList.head; index2 != nullptr; index2 = index2->next)
-		{
-			Node<Scoreboard>* node = index1->data.marks.head;
-			for (node; node->data.course.id.compare(index2->data.id) != 0; node = node->next)
-				continue;
-			cout << setw(50) << left << node->data.Final;
-		}
-		cout << setw(30) << left << index1->data.semGPA;
-		cout << setw(30) << left << index1->data.GPA;
-		if (index1->next != nullptr)
-			cout << endl;
-	}
-	cout << endl << endl;
 }

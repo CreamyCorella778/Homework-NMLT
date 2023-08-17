@@ -24,7 +24,7 @@ struct Scoreboard;
 
 
 bool loginSystem(string fname, string& email);
-void changePassword(string fname, string email);
+bool changePassword(string fname, string email);
 void printProfileIn4(string email);
 
 //---------------------------------------------------------------------
@@ -90,11 +90,20 @@ void viewStaff(Staff a);
 //----------------------------------------------------------------------
 
 int testing1(int &userType, string &email);
-int testing2(string &email);
+int testing2(string email);
 int testing3(string& email);
 int testing4(Semester currSem, string email);
 int testing5(string email, SchoolYear &sy);
 int testing6(string email, Semester currSem);
+int testing7(string email, Semester currSem);
+
+//---------------------------------------------------------------------
+
+int task1(string email);
+void task2();
+bool task3();
+bool task4();
+
 
 //======================================================================
 
@@ -120,7 +129,7 @@ void viewCourse(Course a);
 string* extractCId_cl_sno(string fname);
 void viewScoreBoards(Course a);
 Node<Class>* findCLass(string name);
-bool findCourse(string courseID, string className, int semNum, Course& found);
+Node<Course>* findCourse(string courseID, string className, int semNum);
 Node<Staff>* findStaff(string id);
 void countNoInStudentList(LList<Student>& l);
 bool writeAllCourses(string fname);
@@ -138,3 +147,5 @@ float calculateOverallGPA(Student &stu, Semester currentSem);
 float calculateSemGPA(Student &stu);
 string generateFileName(Course c, Class cl, Semester sem);
 string generateFileName(Class cl, Semester sem);
+LList<Course> findCoursesOfClass(Class cl, Semester sem);
+float* countOverallGPAInClass(Class cl, Semester currentSem);

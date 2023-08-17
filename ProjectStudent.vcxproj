@@ -144,8 +144,8 @@
     <ClCompile Include="Source9.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header1.h" />
-    <ClInclude Include="Header2.h" />
+    <ClInclude Include="Header1.hpp" />
+    <ClInclude Include="Header2.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

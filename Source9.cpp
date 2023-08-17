@@ -57,14 +57,6 @@ bool readStaffList(string fname)
 	}
 }
 
-Node<Staff>* findStaff(string id)
-{
-	for (Node<Staff>* i = systems.allStaff.head; i != nullptr; i = i->next)
-		if (i->data.id.compare(id) == 0)
-			return i;
-	return nullptr;
-}
-
 int findSecondOccurrenceOfChar(const char* str, char c) 
 {
 	int index = -1;
@@ -95,7 +87,7 @@ bool writeAllCourses(string fname) // fname = all_courses_schoolyear.txt
 {
 	ofstream fp;
 	fp.open(fname, ios::trunc);
-	if (fp.is_open() == false)
+	if (!fp.is_open())
 		return false;
 	else
 	{
@@ -183,7 +175,7 @@ bool writeAllClasses(string fname) // fname = all_classes_schoolyear.txt
 {
 	ofstream fp;
 	fp.open(fname, ios::trunc);
-	if (fp.is_open() == false)
+	if (!fp.is_open())
 		return false;
 	else
 	{
@@ -241,7 +233,7 @@ bool writeAllCoursesByStaff(string fname) // fname = staffid.txt
 		return false;
 	ofstream fp;
 	fp.open(fname, ios::trunc);
-	if (fp.is_open() == false)
+	if (!fp.is_open())
 		return false;
 	else
 	{
@@ -291,7 +283,7 @@ bool readAllCoursesByStaff(string fname)
 		node->data.courses.init();
 		while (!fp.eof())
 		{
-			Course a, b;
+			Course a;
 			getline(fp, container, ',');
 			getline(fp, a.id, ',');
 			getline(fp, a.courseName, ',');
@@ -303,8 +295,11 @@ bool readAllCoursesByStaff(string fname)
 			getline(fp, container, ','); a.dayInWeek = atoi(container.c_str());
 			getline(fp, container, ','); a.session = atoi(container.c_str());
 			getline(fp, container, '\n'); a.sem.number = atoi(container.c_str());
-			if (findCourse(a.id, a.lop.cls, a.sem.number, b))
-				a.sem.sy = b.sem.sy;
+			Node<Course>* b = findCourse(a.id, a.lop.cls, a.sem.number);
+			if (b)
+				a.sem.sy = b->data.sem.sy;
+			else
+				return false;
 			Node<Course>* n0de = new Node<Course>; n0de->init(a);
 			addLast(node->data.courses, n0de);
 		}

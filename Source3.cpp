@@ -7,7 +7,7 @@ void getSemesterIn4(int& no, SchoolYear& sy, Date& sd, Date& ed)
 	int ys = 0, ye = 0;
 	getYears(ys, ye);
 	sy = createSchoolYear(ys, ye);
-	string container;
+	string container = "";
 	cout << "Nhap ngay bat dau: "; getline(cin, container);
 	sd = getNS(container);
 	cout << "Nhap ngay ket thuc: "; getline(cin, container);
@@ -30,8 +30,11 @@ string* extractCId_cl_sno(string fname) // fname = courseid_classname_semnumber.
 {
 	int j = 0; string* idAndName = new string[3];
 	for (int i = 0; i < 3; ++i)
-		for (; fname[j] - '_' == 0 || fname[j] - '.' == 0; ++j)
+	{
+		for (; fname[j] != '_' && fname[j] != '.'; ++j)
 			idAndName[i].push_back(fname[j]);
+		++j;
+	}
 	return idAndName;
 }
 
@@ -51,18 +54,18 @@ void getCourseIn4(Course &a, Semester sem)
 	string container = ""; int so_lan = 5;
 	cout << "Nhap ma so giao vien chinh day: "; getline(cin, container);
 	Node<Course>* i = systems.allCourse[sem.number - 1].head;
-	for (i; i != nullptr; i = i->next)
+	for (i; i; i = i->next)
 		if (i->data.teacher.id.compare(container) == 0)
 			a.teacher = i->data.teacher;
 	do
 	{
 		cout << "Ban co " << so_lan << "nhap. Nhap lai ma so giao vien chinh day : "; getline(cin, container);
 		i = systems.allCourse[sem.number - 1].head;
-		for (i; i != nullptr; i = i->next)
-			if (i->data.teacher.id.compare(container) == 0)
+		for (i; i; i = i->next)
+			if (!i->data.teacher.id.compare(container))
 				a.teacher = i->data.teacher;
 		so_lan -= 1;
-	} while (i == nullptr && so_lan != 0);
+	} while (!i && so_lan);
 	cout << "Nhap so tin chi: "; cin >> a.credits;
 	cout << "Nhap so hoc sinh toi da trong khoa hoc: "; cin >> a.capacity;
 	cout << "Nhap ten lop cua hoc phan: "; getline(cin, container); a.lop = createClass(container);
@@ -83,29 +86,11 @@ bool addCoursetoSemester(Course a, Semester sem)
 	return writeAllCourses(fname);
 }
 
-void viewCourse(Course a)
-{
-	cout << a.id
-		<< " - " << a.courseName
-		<< ", cua giang vien " << a.teacher.firstName << " " << a.teacher.lastName
-		<< ", lop " << a.lop.cls << ", " << a.credits
-		<< " tin chi, toi da " << a.capacity << " hoc sinh, thoi gian: thu "
-		<< a.dayInWeek << ", tiet " << a.session << ", hoc ki " << a.sem.number << endl;
-}
-
-void viewCourses(Semester sem)
-{
-	cout << "Cac khoa hoc cua hoc ki " << sem.number << ", nam hoc " << sem.sy.schYr << ":" << endl;
-	for (Node<Course>* i = systems.allCourse[sem.number - 1].head; i != nullptr; i = i->next)
-		viewCourse(i->data);
-	cout << endl << endl;
-}
-
 
 void getIn4toUpdateCourse(string& courseID, string& cl, int& option)
 {
-	cout << "Nhap ma hoc phan can cap nhat: "; cin >> courseID;
-	cout << "Nhap ten lop hoc cua hoc phan: "; cin >> cl;
+	cout << "Nhap ma hoc phan can cap nhat: "; getline(cin ,courseID);
+	cout << "Nhap ten lop hoc cua hoc phan: "; getline(cin, cl);
 	do
 	{
 		cout << "Chon so thu tu tuong ung voi truong can cap nhat: " << endl
@@ -119,6 +104,8 @@ void getIn4toUpdateCourse(string& courseID, string& cl, int& option)
 			<< "sess 1 starts at 7:30, sess 2 starts at 9:30, sess 3 starts at 13:30, sess 4 starts at 15:30" << endl
 			<< "8. Hoc ki de hoc: ";
 		cin >> option;
+		if (option < 1 || option > 8)
+			cout << "Nhap khong hop le. ";
 	} while (option < 1 || option > 8);
 }
 
@@ -142,8 +129,8 @@ CourseVarType getIn4toUpdateCourse(int option)
 			cout << "Ban con " << times << " lan nhap. Nhap ma cua giao vien moi : "; cin >> temp;
 			--times;
 			dataa.teacher = findStaff(temp);
-		} while (dataa.teacher == nullptr && times > 0);
-		if (dataa.teacher == nullptr)
+		} while (!dataa.teacher && times);
+		if (!dataa.teacher)
 			cout << "Khong ton tai giao vien. Chuc ban may man lan sau" << endl;
 	}
 	break;
@@ -168,8 +155,8 @@ CourseVarType getIn4toUpdateCourse(int option)
 			cout << "Ban con " << times << " lan nhap. Nhap ten lop moi : "; cin >> temp;
 			--times;
 			dataa.lop = findCLass(temp);
-		} while (dataa.lop == nullptr && times > 0);
-		if (dataa.lop == nullptr)
+		} while (!dataa.lop && times > 0);
+		if (!dataa.lop)
 			cout << "Khong ton tai lop. Chuc ban may man lan sau" << endl;
 	}
 	break;
@@ -194,7 +181,7 @@ CourseVarType getIn4toUpdateCourse(int option)
 		getSemesterIn4(no, sy, sd, ed);
 		Semester sem = { no, sy, sd, ed }; 
 		dataa.sem = findNode(systems.allSemester, sem);
-		if (dataa.sem == nullptr)
+		if (!dataa.sem)
 		{
 			dataa.sem = new Node<Semester>;
 			dataa.sem->data = createSemester(no, sy, sd, ed);
@@ -207,44 +194,39 @@ CourseVarType getIn4toUpdateCourse(int option)
 	return dataa;
 }
 
-bool updateCourseIn4(string courseID, string cl, int option, CourseVarType in4, Semester sem) // ??? watch out this one
+bool updateCourseIn4(Course &course, int option, CourseVarType in4) 
 {
-	Node<Course>* i = systems.allCourse[sem.number - 1].head;
-	for (i; !(i->data.id == courseID && i->data.lop.cls == cl) && i != nullptr; i = i->next)
-		continue;
-	if (i == nullptr)
-		return false;
 	switch (option)
 	{
 	case 1:
-		i->data.courseName = *in4.courseName;
+		course.courseName.assign(*in4.courseName);
 		break;
 	case 2:
-		if (in4.teacher == nullptr)
+		if (!in4.teacher)
 			return false;
 		else
-			i->data.teacher = in4.teacher->data;
+			course.teacher = in4.teacher->data;
 		break;
 	case 3:
-		i->data.credits = in4.credits;
+		course.credits = in4.credits;
 		break;
 	case 4:
-		i->data.capacity = in4.capacity;
+		course.capacity = in4.capacity;
 		break;
 	case 5:
-		if (in4.lop == nullptr)
+		if (!in4.lop)
 			return false;
 		else
-			i->data.lop = in4.lop->data;
+			course.lop = in4.lop->data;
 		break;
 	case 6:
-		i->data.dayInWeek = in4.dayInWeek;
+		course.dayInWeek = in4.dayInWeek;
 		break;
 	case 7:
-		i->data.session = in4.session;
+		course.session = in4.session;
 		break;
 	case 8:
-		i->data.sem = in4.sem->data;
+		course.sem = in4.sem->data;
 		break;
 	default:
 		return false;

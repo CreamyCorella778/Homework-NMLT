@@ -18,9 +18,9 @@ SchoolYear createSchoolYear(int yearStart, int yearEnd)
 
 SchoolYear createSchoolYear(string schy)
 {
-	string ys, ye; int i = 0;
-	for (; schy[i] - '-' != 0; ++i)
-		ys.push_back(schy[i]);
+	string ys = "", ye = ""; int i = 0;
+	for (; schy[i] != '-'; ++i)
+		ys.push_back(schy.at(i));
 	++i;
 	for (; i < schy.size(); ++i)
 		ye.push_back(schy[i]);
@@ -29,7 +29,7 @@ SchoolYear createSchoolYear(string schy)
 
 void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end)
 {
-	int year = 0;
+	int year = 0, n = 0;
 	cout << "Nhap nam nhap hoc cua hoc sinh nam nay: "; cin >> year;
 	sy = createSchoolYear(year, year + 1);
 	cout << "Chon so thu tu tuong ung voi loai chuong trinh day hoc: " << endl
@@ -38,24 +38,23 @@ void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end)
 		<< "3. Viet-Phap" << endl
 		<< "4. Chuan, dai tra" << endl
 		<< "5. Tien tien, de an" << endl;
-	int n = 0;
 	cin >> n;
 	switch (n)
 	{
 	case 1:
-		eduProg = "APCS";
+		eduProg.assign("APCS");
 		break;
 	case 2:
-		eduProg = "CLC";
+		eduProg.assign("CLC");
 		break;
 	case 3:
-		eduProg = "VP";
+		eduProg.assign("VP");
 		break;
 	case 4:
-		eduProg = "CTT";
+		eduProg.assign("CTT");
 		break;
 	case 5:
-		eduProg = "DA";
+		eduProg.assign("DA");
 		break;
 	default:
 		cout << "Nhap sai roi. Chuc ban may man lan sau.";
@@ -71,7 +70,7 @@ Class* createClasses(SchoolYear sy, string eduProg, int start, int end)
 	Class* a = new Class[end - start + 1];
 	for (int i = 0; i < end - start + 1; ++i)
 	{
-		a[i].eduProgr = eduProg;
+		a[i].eduProgr.assign(eduProg);
 		a[i].year = sy;
 		a[i].no = start + i;
 		a[i].cls = to_string(sy.yStart % 100).append(eduProg).append(to_string(start + i));
@@ -85,16 +84,16 @@ string extractEduProg(string fname) // Assume that the file name part is the cla
 {
 	string ep = "";
 	for (int i = 0; i < fname.size(); ++i)
-		if (isalpha(fname.at(i)) != 0)
+		if (isalpha(fname.at(i)))
 			ep.push_back(fname.at(i));
-		else if (fname[i] - '.' == 0)
+		else if (fname[i] == '.')
 			break;
 	return ep;
 }
 
 SchoolYear extractSchoolYear(string fname) // fname = classname.txt
 {
-	string b; b.assign(fname, 2);
+	string b = ""; b.assign(fname, 2);
 	int c = atoi(b.c_str());
 	if (c >= 77)
 		return createSchoolYear(1900 + c, 1901 + c);
@@ -104,24 +103,24 @@ SchoolYear extractSchoolYear(string fname) // fname = classname.txt
 
 int extractNo(string fname)
 {
-	string a;  a.assign(fname, 2 + extractEduProg(fname).length(), fname.length() - 2 - 4 - extractEduProg(fname).length());
+	string a = ""; a.assign(fname, 2 + extractEduProg(fname).length(), fname.length() - 2 - 4 - extractEduProg(fname).length());
 	return atoi(a.c_str());
 }
 
 Class createClass(string cl)
 {
 	Class a;
-	a.eduProgr = extractEduProg(cl);
+	a.eduProgr.assign(extractEduProg(cl));
 	a.year = extractSchoolYear(cl);
 	string no = "";
 	a.no = atoi(no.assign(cl, 1 + a.eduProgr.size(), cl.size() - 2 - a.eduProgr.size()).c_str());
-	a.cls = cl;
+	a.cls.assign(cl);
 	return a;
 }
 
 Class createCLass(string fname)
 {
-	string a; a.assign(fname, fname.find_last_of('.') + 1);
+	string a = ""; a.assign(fname, fname.find_last_of('.') + 1);
 	return createClass(a);
 }
 
@@ -168,10 +167,10 @@ bool addStudentToClass(Student stu, Class &cl) // fname = classname.txt
 		fp << "\n" << node->data.no << ","
 			<< stu.stuID << ","
 			<< stu.firstName << " " << stu.lastName << ",";
-			if (stu.gender)
-				fp << "nam,";
-			else
-				fp << "nu,";
+		if (stu.gender)
+			fp << "nam,";
+		else
+			fp << "nu,";
 		fp << stu.birth.day << "/" << stu.birth.month << "/" << stu.birth.year << ","
 			<< stu.socialID;
 		fp.close();
@@ -182,7 +181,7 @@ bool addStudentToClass(Student stu, Class &cl) // fname = classname.txt
 bool addStudentsToClass(string fname) // fname = classname.txt
 {
 	Node<Class>* node = findCLass(createCLass(fname).cls);
-	if (node == nullptr)
+	if (!node)
 		return false;
 	ifstream fp;
 	fp.open(fname, ios::in);
@@ -191,7 +190,7 @@ bool addStudentsToClass(string fname) // fname = classname.txt
 	else
 	{
 		string container = ""; getline(fp, container, '\n');
-		while (fp.eof() == false)
+		while (!fp.eof())
 		{
 			Student stu;
 			getline(fp, container, ','); stu.no = atoi(container.c_str());

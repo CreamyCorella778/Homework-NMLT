@@ -8,279 +8,177 @@ Date getTodayIn4()
 	return getNS(temp);
 }
 
-int testing2(string &email)
+bool writeAllSemester(string fname) // fname = all_semester.txt // fname might be changed due to various reasons
 {
-	int userType = -1;  string fname = "login.csv.txt";
-	int res_testing1 = testing1(userType, email);
-	if (res_testing1 == 3)
+	ofstream fp;
+	fp.open(fname, ios::trunc);
+	if (fp.is_open() == false)
+		return false;
+	else
 	{
-		int func = 0;
-		Date today = getTodayIn4();
-		if (userType)
+		fp << "Semester number,School year,Start date,End date\n";
+		if (systems.allSemester.head == systems.allSemester.tail && systems.allSemester.head == nullptr)
 		{
-			Node<Semester>* node = identifySemesterByToday(today);
-			if (node == nullptr)
+			fp.close();
+			return false;
+		}
+		else
+		{
+			for (Node<Semester>* i = systems.allSemester.head; i != nullptr; i = i->next)
 			{
-				cout << "Loi he thong. Chuc ban may man lan sau." << endl;
-				return -1;
+				fp << i->data.number << ","
+					<< i->data.sy.schYr << ","
+					<< i->data.startDate.day << "/" << i->data.startDate.month << "/" << i->data.startDate.year << ","
+					<< i->data.endDate.day << "/" << i->data.endDate.month << "/" << i->data.endDate.year;
+				if (i->next != nullptr)
+					fp << "\n";
 			}
-			Semester curr = node->data;
-			Student stu = extractStudentFromEmail(email)->data;
-			cout << "Chon so thu tu tuong ung voi chuc nang: " << endl
-				<< "1. Xem danh sach khoa hoc dang theo" << endl
-				<< "2. Xem bang diem cac khoa hoc: ";
-			cin >> func;
-			switch (func)
-			{
-			case 1:
-				viewCourses(stu, curr);
-				break;
-			case 2:
-				viewScoreboards(stu);
-				break;
-			}
-			do
-			{
-				cout << "Chon so thu tu tuong ung voi chuc nang: " << endl
-					<< "1. Xem danh sach khoa hoc dang theo" << endl
-					<< "2. Xem bang diem cac khoa hoc" << endl
-					<< "3. Xem ho so ca nhan" << endl
-					<< "4. Doi mat khau" << endl
-					<< "Cac so khac. Dang xuat" << endl;
-				cin >> func;
-				switch (func)
-				{
-				case 1:
-					viewCourses(stu, curr);
-					break;
-				case 2:
-					viewScoreboards(stu);
-					break;
-				case 3:
-					printProfileIn4(email);
-					break;
-				case 4:
-					changePassword(fname, email);
-					break;
-				}
-			} while (1 <= func && func <= 4);
-			return 0;
+			fp.close();
+			return true;
 		}
 	}
-	return -1;
 }
 
-int testing6(string email, Semester currSem) // part 3
+bool readAllSemester(string fname)
 {
-
-	int so_lan = 0, func = 0; bool no_good = false;
-	do
+	ifstream fp;
+	fp.open(fname, ios::in);
+	if (!fp.is_open())
+		return false;
+	else
 	{
-		cout << "Chon so thu tu tuong ung voi chuc nang: " << endl
-			<< "1. Xuat danh sach hoc sinh trong khoa hoc" << endl
-			<< "2. Nhap bang diem cua mot khoa hoc" << endl
-			<< "3. Xem bang diem cua mot khoa hoc" << endl
-			<< "4. Cap nhat diem cua hoc sinh trong khoa hoc" << endl
-			<< "5. Xem bang diem cua lop" << endl
-			<< "6. Xem danh sach khoa hoc trong hoc ki" << endl
-			<< "7. Xem danh sach cac lop nam nhat" << endl
-			<< "8. Xem danh sach cac hoc sinh trong lop" << endl
-			<< "9. Xem danh sach cac hoc sinh trong khoa hoc";
-		if (so_lan > 0)
-			cout << "10. Xem ho so ca nhan" << endl
-			<< "11. Doi mat khau" << endl
-			<< "Cac so khac. Dang xuat: ";
-		else
-			cout << ": ";
-		cin >> func;
-		switch (func)
+		string container = "";
+		getline(fp, container, '\n');
+		systems.allSemester.init();
+		while (!fp.eof())
 		{
-		case 1:
-		{
-			string course = "", cls = "", fname = ""; so_lan = 5; Course cour;
-			do
-			{
-				cout << "Nhap ma khoa hoc: "; getline(cin, course);
-				cout << "Nhap ma lop cua khoa hoc dang day: "; getline(cin, cls);
-				fname = course + cls + to_string(currSem.number) + ".txt";
-				no_good = !findCourse(course, cls, currSem.number, cour);
-				--so_lan;
-				if (no_good)
-					cout << "Khong tim thay khoa hoc. Hay nhap lai. Ban con " << so_lan << " nhap." << endl;
-			} while (no_good && so_lan > 0);
-			if (no_good)
-			{
-				cout << "Khong tim thay khoa hoc. Chuc ban may man lan sau. " << endl;
-				return -1;
-			}
-			no_good = !writeStudentsInCourse(fname, cour);
-			if (no_good)
-			{
-				cout << "Loi he thong. Chuc ban may man lan sau" << endl;
-				break;
-			}
-			else
-			{
-				cout << "Xuat thanh cong. Kiem tra tep " << fname << " trong thu muc nay." << endl;
-				break;
-			}
+			Semester a;
+			getline(fp, container, ','); a.number = atoi(container.c_str());
+			getline(fp, a.sy.schYr, ','); container = "all_courses_" + a.sy.schYr; a.sy = extractSchoolYear(container);
+			getline(fp, container, ','); a.startDate = getNS(container);
+			getline(fp, container, '\n'); a.endDate = getNS(container);
+			Node<Semester>* node = new Node<Semester>; node->init(a);
+			addLast(systems.allSemester, node);
 		}
-		case 2:
-		{
-			string fname = "";
-			cout << "Nhap ten tep. Ten tep phai co dang makhoahoc_tenlop_hockimay.txt: "; cin >> fname;
-			no_good = !readScoreBoard(fname);
-			if (no_good)
-				cout << "Loi he thong. Chuc ban may man lan sau" << endl;
-			else
-				cout << "Nhap thanh cong. " << endl;
-			break;
-		}
-		case 3:
-		{
-			string course = "", cls = "", fname = ""; so_lan = 5; Course cour;
-			do
-			{
-				cout << "Nhap ma khoa hoc: "; getline(cin, course);
-				cout << "Nhap ten lop cua khoa hoc dang day: "; getline(cin, cls);
-				fname = course + cls + to_string(currSem.number) + ".txt";
-				no_good = !findCourse(course, cls, currSem.number, cour);
-				--so_lan;
-				if (no_good)
-					cout << "Khong tim thay khoa hoc. Hay nhap lai. Ban con " << so_lan << " nhap." << endl;
-			} while (no_good && so_lan > 0);
-			if (no_good)
-			{
-				cout << "Khong tim thay khoa hoc. Chuc ban may man lan sau. " << endl;
-				return -1;
-			}
-			viewScoreBoards(cour);
-			break;
-		}
-		case 4:
-		{
-			Node<Student>* node = new Node<Student>; 
-			string course = "", cls = "", fname = ""; so_lan = 5; Course cour;
-
-			do
-			{
-				cout << "Nhap ma khoa hoc: "; getline(cin, course);
-				cout << "Nhap ma lop cua khoa hoc dang day: "; getline(cin, cls);
-				no_good = !findCourse(course, cls, currSem.number, cour);
-				--so_lan;
-				if (no_good)
-					cout << "Khong tim thay khoa hoc. Hay nhap lai. Ban con " << so_lan << " nhap." << endl;
-			} while (no_good && so_lan > 0);
-			if (no_good)
-			{
-				cout << "Khong tim thay khoa hoc. Chuc ban may man lan sau. " << endl;
-				return -1;
-			}
-			so_lan = 5;
-			do
-			{
-				cout << "Nhap ma so hoc sinh: "; getline(cin, course);
-				node = findStudent(course);
-				--so_lan;
-				if (node == nullptr)
-					cout << "Khong tim thay hoc sinh. Hay nhap lai. Ban con " << so_lan << " nhap." << endl;
-			} while (node == nullptr && so_lan > 0);
-			if (no_good)
-			{
-				cout << "Khong tim thay hoc sinh. Chuc ban may man lan sau. " << endl;
-				return -1;
-			}
-			float* in4 = new float[4]; int* option = new int[4]; int n = 0;
-			getUpdateScbIn4(option, in4, n);
-			no_good = !updateScoreBoard(node->data, cour, currSem, option, in4, n);
-			if (no_good)
-				cout << "Loi he thong. Chuc ban may man lan sau" << endl;
-			else
-				cout << "Cap nhat thanh cong" << endl;
-			break;
-		}
-		case 5:
-		{
-			string cls = ""; so_lan = 5; Node<Class>* node = new Node<Class>;
-			do
-			{
-				cout << "Nhap ten lop: "; getline(cin, cls);
-				node = findCLass(cls);
-				--so_lan;
-				if (node == nullptr)
-					cout << "Khong tim thay lop. Hay nhap lai. Ban con " << so_lan << " nhap." << endl;
-			} while (node == nullptr && so_lan > 0);
-			if (node == nullptr)
-			{
-				cout << "Khong tim thay lop. Chuc ban may man lan sau. " << endl;
-				return -1;
-			}
-			viewScoreBoards(node->data, currSem);
-			break;
-		}
-		case 6:
-		{
-			viewCourses(currSem);
-			break;
-		}
-		case 7:
-		{
-			cout << "Danh sach cac lop nam nay: " << endl;
-			viewClasses();
-			break;
-		}
-		case 8:
-		{
-			string cls = "";
-			cout << "Nhap ten lop: "; cin >> cls; Class lop;
-			Node<Class>* node = findCLass(cls);
-			if (node == nullptr)
-			{
-				char a = 0;
-				cout << "Ban co muon tao lop moi voi ten vua roi khong? Chon so thu tu tuong ung voi lua chon: " << endl
-					<< "1. Co                                          2. Khong: "; cin >> a;
-				if (a == 2)
-				{
-					cout << "Loi he thong. Chuc ban may man lan sau" << endl;
-					no_good = true;
-					break;
-				}
-				else
-				{
-					lop = createClass(cls);
-					cout << "Tao thanh cong." << endl;
-				}
-			}
-			else
-				lop = node->data;
-			cout << "Danh sach cac hoc sinh cua lop " << lop.cls << ":\n";
-			viewStudents(lop);
-			break;
-		}
-		case 9:
-		{
-			cout << "Phan lay thong tin cua khoa hoc can xem: " << endl;
-			string cou = "", cls = ""; bool found = false; Course course;
-			do
-			{
-				cout << "Nhap ma khoa hoc: "; getline(cin, cou);
-				cout << "Nhap ten lop: "; getline(cin, cls);
-				found = findCourse(cou, cls, currSem.number, course);
-				if (!found)
-					cout << "Khong tim thay khoa hoc. Moi nhap lai: " << endl;
-			} while (!found);
-			viewStudents(course);
-			break;
-		}
-		case 10:
-			printProfileIn4(email);
-			break;
-		case 11:
-			string fname = "login.csv.txt";
-			changePassword(fname, email);
-			break;
-		}
-
-	} while (1 <= func && func <= 11);
-	return no_good ? -1 : 0;
+		fp.close();
+		return true;
+	}
 }
+
+void viewSemester(Semester sem)
+{
+	cout << "Hoc ki " << sem.number << ", thuoc nam hoc " << sem.sy.schYr << endl;
+	cout << "Bat dau tu " << sem.startDate.day << "/" << sem.startDate.month << "/" << sem.startDate.year
+		<< " den " << sem.endDate.day << "/" << sem.endDate.month << "/" << sem.endDate.year;
+	cout << endl;
+}
+
+int Check_Nhuan(Date yyyy)
+{
+	if (((yyyy.year % 4 == 0) && (yyyy.year % 100 != 0)) || (yyyy.year % 400 == 0))
+		return 1;
+	else
+		return 0;
+}
+
+int ThuTu(Date theyt)
+{
+	int ThuTu = 0;
+	int ngay_trong_thang[13] = { 0, 31, 28 + Check_Nhuan(theyt), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	//Theo thu tu trong mang tu trai sang phai: so ngay trong thang 0, 1, 2,..., 12 
+	for (int i = 0; i <= 12; i++)
+		if (i == theyt.month)
+		{
+			for (int j = 0; j < i; j++)
+				ThuTu = ThuTu + ngay_trong_thang[j];
+			ThuTu = ThuTu + theyt.day;
+			break;
+		}
+		else
+			continue;
+	return ThuTu;
+}
+
+//dey1 > dey2 => -1; dey1 = dey2 => 0; dey1 < dey2 => 1
+int compareDate(Date dey1, Date dey2) 
+{
+	if (dey1.year > dey2.year)
+		return -1;
+	else
+	{
+		if (dey1.year < dey2.year)
+			return 1;
+		else
+		{
+			if (ThuTu(dey1) > ThuTu(dey2))
+				return -1;
+			else
+			{
+				if (ThuTu(dey1) < ThuTu(dey2))
+					return 1;
+				else
+					return 0;
+			}
+		}
+	}
+}
+
+Node<Semester>* identifySemesterByToday(Date today)
+{
+	for (Node<Semester>* i = systems.allSemester.head; i != nullptr; i = i->next)
+		if (compareDate(today, i->data.startDate) == -1 && compareDate(today, i->data.endDate) == 1)
+		{
+			Node<Semester>* node = new Node<Semester>; node->init(i->data);
+			return node;
+		}
+	return nullptr;
+}
+
+int dayOfWeek(int d, int m, int y) 
+{
+	y -= (14 - m) / 12;
+	m += 12 * ((14 - m) / 12) - 2;
+	return (d + y + y / 4 - y / 100 + y / 400 + (31 * m) / 12) % 7;
+}
+
+int dayOfWeek(Date date)
+{
+	return dayOfWeek(date.day, date.month, date.year);
+}
+
+int* divideInto3Parts(int a, int b)
+{
+	int* parts = new int[4];
+	int step = b > a ? (b - a) / 3 : (a - b) / 3;
+	parts[0] = b > a ? a : b; parts[1] = parts[0] + step; parts[2] = parts[1] + step; parts[3] = b > a ? b : a;
+	return parts;
+}
+
+Date Reverse_ThuTu(int yyyy, int n)
+{
+	Date date = {1, 1, yyyy};
+	int ngay_trong_thang[13] = { 0, 31, 28 + Check_Nhuan(date), 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	for (int i = 1; true; i++)
+		if (n <= ngay_trong_thang[i])
+		{
+			date = { n, i, yyyy };
+			break;
+		}
+		else
+			n = n - ngay_trong_thang[i];
+	return date;
+}
+
+Date* divideSemester(Semester sem)
+{
+	Date* parts = new Date[4];
+	int* parts_thutu = divideInto3Parts(ThuTu(sem.startDate), ThuTu(sem.endDate));
+	parts_thutu[1] += ((0 < dayOfWeek(sem.startDate) + 1) && (dayOfWeek(sem.startDate) + 1 < 5)) ? 1 - dayOfWeek(sem.startDate) : 
+		(dayOfWeek(sem.startDate) == 0 ? 1 : 8 - dayOfWeek(sem.startDate));
+	parts_thutu[2] += ((0 < dayOfWeek(sem.startDate) + 1) && (dayOfWeek(sem.startDate) + 1 < 5)) ? 1 - dayOfWeek(sem.endDate) :
+		(dayOfWeek(sem.endDate) == 0 ? 1 : 8 - dayOfWeek(sem.endDate));
+	for (int i = 0; i < 4; ++i)
+		parts[i] = Reverse_ThuTu(sem.startDate.year, parts_thutu[i]);
+	return parts;
+}
+

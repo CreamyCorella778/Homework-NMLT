@@ -1,0 +1,73 @@
+# depslib dependency file v1.0
+1692107619 source:c:\users\user\source\repos\projectstudent\projectstudent\main.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691998087 c:\users\user\source\repos\projectstudent\projectstudent\header1.hpp
+	<iostream>
+	<iomanip>
+	<fstream>
+	"Header2.hpp"
+
+1692027739 c:\users\user\source\repos\projectstudent\projectstudent\header2.hpp
+	<string>
+	<cstring>
+	<cmath>
+	"Header1.hpp"
+
+1692107619 source:c:\users\user\source\repos\projectstudent\projectstudent\source1.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691999431 source:c:\users\user\source\repos\projectstudent\projectstudent\source10.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1692107619 source:c:\users\user\source\repos\projectstudent\projectstudent\source11.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691751122 source:c:\users\user\source\repos\projectstudent\projectstudent\source12.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691765557 source:c:\users\user\source\repos\projectstudent\projectstudent\source13.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691999431 source:c:\users\user\source\repos\projectstudent\projectstudent\source14.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1692107619 source:c:\users\user\source\repos\projectstudent\projectstudent\source2.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691998793 source:c:\users\user\source\repos\projectstudent\projectstudent\source3.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691751984 source:c:\users\user\source\repos\projectstudent\projectstudent\source4.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691751506 source:c:\users\user\source\repos\projectstudent\projectstudent\source5.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691765557 source:c:\users\user\source\repos\projectstudent\projectstudent\source6.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1692031257 source:c:\users\user\source\repos\projectstudent\projectstudent\source7.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691998984 source:c:\users\user\source\repos\projectstudent\projectstudent\source8.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+
+1691766047 source:c:\users\user\source\repos\projectstudent\projectstudent\source9.cpp
+	"Header1.hpp"
+	"Header2.hpp"
+

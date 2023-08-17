@@ -65,7 +65,7 @@ bool readAllCoursesOfStudent(string fname)
 		node->data.marks.init();
 		while (!fp.eof())
 		{
-			Course a, b;
+			Course a;
 			getline(fp, container, ',');
 			getline(fp, a.id, ',');
 			getline(fp, a.courseName, ',');
@@ -77,8 +77,9 @@ bool readAllCoursesOfStudent(string fname)
 			getline(fp, container, ','); a.dayInWeek = atoi(container.c_str());
 			getline(fp, container, ','); a.session = atoi(container.c_str());
 			getline(fp, container, ','); a.sem.number = atoi(container.c_str());
-			if (findCourse(a.id, a.lop.cls, a.sem.number, b))
-				a.sem.sy = b.sem.sy;
+			Node<Course>* b = findCourse(a.id, a.lop.cls, a.sem.number);
+			if (b)
+				a.sem.sy = b->data.sem.sy;
 			else
 				return false;
 			Scoreboard c; 

@@ -62,10 +62,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Header1.h">
+    <ClInclude Include="Header1.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Header2.h">
+    <ClInclude Include="Header2.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
