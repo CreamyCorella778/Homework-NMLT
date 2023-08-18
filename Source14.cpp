@@ -5,7 +5,6 @@
 int testing4(Semester currSem, string email) 
 {
 	int func = 0; bool no_good = false;
-	string fname = "";
 	do
 	{
 		no_good = false;
@@ -33,90 +32,33 @@ int testing4(Semester currSem, string email)
 		}
 		case 2:
 		{
-			no_good = !task3();
+			no_good = !task3(currSem);
 			break;
 		}
 		case 3:
 		{
-			no_good = !task4();
+			no_good = !task4(currSem);
 			break;
 		}
 		case 4:
 		{
-			
+			no_good = !task5(currSem);
 			break;
 		}
 		case 5:
 		{
-			cout << "Phan lay thong tin hoc sinh can them: " << endl;
-			Student stu;
-			getStudentIn4(stu);
-			cout << "Phan lay thong tin cua khoa hoc can nhan them hoc sinh: " << endl;
-			string cou = "", cls = ""; bool found = false; Node<Course>* course = new Node<Course>;
-			do
-			{
-				cout << "Nhap ma khoa hoc: "; getline(cin, cou);
-				cout << "Nhap ten lop: "; getline(cin, cls);
-				course = findCourse(cou, cls, currSem.number);
-			} while (!course);
-			no_good = !addStudentToCourse(stu, course->data);
-			if (no_good)
-			{
-				cout << "Loi he thong. Chuc ban may man lan sau" << endl;
-				break;
-			}
-			else
-			{
-				cout << "Them thanh cong. " << endl;
-				break;
-			}
+			no_good = !task6(currSem);
+			break;
 		}
 		case 6:
 		{
-			cout << "Phan lay thong tin hoc sinh can duoi: " << endl;
-			Student stu;
-			getStudentIn4(stu);
-			cout << "Phan lay thong tin cua khoa hoc can duoi hoc sinh: " << endl;
-			string cou = "", cls = ""; bool found = false; Node<Course>* course = new Node<Course>;
-			do
-			{
-				cout << "Nhap ma khoa hoc: "; getline(cin, cou);
-				cout << "Nhap ten lop: "; getline(cin, cls);
-				course = findCourse(cou, cls, currSem.number);
-			} while (!course);
-			no_good = !addStudentToCourse(stu, course->data);
-			if (no_good)
-			{
-				cout << "Loi he thong. Chuc ban may man lan sau" << endl;
-				break;
-			}
-			else
-			{
-				cout << "Duoi thanh cong. " << endl;
-				break;
-			}
+			no_good = !task7(currSem);
+			break;
 		}
 		case 7:
 		{
-			cout << "Phan lay thong tin cua khoa hoc can xoa: " << endl;
-			string cou = "", cls = ""; bool found = false; Node<Course>* course = new Node<Course>;
-			do
-			{
-				cout << "Nhap ma khoa hoc: "; getline(cin, cou);
-				cout << "Nhap ten lop: "; getline(cin, cls);
-				course = findCourse(cou, cls, currSem.number);
-			} while (!course);
-			no_good = !removeCourse(course->data, currSem);
-			if (no_good)
-			{
-				cout << "Loi he thong. Chuc ban may man lan sau" << endl;
-				break;
-			}
-			else
-			{
-				cout << "Xoa thanh cong. " << endl;
-				break;
-			}
+			no_good = !task8(currSem);
+			break;
 		}
 		case 8:
 		{
@@ -131,48 +73,12 @@ int testing4(Semester currSem, string email)
 		}
 		case 10:
 		{
-			string cls = "";
-			cout << "Nhap ten lop: "; cin >> cls; Class lop;
-			Node<Class>* node = findCLass(cls);
-			if (!node)
-			{
-				char a = 0;
-				cout << "Ban co muon tao lop moi voi ten vua roi khong? Chon so thu tu tuong ung voi lua chon: " << endl
-					<< "1. Co                                          2. Khong: "; cin >> a;
-				if (a == 2)
-				{
-					cout << "Loi he thong. Chuc ban may man lan sau" << endl;
-					no_good = true;
-					break;
-				}
-				else
-				{
-					lop = createClass(cls);
-					cout << "Tao thanh cong." << endl;
-				}
-			}
-			else
-				lop = node->data;
-			cout << "Danh sach cac hoc sinh cua lop " << lop.cls << ":\n";
-			viewStudents(lop);
+			no_good = !task9();
 			break;
 		}
 		case 11:
 		{
-			cout << "Phan lay thong tin cua khoa hoc can xem: " << endl;
-			string cou = "", cls = ""; bool found = false; Node<Course>* course = new Node<Course>;
-			do
-			{
-				cout << "Nhap ma khoa hoc: "; getline(cin, cou);
-				cout << "Nhap ten lop: "; getline(cin, cls);
-				course = findCourse(cou, cls, currSem.number);
-			} while (!course);
-			if (!course)
-			{
-				cout << "Khong tim thay khoa hoc. Chuc ban may man lan sau" << endl;
-				no_good = true;
-			}
-			viewStudents(course->data);
+			no_good = !task10(currSem);
 			break;
 		}
 		case 12:

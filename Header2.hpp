@@ -46,7 +46,7 @@ bool addCoursetoSemester(Course a, Semester sem);
 void viewCourses(Semester sem);
 void getIn4toUpdateCourse(string& courseID, string& cl, int& option);
 CourseVarType getIn4toUpdateCourse(int option);
-bool updateCourseIn4(string courseID, string cl, int option, CourseVarType in4, Semester sem);
+bool updateCourseIn4(Course &course, int option, CourseVarType in4);
 void getStudentIn4(Student& a);
 bool addStudentToCourse(Student st, Course& c);
 bool addStudentsToCourse(string fname, Course &cour);
@@ -101,8 +101,19 @@ int testing7(string email, Semester currSem);
 
 int task1(string email);
 void task2();
-bool task3();
-bool task4();
+bool task3(Semester currSem);
+bool task4(Semester currSem);
+Node<Course>* task3_5(Semester currSem);
+bool task5(Semester currSem);
+bool task6(Semester currSem);
+bool task7(Semester currSem);
+bool task8(Semester currSem);
+bool task9();
+bool task10(Semester currSem);
+void task11(SchoolYear &sy);
+void task12(SchoolYear &sy);
+bool task13();
+bool task14();
 
 
 //======================================================================
@@ -125,6 +136,7 @@ int countLinesInCSV(string fname);
 Date getNS(string birth);
 void getYears(int& yearStart, int& yearEnd);
 Class createClass(string cl);
+Class createCLass(string fname);
 void viewCourse(Course a);
 string* extractCId_cl_sno(string fname);
 void viewScoreBoards(Course a);
