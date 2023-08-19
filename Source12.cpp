@@ -25,14 +25,20 @@ int testing2(string email)
 		switch (func)
 		{
 		case 1:
+		{
 			viewCourses(stu, curr);
 			break;
+		}
 		case 2:
+		{
 			viewScoreboards(stu);
 			break;
+		}
 		case 3:
+		{
 			task1(email);
 			break;
+		}
 		}
 	} while (1 <= func && func <= 3);
 	return 0;

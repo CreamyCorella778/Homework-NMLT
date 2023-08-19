@@ -92,7 +92,7 @@ void viewStaff(Staff a);
 int testing1(int &userType, string &email);
 int testing2(string email);
 int testing3(string& email);
-int testing4(Semester currSem, string email);
+int testing4(string email, Semester currSem);
 int testing5(string email, SchoolYear &sy);
 int testing6(string email, Semester currSem);
 int testing7(string email, Semester currSem);
@@ -114,6 +114,11 @@ void task11(SchoolYear &sy);
 void task12(SchoolYear &sy);
 bool task13();
 bool task14();
+bool task15(Semester currSem);
+bool task16();
+bool task17(Semester currSem);
+bool task18(Semester currSem);
+bool task19(Semester currSem);
 
 
 //======================================================================
@@ -155,6 +160,7 @@ Date* divideSemester(Semester sem);
 Node<Student>* extractStudentFromEmail(string email);
 Date getTodayIn4();
 void viewSemester(Semester sem);
+void viewScoreBoard(Scoreboard a);
 float calculateOverallGPA(Student &stu, Semester currentSem);
 float calculateSemGPA(Student &stu);
 string generateFileName(Course c, Class cl, Semester sem);

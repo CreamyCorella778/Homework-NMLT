@@ -15,7 +15,8 @@ bool writeAllCoursesOfStudent(string fname) // fname = studentid.txt
 	{
 		fp << "No,ID,Course name,Teacher's id,Class,Credits,Capacity,Day in week,Session,Semester number,Midterm,Final,Other,Total\n";
 		bool written = false;
-		if ((node->data.courses.head == node->data.courses.tail && node->data.courses.head == nullptr) || (node->data.marks.head == node->data.marks.tail && node->data.marks.head == nullptr))
+		if ((node->data.courses.head == node->data.courses.tail && node->data.courses.head == nullptr) 
+		|| (node->data.marks.head == node->data.marks.tail && node->data.marks.head == nullptr))
 			written = false;
 		else
 		{

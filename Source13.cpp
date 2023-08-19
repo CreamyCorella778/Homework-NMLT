@@ -56,7 +56,7 @@ int testing3(string& email)
 		switch (part)
 		{
 		case 1:
-			return testing4(node->data, email);
+			return testing4(email, node->data);
 		case 2:
 			return testing7(email, node->data);
 		case 3:

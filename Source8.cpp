@@ -97,7 +97,7 @@ string* extractCl_sno_schy(string fname) // fname = gpa_classname_semnumber.txt 
 {
 	int j = 4; string* res = new string[2];
 	for (int i = 0; i < 2; ++i)
-		for (j; fname[j] - '_' == 0 || fname[j] - '.' == 0; ++j)
+		for (; fname[j] != '_' && fname[j] != '.'; ++j)
 			res[i].push_back(fname[j]);
 	return res;
 }

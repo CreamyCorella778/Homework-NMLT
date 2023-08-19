@@ -120,8 +120,6 @@ bool readScoreBoard(string fname) // fname = courseid_classname_semnumber.txt
 	}
 }
 
-
-
 template <class T>
 T* realloc(T* ptr, size_t old_size, size_t new_size) {
 	if (ptr == nullptr) 
@@ -167,7 +165,7 @@ void getUpdateScbIn4(int*& option, float*& in4, int& n)
 bool updateScoreBoard_aStudent(Student& stu, Course cour, int* option, float* in4, int n)
 {
 	Node<Scoreboard>* node = stu.marks.head;
-	for (node; node != nullptr; node = node->next)
+	for (; node != nullptr; node = node->next)
 		if (node->data.course.id == cour.id)
 			break;
 	if (!node)
@@ -194,10 +192,10 @@ bool updateScoreBoard_aStudent(Student& stu, Course cour, int* option, float* in
 bool updateScoreBoard_aCourse(Student& stu, Course& cour, int* option, float* in4, int n)
 {
 	Node<Scoreboard>* node = cour.score.head;
-	for (node; node != nullptr; node = node->next)
+	for (; node != nullptr; node = node->next)
 		if (node->data.student.stuID == stu.stuID)
 			break;
-	if (node == nullptr)
+	if (!node)
 		return false;
 	for (int i = 0; i < n; i++)
 		switch (option[i])
@@ -220,12 +218,10 @@ bool updateScoreBoard_aCourse(Student& stu, Course& cour, int* option, float* in
 
 bool updateScoreBoard_aStaff(Student& stu, Course& cour, int* option, float* in4, int n)
 {
-	Node<Course>* n0de = cour.teacher.courses.head;
-	for (; n0de != nullptr; n0de = n0de->next)
-		if (n0de->data.id == cour.id)
+	for (Node<Course>* n0de = cour.teacher.courses.head; n0de; n0de = n0de->next)
+		if (!n0de->data.id.compare(cour.id))
 			return updateScoreBoard_aCourse(stu, n0de->data, option, in4, n);
-	if (n0de == nullptr)
-		return false;
+	return false;
 }
 
 bool updateScoreBoard(Student& stu, Course& cour, Semester currSem, int* option, float* in4, int n) // Watch out this one, change the course scb too

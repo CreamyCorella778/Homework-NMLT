@@ -54,14 +54,14 @@ void getCourseIn4(Course &a, Semester sem)
 	string container = ""; int so_lan = 5;
 	cout << "Nhap ma so giao vien chinh day: "; getline(cin, container);
 	Node<Course>* i = systems.allCourse[sem.number - 1].head;
-	for (i; i; i = i->next)
+	for (; i; i = i->next)
 		if (i->data.teacher.id.compare(container) == 0)
 			a.teacher = i->data.teacher;
 	do
 	{
 		cout << "Ban co " << so_lan << "nhap. Nhap lai ma so giao vien chinh day : "; getline(cin, container);
 		i = systems.allCourse[sem.number - 1].head;
-		for (i; i; i = i->next)
+		for (; i; i = i->next)
 			if (!i->data.teacher.id.compare(container))
 				a.teacher = i->data.teacher;
 		so_lan -= 1;

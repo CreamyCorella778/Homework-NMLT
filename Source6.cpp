@@ -140,7 +140,7 @@ void viewScoreBoards(Class cl, Semester sem)
 		for (Node<Course>* index2 = courseList.head; index2 != nullptr; index2 = index2->next)
 		{
 			Node<Scoreboard>* node = index1->data.marks.head;
-			for (node; node->data.course.id.compare(index2->data.id) != 0; node = node->next)
+			for (; node->data.course.id.compare(index2->data.id) != 0; node = node->next)
 				continue;
 			cout << setw(50) << left << node->data.Final;
 		}

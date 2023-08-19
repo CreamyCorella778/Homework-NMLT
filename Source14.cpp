@@ -2,7 +2,7 @@
 #include "Header2.hpp"
 
 // part 1
-int testing4(Semester currSem, string email) 
+int testing4(string email, Semester currSem) 
 {
 	int func = 0; bool no_good = false;
 	do
@@ -82,10 +82,11 @@ int testing4(Semester currSem, string email)
 			break;
 		}
 		case 12:
+		{
 			task1(email);
 			break;
+		}
 		}
 	} while (1 <= func && func < 13);
 	return no_good ? -1 : 0; // return 0 if user wants to exit the program and -1 when program has issues
 }
-

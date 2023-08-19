@@ -78,7 +78,6 @@ Node<Course>* task3_5(Semester currSem)
     return course;
 }
 
-
 // nhap danh sach hoc sinh tu tep vao khoa hoc
 bool task4(Semester currSem)
 {
@@ -303,7 +302,10 @@ bool task13()
         }
     }
     if (!addStudentToClass(stu, node->data))
+    {
         cout << "Loi he thong. Chuc ban may man lan sau." << endl;
+        return false;
+    }
     else
     {
         cout << "Them thanh cong. Ban co muon xem hoc sinh da them khong?" << endl
@@ -343,3 +345,189 @@ bool task14()
     }
 }
 
+// ghi danh sach hoc sinh cua khoa hoc vao tep
+bool task15(Semester currSem)
+{
+    cout << "Phan lay thong tin cua khoa hoc: " << endl;
+    Node<Course>* course = task3_5(currSem);
+	string fname = course->data.id + "_" + course->data.lop.cls + "_" + to_string(currSem.number) + ".txt";
+    if (!course) return false;
+    if (!writeStudentsInCourse(fname, course->data))
+    {
+        cout << "Loi he thong. Chuc ban may man lan sau." << endl;
+        return false;
+    }
+    else
+    {
+        cout << "Xuat thanh cong. Kiem tra tep " << fname << " trong thu muc nay." << endl;
+        return true;
+    }
+}
+
+// Nhap bang diem cua mot khoa hoc tu tep
+bool task16()
+{
+    string fname = "";
+    cout << "Nhap ten tep. Ten tep phai co dang makhoahoc_tenlop_hockimay.txt: "; cin >> fname;
+    if (!readScoreBoard(fname))
+    {
+        cout << "Loi he thong. Chuc ban may man lan sau." << endl;
+        return false;
+    }
+    else
+    {
+        int option = 0;
+        cout << "Nhap thanh cong. Ban co muon xem bang diem cua khoa hoc nay khong?" << endl
+        << "Chon so thu tu tuong ung voi lua chon:" << endl
+        << "1. Co                        2. Khong: ";
+        cin >> option;
+        if (option == 1)
+        {
+            string* in4 = extractCId_cl_sno(fname);
+	        Node<Course>* c = findCourse(in4[0], in4[1], atoi(in4[2].c_str()));
+            if (!c)
+                return false;
+            viewScoreBoards(c->data);
+        }
+        return true;
+    }
+}
+
+// xem bang diem cua mot khoa hoc
+bool task17(Semester currSem)
+{
+    cout << "Phan lay thong tin cua khoa hoc can xem bang diem: " << endl;
+    Node<Course>* course = task3_5(currSem);
+	string fname = course->data.id + "_" + course->data.lop.cls + "_" + to_string(currSem.number) + ".txt";
+    if (!course) return false;
+    cout << "Bang diem cua khoa hoc: " << endl;
+    viewScoreBoards(course->data);
+    return true;
+}
+
+// tim kiem hoc sinh trong khoa hoc
+Node<Student>* task17_5()
+{
+    Node<Student>* node = new Node<Student>; 
+    int so_lan = 5; string id = "";
+    do
+    {
+        cout << "Nhap ma so hoc sinh: "; getline(cin, id);
+        node = findStudent(id);
+        --so_lan;
+        if (!node)
+            cout << "Khong tim thay hoc sinh. Hay nhap lai. Ban con " << so_lan << " nhap." << endl;
+    } while (!node && so_lan);
+    if (!node)
+        cout << "Khong tim thay hoc sinh. Chuc ban may man lan sau." << endl;
+    else
+        cout << "Da tim thay hoc sinh." << endl;
+    return node;
+}
+
+// ho tro cho phan cuoi task18: xem cac loai bang diem
+void task17_75(int option, Course course, Student student, Semester currSem)
+{
+    switch(option)
+    {
+    case 1:
+    {
+        viewScoreboards(student);
+        break;
+    }
+    case 2:
+    {
+        viewScoreBoards(course);
+        break;
+    }
+    case 3:
+    {
+        for (Node<Scoreboard>* scb = student.marks.head; scb; scb = scb->next)
+            if (!scb->data.course.id.compare(course.id))
+                viewScoreBoard(scb->data);
+        break;
+    }
+    case 4:
+    {
+        viewScoreBoards(student.cl, currSem);
+        break;
+    }
+    case 5:
+    {
+        for (Node<Student>* i = student.cl.stuList.head; i; i = i->next)
+            for (Node<Scoreboard>* scb = i->data.marks.head; scb; scb = scb->next)
+                if (!scb->data.course.id.compare(course.id))
+                    viewScoreBoard(scb->data);
+        break;
+    }
+    default:
+        return;
+    }
+}
+
+// cap nhat bang diem cua mot hoc sinh trong khoa hoc
+bool task18(Semester currSem)
+{
+    Node<Course>* course = task3_5(currSem);
+    Node<Student>* student = task17_5();
+    if (!course || !student)
+        return false;
+    float* in4 = new float[4]; int* options = new int[4]; int n = 0;
+    getUpdateScbIn4(options, in4, n);
+    if (!updateScoreBoard(student->data, course->data, currSem, options, in4, n))
+    {
+        cout << "Loi he thong. Chuc ban may man lan sau." << endl;
+        delete[]in4;
+        delete[]options;
+        return false;
+    }
+    else
+    {
+        delete[]in4;
+        delete[]options;
+        int option = 0;
+        cout << "Cap nhat thanh cong. Ban co muon xem bang diem khong?" << endl
+        << "Chon so thu tu tuong ung voi lua chon: " << endl
+        << "1. Xem bang diem cua hoc sinh do" << endl
+        << "2. Xem bang diem cua khoa hoc do" << endl
+        << "3. Xem bang diem khoa hoc do cua hoc sinh do" << endl
+        << "4. Xem bang diem cua lop cua hoc sinh do" << endl
+        << "5. Xem bang diem khoa hoc do cua lop cua hoc sinh do" << endl
+        << "Cac so khac. Khong xem gi het"; cin >> option;
+        task17_75(option, course->data, student->data, currSem);
+        return true;
+    }
+}
+
+// xem bang diem cua mot lop
+bool task19(Semester currSem)
+{
+    string cls = ""; int option = 0;
+    cout << "Nhap ten lop: "; cin >> cls;
+    Node<Class>* node = findCLass(cls);
+    if (!node)
+    {
+        cout << "Ban co muon tao lop moi voi ten vua roi khong? Chon so thu tu tuong ung voi lua chon: " << endl
+            << "1. Co                                          2. Khong: "; 
+        cin >> option;
+        if (option == 1)
+        {
+            node = new Node<Class>;
+            node->init(createClass(cls));
+            cout << "Tao thanh cong. Ban co muon xem lop moi tao khong?" << endl
+            << "Chon so thu tu tuong ung voi lua chon:" << endl
+            << "1. Co                        2. Khong: ";
+            cin >> option;
+            if (option == 1)
+                cout << "Lop moi them la: " << node->data.cls;
+            return true;
+        }
+        else
+        {
+            cout << "Loi he thong. Chuc ban may man lan sau." << endl;
+            return false;
+        }
+    }
+    viewScoreBoards(node->data, currSem);
+    return true;
+}
