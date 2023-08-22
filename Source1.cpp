@@ -1,5 +1,6 @@
 #include "Header1.hpp"
 #include "Header2.hpp"
+#include "Header3.hpp"
 
 int countLinesInCSV(string fname)
 {
@@ -61,21 +62,21 @@ bool loginSystem(string fname, string &email)
 		{
 			cout << "Nhap email: "; getline(cin, email, '\n');
 			isExistEmail = checkExistEmail(loginData, row, email);
-			count--;
+			--count;
 			if (isExistEmail & (1 << 31)) // isExistEmail < 0
 				cout << "Ban con " << count << " lan dang nhap. ";
-		} while ((isExistEmail & (1 << 31)) && count > 0);
+		} while ((isExistEmail & (1 << 31)) && count);
 		if (isExistEmail != -1)
 		{
-			count = 0; int isExistPass = 0;
+			count = 5; int isExistPass = 0;
 			do
 			{
-				cout << "So lan co dang nhap: " << count << ". Ban chi co 5 lan thu. Nhap mat khau: "; getline(cin, pass, '\n');
+				cout << "Nhap mat khau : "; getline(cin, pass, '\n');
 				isExistPass = pass.compare(loginData[isExistEmail][1]);
-				count++;
+				--count;
 				if (isExistPass) // isExistPass != 0
 					cout << "Ban con " << count << " lan dang nhap. ";
-			} while (isExistPass && count != 5);
+			} while (isExistPass && count);
 			if (!isExistPass) // isExistPass == 0
 			{
 				cout << "Dang nhap thanh cong. " << endl;
@@ -118,6 +119,9 @@ bool changePassword(string fname, string email)
 		if (!fp.is_open())
 		{
 			cout << "Loi he thong. Chuc ban may man lan sau.";
+			for (int index = 0; index < row; ++index)
+				delete[]container[index];
+			delete[]container;
 			return false;
 		}
 		else
@@ -129,12 +133,15 @@ bool changePassword(string fname, string email)
 					<< "\n";
 			fp.close();
 			cout << "Doi mat khau thanh cong." << endl;
+			for (int index = 0; index < row; ++index)
+				delete[]container[index];
+			delete[]container;
 			return true;
 		}
 	}
 	else if (count == 5)
 	{
-		cout << "Ban da het so lan nhap. Chuc ban may man lan sau. " << endl;
+		cout << "Ban da het so lan nhap. Chuc ban may man lan sau." << endl;
 		return false;
 	}
 	else
@@ -188,7 +195,7 @@ void printProfileIn4(string email)
 	{
 		Node<Student>* node = extractStudentFromEmail(email);
 		if (!node)
-			cout << "Loi email khong hop le" << endl;
+			cout << "Loi email khong hop le." << endl;
 		else
 			viewStudent(node->data);
 	}
@@ -196,12 +203,12 @@ void printProfileIn4(string email)
 	{
 		Node<Staff>* node = extractStaffFromEmail(email);
 		if (!node)
-			cout << "Loi email khong hop le" << endl;
+			cout << "Loi email khong hop le." << endl;
 		else
 			viewStaff(node->data);
 	}
 	else
-		cout << "Loi email khong hop le" << endl;
+		cout << "Loi email khong hop le." << endl;
 }
 
 void logout() // skip for now cuz of no idea and main func dependance.
@@ -220,7 +227,7 @@ int testing1(int &userType, string &email)
 	}
 	else
 	{
-		cout << endl << "Dang nhap that bai! Chuc ban may man lan sau" << endl;
+		cout << endl << "Dang nhap that bai! Chuc ban may man lan sau." << endl;
 		return -1;
 	}
 }
@@ -228,5 +235,6 @@ int testing1(int &userType, string &email)
 void main1()
 {
 	string email = ""; int userType = 0;
+	cout << readStaffList("all_staffs.txt") << endl;
 	cout << testing1(userType, email);
 }

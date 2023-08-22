@@ -1,5 +1,6 @@
 #include "Header1.hpp"
 #include "Header2.hpp"
+#include "Header3.hpp"
 
 // userType == 1 => Student
 int testing2(string email)

@@ -1,5 +1,6 @@
 #include "Header1.hpp"
 #include "Header2.hpp"
+#include "Header3.hpp"
 
 bool addStudentsToCourse(string fname, Course &cour)  // fname = courseid_classname_semnumber.txt
 {
@@ -18,7 +19,7 @@ bool addStudentsToCourse(string fname, Course &cour)  // fname = courseid_classn
 			getline(fp, stu.firstName, ',');
 			getline(fp, stu.lastName, ',');
 			getline(fp, container, ',');
-			if (!stricmp("nam", container.c_str()))
+			if (!_stricmp("nam", container.c_str()))
 				stu.gender = true;
 			else
 				stu.gender = false;
@@ -101,7 +102,7 @@ bool readScoreBoard(string fname) // fname = courseid_classname_semnumber.txt
 			getline(fp, a.student.firstName, ',');
 			getline(fp, a.student.lastName, ',');
 			getline(fp, container, ',');
-			if (!stricmp("nam", container.c_str()))
+			if (!_stricmp("nam", container.c_str()))
 				a.student.gender = true;
 			else
 				a.student.gender = false;

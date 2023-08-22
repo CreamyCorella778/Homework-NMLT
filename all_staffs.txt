@@ -1,0 +1,12 @@
+No,Staff ID,First name,Last name
+1,22120001,le thi anh,thao
+2,22120002,nguyen thi manh,phuc
+3,22120003,hai,tu
+4,22120004,nguyen le huy,dung
+5,22120005,pham trung,nghia
+6,22120006,huynh tran bach,tran
+7,22120007,kien vu manh,duc
+8,22120008,cao to,linh
+9,22120009,ly nhat,nam
+10,22120010,ngo duy,loc
+11,22120011,le thi,thu

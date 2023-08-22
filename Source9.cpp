@@ -1,16 +1,17 @@
 #include "Header1.hpp"
 #include "Header2.hpp"
+#include "Header3.hpp"
 
 bool writeStaffList(string fname) // fname = all_staffs.txt
 {
 	ofstream fp;
 	fp.open(fname, ios::trunc);
-	if (fp.is_open() == false)
+	if (!fp.is_open())
 		return false;
 	else
 	{
 		fp << "No,Staff ID,First name,Last name\n";
-		if (systems.allStaff.head == systems.allStaff.tail && systems.allStaff.head == nullptr)
+		if (systems.allStaff.head == systems.allStaff.tail && !systems.allStaff.head)
 		{
 			fp.close();
 			return false;
@@ -37,13 +38,12 @@ bool readStaffList(string fname)
 		return false;
 	else
 	{	
-		char* container = new char[100];
-		fp.getline(container, '\n');
+		string container = "";
+		getline(fp, container, '\n');
 		systems.allStaff.init();
-		while(!fp.eof())
+		while(getline(fp, container, ','))
 		{
 			Staff a;
-			fp.getline(container, ',');
 			getline(fp, a.id, ',');
 			getline(fp, a.firstName, ',');
 			getline(fp, a.lastName, '\n');
@@ -51,8 +51,6 @@ bool readStaffList(string fname)
 			addLast(systems.allStaff, node);
 		}
 		fp.close();
-		delete[]container;
-		container = nullptr;
 		return true;
 	}
 }
@@ -133,7 +131,7 @@ bool readAllCourses(string fname)
 		getline(fp, container, '\n');
 		for (int i = 0; i < 2; ++i)
 			systems.allCourse[i].init();
-		while (!fp.eof())
+		while (!(fp >> ws).eof())
 		{
 			Course a;
 			getline(fp, container, ',');

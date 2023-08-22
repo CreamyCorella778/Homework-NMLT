@@ -1,5 +1,6 @@
 #include "Header1.hpp"
 #include "Header2.hpp"
+#include "Header3.hpp"
 
 // part 1
 int testing4(string email, Semester currSem) 

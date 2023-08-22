@@ -7,20 +7,21 @@
 //#include "Source9.cpp"
 using namespace std;
 
-struct Date;
 template <class a>
 struct Node;
 template <class T>
 struct LList;
+struct Date;
 struct SchoolYear;
 struct Semester;
-struct Student;
-struct Scoreboard4Class;
 struct Staff;
-union CourseVarType;
 struct Class;
 struct Course;
+struct Student;
 struct Scoreboard;
+struct Scoreboard4Class;
+union CourseVarType;
+struct System;
 
 
 bool loginSystem(string fname, string& email);
@@ -89,6 +90,11 @@ void viewStaff(Staff a);
 
 //----------------------------------------------------------------------
 
+bool readStaffList(string fname);
+
+
+//----------------------------------------------------------------------
+
 int testing1(int &userType, string &email);
 int testing2(string email);
 int testing3(string& email);
@@ -120,16 +126,21 @@ bool task17(Semester currSem);
 bool task18(Semester currSem);
 bool task19(Semester currSem);
 
+//---------------------------------------------------------------------
+
+void main1();
+void main2();
+void main3();
 
 //======================================================================
 
 void initSystems();
 template <class a>
-void addLast(LList<a> l, Node<a>* insert);
+void addLast(LList<a>& l, Node<a>* insert);
 template <class a>
 int countNodes(Node<a>* head);
 template <class a>
-void removeRandomNode(LList<a> l, a data);
+void removeRandomNode(LList<a>& l, a data);
 template <class a>
 Node<a>* findNode(LList<a> l, a data);
 template <class a>

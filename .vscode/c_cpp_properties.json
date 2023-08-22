@@ -6,7 +6,7 @@
         "_DEBUG",
         "UNICODE"
       ],
-      "compilerPath": "C:/msys64/mingw64/bin/gcc.exe",
+      "compilerPath": "C:/msys64/mingw64/bin/gcc",
       "intelliSenseMode": "windows-gcc-x64",
       "browse": {
         "path": [

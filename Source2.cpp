@@ -1,5 +1,6 @@
 #include "Header1.hpp"
 #include "Header2.hpp"
+#include "Header3.hpp"
 
 void getYears(int& yearStart, int& yearEnd)
 {
@@ -198,7 +199,7 @@ bool addStudentsToClass(string fname) // fname = classname.txt
 			getline(fp, stu.firstName, ',');
 			getline(fp, stu.lastName, ',');
 			getline(fp, container, ',');
-			if (stricmp("nam", container.c_str()) == 0)
+			if (!_stricmp("nam", container.c_str()))
 				stu.gender = true;
 			else
 				stu.gender = false;

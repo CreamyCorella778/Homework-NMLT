@@ -1,5 +1,6 @@
 #include "Header1.hpp"
 #include "Header2.hpp"
+#include "Header3.hpp"
 
 /***************************************
 Assume that a semester is divided into 3 equal parts: 

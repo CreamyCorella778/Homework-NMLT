@@ -1,9 +1,11 @@
 #include "Header1.hpp"
 #include "Header2.hpp"
+#include "Header3.hpp"
 
 int main()
 {
-	string email = ""; int userType = 0;
-	cout << testing1(userType, email);
+	main1();
 	return 0;
 }
+
+System systems;

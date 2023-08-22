@@ -1,5 +1,6 @@
 #include "Header1.hpp"
 #include "Header2.hpp"
+#include "Header3.hpp"
 
 // Xem ho so ca nhan & doi mat khau
 int task1(string email)
@@ -10,15 +11,18 @@ int task1(string email)
         cout << "Chon so thu tu tuong ung voi chuc nang: " << endl
             << "1. Xem ho so ca nhan" << endl
             << "2. Doi mat khau" << endl
-            << "Cac so khac. Dang xuat:";
+            << "Cac so khac. Dang xuat: ";
         cin >> func;
         switch (func)
         {
         case 1:
+        {
             printProfileIn4(email);
             break;
+        }
         case 2:
         {
+            cin.ignore();
             string fname = "login.csv.txt";
             changePassword(fname, email);
             break;
