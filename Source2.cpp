@@ -94,7 +94,7 @@ string extractEduProg(string fname) // Assume that the file name part is the cla
 
 SchoolYear extractSchoolYear(string fname) // fname = classname.txt
 {
-	string b = ""; b.assign(fname, 2);
+	string b = ""; b.assign(fname, 0, 2);
 	int c = atoi(b.c_str());
 	if (c >= 77)
 		return createSchoolYear(1900 + c, 1901 + c);
@@ -113,15 +113,15 @@ Class createClass(string cl)
 	Class a;
 	a.eduProgr.assign(extractEduProg(cl));
 	a.year = extractSchoolYear(cl);
-	string no = "";
-	a.no = atoi(no.assign(cl, 1 + a.eduProgr.size(), cl.size() - 2 - a.eduProgr.size()).c_str());
+	string no = ""; int pos_to_copy = cl.find_last_of("ABCDEFGHIJKLMNOPQRSTUVWXYZ") + 1;
+	a.no = atoi(no.assign(cl, pos_to_copy, cl.size() - pos_to_copy).c_str());
 	a.cls.assign(cl);
 	return a;
 }
 
 Class createCLass(string fname)
 {
-	string a = ""; a.assign(fname, fname.find_last_of('.') + 1);
+	string a = ""; a.assign(fname, 0, fname.find_last_of('.'));
 	return createClass(a);
 }
 
@@ -153,6 +153,7 @@ Date getNS(string birth)
 	return ket_qua;
 }
 
+// add a student to class in systems and write the student to the respective csv file
 bool addStudentToClass(Student stu, Class &cl) // fname = classname.txt
 {
 	string fname = cl.cls + ".txt";
@@ -167,7 +168,8 @@ bool addStudentToClass(Student stu, Class &cl) // fname = classname.txt
 		countNoInStudentList(cl.stuList);
 		fp << "\n" << node->data.no << ","
 			<< stu.stuID << ","
-			<< stu.firstName << " " << stu.lastName << ",";
+			<< stu.firstName << "," 
+			<< stu.lastName << ",";
 		if (stu.gender)
 			fp << "nam,";
 		else
@@ -179,6 +181,7 @@ bool addStudentToClass(Student stu, Class &cl) // fname = classname.txt
 	}
 }
 
+// read student lists of a class from csv file
 bool addStudentsToClass(string fname) // fname = classname.txt
 {
 	Node<Class>* node = findCLass(createCLass(fname).cls);
@@ -186,15 +189,15 @@ bool addStudentsToClass(string fname) // fname = classname.txt
 		return false;
 	ifstream fp;
 	fp.open(fname, ios::in);
-	if (fp.is_open() == false)
+	if (!fp.is_open())
 		return false;
 	else
 	{
 		string container = ""; getline(fp, container, '\n');
-		while (!fp.eof())
+		while (getline(fp, container, ','))
 		{
 			Student stu;
-			getline(fp, container, ','); stu.no = atoi(container.c_str());
+			stu.no = atoi(container.c_str());
 			getline(fp, stu.stuID, ',');
 			getline(fp, stu.firstName, ',');
 			getline(fp, stu.lastName, ',');
@@ -214,3 +217,35 @@ bool addStudentsToClass(string fname) // fname = classname.txt
 	}
 }
 
+bool writeStudentsInClass(string fname) // fname = classname.txt
+{
+	Node<Class>* node = findCLass(createCLass(fname).cls);
+	if (!node || (node->data.stuList.head == node->data.stuList.tail && !node->data.stuList.head))
+		return false;
+	countNoInStudentList(node->data.stuList);
+	ofstream fp;
+	fp.open(fname, ios::trunc);
+	if (!fp.is_open())
+		return false;
+	else
+	{
+		fp << "No,Student ID,First name,Last name,Gender,Date of birth,Social ID\n";
+		for (Node<Student>* i = node->data.stuList.head; i; i = i->next)
+		{
+			fp << i->data.no << ","
+			<< i->data.stuID << ","
+			<< i->data.firstName << "," 
+			<< i->data.lastName << ",";
+			if (i->data.gender)
+				fp << "nam,";
+			else
+				fp << "nu,";
+			fp << i->data.birth.day << "/" << i->data.birth.month << "/" << i->data.birth.year << ","
+				<< i->data.socialID;
+			if (!i->next)
+				fp << endl;
+		}
+		fp.close();
+		return true;
+	}
+}

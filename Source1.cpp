@@ -6,12 +6,12 @@ int countLinesInCSV(string fname)
 {
 	ifstream fp;
 	fp.open(fname, ios::in);
-	if (fp.is_open() == false)
+	if (!fp.is_open())
 		return -1;
 	else
 	{
-		int count = 0; string a = "";
-		while (getline(fp, a))
+		int count = 0; string line = "";
+		while (getline(fp, line))
 			count++;
 		fp.close();
 		return count;
@@ -23,7 +23,7 @@ bool readLoginIn4(string fname, string** &container, int& col, int& row)
 	row = countLinesInCSV(fname); col = 2;
 	ifstream fp;
 	fp.open(fname, ios::in);
-	if (fp.is_open() == false)
+	if (!fp.is_open())
 		return false;
 	else
 	{
@@ -211,11 +211,6 @@ void printProfileIn4(string email)
 		cout << "Loi email khong hop le." << endl;
 }
 
-void logout() // skip for now cuz of no idea and main func dependance.
-{
-
-}
-
 // login & manage profile
 int testing1(int &userType, string &email)
 {
@@ -235,6 +230,7 @@ int testing1(int &userType, string &email)
 void main1()
 {
 	string email = ""; int userType = 0;
+	initSystems();
 	cout << readStaffList("all_staffs.txt") << endl;
 	cout << testing1(userType, email);
 }

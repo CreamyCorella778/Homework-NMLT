@@ -91,6 +91,16 @@ void viewStaff(Staff a);
 //----------------------------------------------------------------------
 
 bool readStaffList(string fname);
+bool readAllSemester(string fname);
+bool readAllClasses(string fname);
+bool readAllCoursesOfStudent(string fname);
+bool readAllCourses(string fname);
+
+
+//----------------------------------------------------------------------
+
+bool writeAllCoursesOfStudent(string fname);
+bool writeAllCourses(string fname);
 
 
 //----------------------------------------------------------------------
@@ -163,7 +173,6 @@ void countNoInStudentList(LList<Student>& l);
 bool writeAllCourses(string fname);
 Node<Class>* findCLass(string name);
 Node<Student>* findStudent(string id);
-bool writeAllCoursesOfStudent(string fname);
 Node<Semester>* identifySemesterByToday(Date today);
 int compareDate(Date dey1, Date dey2) ;
 SchoolYear extractSchoolYear(string fname);

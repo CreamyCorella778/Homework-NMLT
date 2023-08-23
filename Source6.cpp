@@ -23,6 +23,7 @@ void viewStudent(Student a)
 	cout << ", gioi tinh " << (a.gender ? "nam " : "nu ");
 	cout << ", ngay sinh: " << a.birth.day << "/" << a.birth.month << "/" << a.birth.year;
 	cout << ", ma so can cuoc cong dan la " << a.socialID;
+	cout << endl;
 }
 
 void viewStudents(Class a)

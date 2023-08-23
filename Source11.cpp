@@ -9,34 +9,26 @@ Date getTodayIn4()
 	return getNS(temp);
 }
 
-bool writeAllSemester(string fname) // fname = all_semester.txt // fname might be changed due to various reasons
+bool writeAllSemester(string fname) // fname = all_semester.txt // fname might be changed unexpectedly
 {
 	ofstream fp;
 	fp.open(fname, ios::trunc);
-	if (fp.is_open() == false)
+	if (!fp.is_open() || (systems.allSemester.head == systems.allSemester.tail && systems.allSemester.head == nullptr))
 		return false;
 	else
 	{
 		fp << "Semester number,School year,Start date,End date\n";
-		if (systems.allSemester.head == systems.allSemester.tail && systems.allSemester.head == nullptr)
+		for (Node<Semester>* i = systems.allSemester.head; i != nullptr; i = i->next)
 		{
-			fp.close();
-			return false;
+			fp << i->data.number << ","
+				<< i->data.sy.schYr << ","
+				<< i->data.startDate.day << "/" << i->data.startDate.month << "/" << i->data.startDate.year << ","
+				<< i->data.endDate.day << "/" << i->data.endDate.month << "/" << i->data.endDate.year;
+			if (!i->next)
+				fp << "\n";
 		}
-		else
-		{
-			for (Node<Semester>* i = systems.allSemester.head; i != nullptr; i = i->next)
-			{
-				fp << i->data.number << ","
-					<< i->data.sy.schYr << ","
-					<< i->data.startDate.day << "/" << i->data.startDate.month << "/" << i->data.startDate.year << ","
-					<< i->data.endDate.day << "/" << i->data.endDate.month << "/" << i->data.endDate.year;
-				if (i->next != nullptr)
-					fp << "\n";
-			}
-			fp.close();
-			return true;
-		}
+		fp.close();
+		return true;
 	}
 }
 
@@ -51,11 +43,11 @@ bool readAllSemester(string fname)
 		string container = "";
 		getline(fp, container, '\n');
 		systems.allSemester.init();
-		while (!fp.eof())
+		while (getline(fp, container, ','))
 		{
 			Semester a;
-			getline(fp, container, ','); a.number = atoi(container.c_str());
-			getline(fp, a.sy.schYr, ','); container = "all_courses_" + a.sy.schYr; a.sy = extractSchoolYear(container);
+			a.number = atoi(container.c_str());
+			getline(fp, a.sy.schYr, ','); a.sy = createSchoolYear(a.sy.schYr);
 			getline(fp, container, ','); a.startDate = getNS(container);
 			getline(fp, container, '\n'); a.endDate = getNS(container);
 			Node<Semester>* node = new Node<Semester>; node->init(a);

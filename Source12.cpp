@@ -38,7 +38,7 @@ int testing2(string email)
 		case 3:
 		{
 			task1(email);
-			break;
+			return 0;
 		}
 		}
 	} while (1 <= func && func <= 3);
@@ -47,6 +47,13 @@ int testing2(string email)
 
 void main2()
 {
-	string email = "22120064@student.hcmuf.edu.vn"; 
+	string email = "21098765@student.hcmuf.edu.vn"; 
+	initSystems();
+	cout << readStaffList("all_staffs.txt") << endl;
+	cout << readAllSemester("all_semester.txt") << endl;
+	cout << readAllClasses("all_classes_2022-2023.txt") << endl;
+	cout << addStudentsToClass("22CTT2.txt") << endl;
+	cout << readAllCourses("all_courses_2022-2023.txt") << endl;
+	cout << readAllCoursesOfStudent("21098765.txt") << endl;
 	cout << testing2(email);
 }

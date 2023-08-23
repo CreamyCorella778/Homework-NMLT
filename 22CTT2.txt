@@ -1,4 +1,4 @@
-no,student_id,first_name,last_name,gender,date_of_birth,social_id
+No,Student ID,First name,Last name,Gender,Date of birth,Social ID
 1,12345678,nguyen,thi b,nam,01/01/2000,1234567890123
 2,98765432,tran,thi d,nu,02/02/2001,456789012345
 3,76543210,le,thi f,nam,03/03/2002,654321098765

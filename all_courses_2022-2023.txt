@@ -1,0 +1,2 @@
+No,ID,Course name,Teacher's id,Class,Credits,Capacity,Day in week,Session,Semester number
+1,BAA000012,Nhap mon nhap trinh,22120004,22CTT2,4,120,4,2,3,9.0,7.0,8.0,8.0

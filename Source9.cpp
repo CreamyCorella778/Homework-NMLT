@@ -92,7 +92,7 @@ bool writeAllCourses(string fname) // fname = all_courses_schoolyear.txt
 		fp << "No,ID,Course name,Teacher's id,Class,Credits,Capacity,Day in week,Session,Semester number\n";
 		bool written = false;
 		for (int index = 0; index < 3; ++index)
-			if (systems.allCourse[index].head == systems.allCourse[index].tail && systems.allCourse[index].head == nullptr)
+			if (systems.allCourse[index].head == systems.allCourse[index].tail && !systems.allCourse[index].head)
 				continue;
 			else
 			{
@@ -129,17 +129,16 @@ bool readAllCourses(string fname)
 	{
 		string container = "";
 		getline(fp, container, '\n');
-		for (int i = 0; i < 2; ++i)
+		for (int i = 0; i < 3; ++i)
 			systems.allCourse[i].init();
-		while (!(fp >> ws).eof())
+		while (getline(fp, container, ','))
 		{
 			Course a;
-			getline(fp, container, ',');
 			getline(fp, a.id, ',');
 			getline(fp, a.courseName, ',');
 			getline(fp, container, ',');
 			Node<Staff>* node = findStaff(container);
-			if (node == nullptr)
+			if (!node)
 			{
 				fp.close();
 				return false;
@@ -148,7 +147,7 @@ bool readAllCourses(string fname)
 				a.teacher = node->data;
 			getline(fp, container, ',');
 			Node<Class>* nodE = findCLass(container);
-			if (nodE == nullptr)
+			if (!nodE)
 			{
 				fp.close();
 				return false;
@@ -173,28 +172,21 @@ bool writeAllClasses(string fname) // fname = all_classes_schoolyear.txt
 {
 	ofstream fp;
 	fp.open(fname, ios::trunc);
-	if (!fp.is_open())
+	if (!fp.is_open() || (systems.allClass.head == systems.allClass.tail && !systems.allClass.head))
 		return false;
 	else
 	{
 		fp << "No,Class name\n";
-		bool written = false;
-		if (systems.allClass.head == systems.allClass.tail && systems.allClass.head == nullptr)
-			written = false;
-		else
+		int j = 1;
+		for (Node<Class>* i = systems.allClass.head; i != nullptr; i = i->next, ++j)
 		{
-			int j = 1;
-			for (Node<Class>* i = systems.allClass.head; i != nullptr; i = i->next, ++j)
-			{
-				fp << j << ","
-					<< i->data.cls << ",";
-				if (!(i->next == nullptr))
-					fp << "\n";
-			}
-			written = true;
+			fp << j << ","
+				<< i->data.cls << ",";
+			if (!i->next)
+				fp << "\n";
 		}
 		fp.close();
-		return written;
+		return true;
 	}
 }
 
@@ -209,10 +201,9 @@ bool readAllClasses(string fname)
 		string container = "";
 		getline(fp, container, '\n');
 		systems.allClass.init();
-		while (!fp.eof())
+		while (getline(fp, container, ','))
 		{
 			Class a; string container2 = "";
-			getline(fp, container, ',');
 			getline(fp, container2, '\n');
 			a = createClass(container2);
 			Node<Class>* node = new Node<Class>; node->init(a);
@@ -227,7 +218,7 @@ bool writeAllCoursesByStaff(string fname) // fname = staffid.txt
 {
 	string staID = ""; staID.assign(fname, fname.find_last_of('.') + 1);
 	Node<Staff>* node = findStaff(staID);
-	if (node == nullptr)
+	if (!node || (node->data.courses.head == node->data.courses.tail && !node->data.courses.head))
 		return false;
 	ofstream fp;
 	fp.open(fname, ios::trunc);
@@ -236,31 +227,24 @@ bool writeAllCoursesByStaff(string fname) // fname = staffid.txt
 	else
 	{
 		fp << "No,ID,Course name,Teacher's id,Class,Credits,Capacity,Day in week,Session,Semester number\n";
-		bool written = false;
-		if (node->data.courses.head == node->data.courses.tail && node->data.courses.head == nullptr)
-			written = false;
-		else
+		int j = 1;
+		for (Node<Course>* i = node->data.courses.head; i != nullptr; i = i->next, ++j)
 		{
-			int j = 1;
-			for (Node<Course>* i = node->data.courses.head; i != nullptr; i = i->next, ++j)
-			{
-				fp << j << ","
-					<< i->data.id << ","
-					<< i->data.courseName << ","
-					<< i->data.teacher.id << ","
-					<< i->data.lop.cls << ","
-					<< i->data.credits << ","
-					<< i->data.capacity << ","
-					<< i->data.dayInWeek << ","
-					<< i->data.session << ","
-					<< i->data.sem.number;
-				if (!(i->next == nullptr))
-					fp << "\n";
-			}
-			written = true;
+			fp << j << ","
+				<< i->data.id << ","
+				<< i->data.courseName << ","
+				<< i->data.teacher.id << ","
+				<< i->data.lop.cls << ","
+				<< i->data.credits << ","
+				<< i->data.capacity << ","
+				<< i->data.dayInWeek << ","
+				<< i->data.session << ","
+				<< i->data.sem.number;
+			if (!i->next)
+				fp << "\n";
 		}
 		fp.close();
-		return written;
+		return true;
 	}
 }
 

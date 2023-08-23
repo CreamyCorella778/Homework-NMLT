@@ -8,6 +8,8 @@ void initSystems()
 	for (int i = 0; i < 3; ++i)
 		systems.allCourse[i].init();
 	systems.allClass.init();
+	systems.allSemester.init();
+	systems.allStaff.init();
 }
 
 LList<Course> courseAttending(Student stu, Semester sem)
