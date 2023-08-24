@@ -20,7 +20,7 @@ void viewStudent(Student a)
 {
 	cout << "Sinh vien " << a.firstName << " " << a.lastName << " co ma so sinh vien "
 		<< a.stuID;
-	cout << ", gioi tinh " << (a.gender ? "nam " : "nu ");
+	cout << ", gioi tinh " << (a.gender ? "nam" : "nu");
 	cout << ", ngay sinh: " << a.birth.day << "/" << a.birth.month << "/" << a.birth.year;
 	cout << ", ma so can cuoc cong dan la " << a.socialID;
 	cout << endl;

@@ -27,7 +27,7 @@ LList<Course> courseAttending(Student stu, Semester sem)
 
 Node<Course>* findCourse(string courseID, string className, int semNum)
 {
-	for (Node<Course>* i = systems.allCourse[semNum - 1].head; i != nullptr; i = i->next)
+	for (Node<Course>* i = systems.allCourse[semNum - 1].head; i; i = i->next)
 		if (!i->data.id.compare(courseID) && !i->data.lop.cls.compare(className))
 			return i;
 	return nullptr;
@@ -35,33 +35,33 @@ Node<Course>* findCourse(string courseID, string className, int semNum)
 
 Node<Student>* findStudent(string id, Class cl)
 { 
-	for (Node<Student>* i = cl.stuList.head; i != nullptr; i = i->next)
-		if (i->data.stuID.compare(id) == 0)
+	for (Node<Student>* i = cl.stuList.head; i; i = i->next)
+		if (!i->data.stuID.compare(id))
 			return i;
 	return nullptr;
 }
 
 Node<Student>* findStudent(string id)
 {
-	for (Node<Class>* cl = systems.allClass.head; cl != nullptr; cl = cl->next)
-		for (Node<Student>* i = cl->data.stuList.head; i != nullptr; i = i->next)
-			if (i->data.stuID.compare(id) == 0)
+	for (Node<Class>* cl = systems.allClass.head; cl; cl = cl->next)
+		for (Node<Student>* i = cl->data.stuList.head; i; i = i->next)
+			if (!i->data.stuID.compare(id))
 				return i;
 	return nullptr;
 }
 
 Node<Class>* findCLass(string name)
 {
-	for (Node<Class>* i = systems.allClass.head; i != nullptr; i = i->next)
-		if (i->data.cls.compare(name) == 0)
+	for (Node<Class>* i = systems.allClass.head; i; i = i->next)
+		if (!i->data.cls.compare(name))
 			return i;
 	return nullptr;
 }
 
 Node<Staff>* findStaff(string id)
 {
-	for (Node<Staff>* i = systems.allStaff.head; i != nullptr; i = i->next)
-		if (i->data.id.compare(id) == 0)
+	for (Node<Staff>* i = systems.allStaff.head; i; i = i->next)
+		if (!i->data.id.compare(id))
 			return i;
 	return nullptr;
 }

@@ -9,7 +9,8 @@ Part 2 = other
 Part 3 = "the end of a semester"
 ****************************************/
 
-int whenInSemester(Semester sem, Date today) // part 1 = 1, part 2 = 2, part 3 = 3
+// part 1 = 1, part 2 = 2, part 3 = 3
+int whenInSemester(Semester sem, Date today) 
 {
 	Date* parts = divideSemester(sem);
 	for (int i = 0; i < 3; ++i)
@@ -24,7 +25,8 @@ int whenInSemester(Semester sem, Date today) // part 1 = 1, part 2 = 2, part 3 =
 	return -1;
 }
 
-bool whenInSchoolYear(Date today) // true = "the beginning of the school year" (around September), false = otherwise
+// true = "the beginning of the school year" (around September), false = otherwise
+bool whenInSchoolYear(Date today) 
 {
 	return (today.month == 9 || (today.day < 16 && today.month == 10));
 }
@@ -69,6 +71,12 @@ int testing3(string& email)
 
 void main3()
 {
-	string email = "22120064@staff.hcmuf.edu.vn";
+	string email = "21098765@teacher.hcmuf.edu.vn";
+	initSystems();
+	cout << readStaffList("all_staffs.txt") << endl;
+	cout << readAllSemester("all_semester.txt") << endl;
+	cout << readAllClasses("all_classes_2022-2023.txt") << endl;
+	cout << readAllCourses("all_courses_2022-2023.txt") << endl;
+	cout << addStudentsToClass("22CTT2.txt") << endl;
 	cout << testing3(email);
 }

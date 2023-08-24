@@ -4,7 +4,7 @@
 
 int main()
 {
-	main2();
+	main3();
 	return 0;
 }
 

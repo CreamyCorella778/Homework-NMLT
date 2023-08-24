@@ -50,6 +50,11 @@ bool task3(Semester currSem)
 {
     Course cour; 
     getCourseIn4(cour, currSem);
+    if (!cour.teacher.id.compare("not found"))
+    {
+        cout << "Loi he thong. Chuc ban may man lan sau." << endl;
+        return false; // neu ko tim dc giao vien -> khong tao dc khoa hoc
+    }
     if (!addCoursetoSemester(cour, currSem))
     {
         cout << "Loi he thong. Chuc ban may man lan sau." << endl;
@@ -87,7 +92,7 @@ bool task4(Semester currSem)
 {
     string fname = ""; Node<Course>* course = task3_5(currSem);
     if (!course) return false;
-    cout << "Nhap ten tep can nhap danh sach hoc sinh vao: "; cin >> fname;
+    fname = course->data.id + "_" + course->data.lop.cls + "_" + to_string(course->data.sem.number) + ".txt";
     if (!addStudentsToCourse(fname, course->data))
     {
         cout << "Loi he thong. Chuc ban may man lan sau." << endl;
@@ -113,8 +118,13 @@ bool task5(Semester currSem)
     do
     {
         getIn4toUpdateCourse(cou, cls, option);
+        cin.ignore();
         Node<Course>* course = task3_5(currSem);
-        if (!course) done = false;
+        if (!course)
+        {
+            done = false;
+            break;
+        }
         done = updateCourseIn4(course->data, option, getIn4toUpdateCourse(option));
         --so_lan;
         if (!done)
@@ -158,16 +168,32 @@ bool task6(Semester currSem)
     }
 }
 
+// tim hoc sinh trong khoa hoc 
+Node<Student>* task6_5(Course course)
+{
+    string id = "";
+    cout << "Nhap ma so hoc sinh cua hoc sinh can duoi: "; cin >> id;
+    for (Node<Student>* i = course.stuList.head; i; i = i->next)
+        if (!i->data.stuID.compare(id))
+        {
+            cout << "Da tim thay hoc sinh." << endl;
+            return i;
+        }
+    cout << "Khong tim thay hoc sinh. Chuc ban may man lan sau." << endl;
+    return nullptr;
+}
+
 // duoi mot hoc snh ra khoi khoa hoc
 bool task7(Semester currSem)
 {
-    cout << "Phan lay thong tin hoc sinh can duoi: " << endl;
-    Student stu;
-    getStudentIn4(stu);
     cout << "Phan lay thong tin cua khoa hoc can duoi hoc sinh: " << endl;
     Node<Course>* course = task3_5(currSem);
     if (!course) return false;
-    if (!removeStudentFromCourse(stu, course->data))
+    cout << "Phan lay thong tin hoc sinh can duoi: " << endl;
+    Node<Student>* node = task6_5(course->data);
+    if (!node) return false;
+    Student student = node->data;
+    if (!removeStudentFromCourse(student, course->data))
     {
         cout << "Loi he thong. Chuc ban may man lan sau." << endl;
         return false;
@@ -180,7 +206,7 @@ bool task7(Semester currSem)
         << "1. Co                        2. Khong: ";
         cin >> option;
         if (option == 1)
-            viewStudent(stu);
+            viewStudent(student);
         return true;
     }
 }
@@ -191,6 +217,7 @@ bool task8(Semester currSem)
     cout << "Phan lay thong tin cua khoa hoc can xoa: " << endl;
     Node<Course>* course = task3_5(currSem);
     if (!course) return false;
+    Course deleted = course->data;
     if (!removeCourse(course->data, currSem))
     {
         cout << "Loi he thong. Chuc ban may man lan sau." << endl;
@@ -204,7 +231,7 @@ bool task8(Semester currSem)
         << "1. Co                        2. Khong: ";
         cin >> option;
         if (option == 1)
-            viewCourse(course->data);
+            viewCourse(deleted);
         return true;
     }
 }
@@ -280,7 +307,7 @@ bool task13()
     Student stu;
     getStudentIn4(stu);
     string cls = "";  int option = 0;
-    cout << "Nhap ten lop: "; cin >> cls;
+    cout << "Nhap ten lop: "; getline(cin, cls);
     Node<Class>* node = findCLass(cls);
     if (!node)
     {
@@ -534,4 +561,16 @@ bool task19(Semester currSem)
     }
     viewScoreBoards(node->data, currSem);
     return true;
+}
+
+// cac chuc nang khac cho testing5, vì dau nam hoc cung la dau hoc ki 1
+bool task20(string email)
+{
+    int option = 0;
+    cout << "Chon so thu tu tuong ung voi chuc nang:" << endl
+    << "0. Tao mot hoc ky moi." << endl
+    << "Cac so khac. Da tao hoc ki san nen chon hoc ki hien tai: "; cin >> option;
+    if (!option) 
+        task2();
+	return !testing4(email, systems.allSemester.tail->data) ? true : false;
 }

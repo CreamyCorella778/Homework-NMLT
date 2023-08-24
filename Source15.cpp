@@ -40,7 +40,7 @@ int testing5(string email, SchoolYear &sy)
 		}
 		case 5:
 		{
-			task1(email);
+			no_good = !task20(email);
 			break;
 		}
 		}

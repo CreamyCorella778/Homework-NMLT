@@ -8,7 +8,7 @@ void getSemesterIn4(int& no, SchoolYear& sy, Date& sd, Date& ed)
 	int ys = 0, ye = 0;
 	getYears(ys, ye);
 	sy = createSchoolYear(ys, ye);
-	string container = "";
+	string container = ""; cin.ignore();
 	cout << "Nhap ngay bat dau: "; getline(cin, container);
 	sd = getNS(container);
 	cout << "Nhap ngay ket thuc: "; getline(cin, container);
@@ -45,53 +45,80 @@ string generateFileName(Course c, Class cl, Semester sem)
 	fname += c.id; fname.push_back('_');
 	fname += cl.cls; fname.push_back('_');
 	fname += to_string(sem.number);
+	fname += ".txt";
 	return fname;
 }
 
 void getCourseIn4(Course &a, Semester sem)
 {
-	cout << "Nhap ma hoc phan: "; getline(cin, a.id);
-	cout << "Nhap ten hoc phan: "; getline(cin, a.courseName);
 	string container = ""; int so_lan = 5;
-	cout << "Nhap ma so giao vien chinh day: "; getline(cin, container);
-	Node<Course>* i = systems.allCourse[sem.number - 1].head;
-	for (; i; i = i->next)
-		if (i->data.teacher.id.compare(container) == 0)
-			a.teacher = i->data.teacher;
+	cout << "Nhap ma khoa hoc: "; getline(cin, a.id);
+	cout << "Nhap ten khoa hoc: "; getline(cin, a.courseName);
+	Node<Staff>* node = new Node<Staff>;
 	do
 	{
-		cout << "Ban co " << so_lan << "nhap. Nhap lai ma so giao vien chinh day : "; getline(cin, container);
-		i = systems.allCourse[sem.number - 1].head;
-		for (; i; i = i->next)
-			if (!i->data.teacher.id.compare(container))
-				a.teacher = i->data.teacher;
-		so_lan -= 1;
-	} while (!i && so_lan);
+		cout << "Nhap ma so giao vien day chinh: "; getline(cin, container);
+		node = findStaff(container);
+		--so_lan;
+		if (!node)
+			cout << "Ban con " << so_lan << " lan nhap. ";
+	} while (!node && so_lan);
+	if (!node)
+	{
+		cout << "Khong tim thay giao vien. Chuc ban may man lan sau." << endl;
+		a.teacher.id.assign("not found");
+		return;
+	}
+	else
+		a.teacher = node->data;
 	cout << "Nhap so tin chi: "; cin >> a.credits;
 	cout << "Nhap so hoc sinh toi da trong khoa hoc: "; cin >> a.capacity;
-	cout << "Nhap ten lop cua hoc phan: "; getline(cin, container); a.lop = createClass(container);
-	cout << "Nhap thu trong tuan cua hoc phan, tu thu 2 den thu 8 (chu nhat): "; cin >> a.dayInWeek;
-	cout << "Nhap tiet hoc trong ngay cua hoc phan:" << endl
+	cin.ignore();
+	cout << "Nhap ten lop cua khoa hoc: "; getline(cin, container); 
+    Node<Class>* n0de = findCLass(container);
+    if (!n0de)
+    {
+        int option = 0;
+		cout << "Khong tim thay lop. Ban co muon tao lop moi voi ten vua roi khong?" << endl
+		<< "Chon so thu tu tuong ung voi lua chon:" << endl
+        << "1. Co                        2. Khong: "; 
+        cin >> option;
+        if (option == 1)
+        {
+            n0de = new Node<Class>;
+            n0de->init(createClass(container));
+            cout << "Tao thanh cong." << endl;
+        }
+        else
+        {
+            cout << "Loi he thong. Chuc ban may man lan sau." << endl;
+            return;
+        }
+    }
+	else
+		a.lop = n0de->data;
+	cout << "Nhap thu trong tuan cua khoa hoc, tu thu 2 den thu 8 (chu nhat): "; cin >> a.dayInWeek;
+	cout << "Nhap tiet hoc trong ngay cua khoa hoc:" << endl
 		<< "tiet 1 bat dau luc 7:30" << endl
 		<< "tiet 2 bat dau luc 9:30" << endl
 		<< "tiet 3 bat dau luc 13:30" << endl
-		<< "tiet 4 bat dau luc 15 30: ";
+		<< "tiet 4 bat dau luc 15:30: ";
 	cin >> a.session;
+	a.sem = sem;
 }
 
 bool addCoursetoSemester(Course a, Semester sem) 
 {
 	Node<Course>* node = new Node<Course>; node->init(a);
 	addLast(systems.allCourse[sem.number - 1], node);
-	string fname = "all_course_" + sem.sy.schYr + ".txt";
+	string fname = "all_courses_" + sem.sy.schYr + ".txt";
 	return writeAllCourses(fname);
 }
 
-
 void getIn4toUpdateCourse(string& courseID, string& cl, int& option)
 {
-	cout << "Nhap ma hoc phan can cap nhat: "; getline(cin ,courseID);
-	cout << "Nhap ten lop hoc cua hoc phan: "; getline(cin, cl);
+	cout << "Nhap ma khoa hoc can cap nhat: "; getline(cin ,courseID);
+	cout << "Nhap ten lop hoc cua khoa hoc: "; getline(cin, cl);
 	do
 	{
 		cout << "Chon so thu tu tuong ung voi truong can cap nhat: " << endl
@@ -254,10 +281,11 @@ void getStudentIn4(Student& a)
 	a.lastName = extractFirstLastName(container)[1];
 	cout << "Nhap ma so sinh vien: "; getline(cin, a.stuID);
 	int i = 0;
-	cout << "Nhap gioi tinh: 1 neu a nam, 0 neu la nu: "; cin >> i;
+	cout << "Nhap gioi tinh: 1 neu la nam, 0 neu la nu: "; cin >> i;
 	a.gender = i == 0 ? false : true;
-	cout << "Nhap ngay thang nam sinh (dang dd/mm/yyyy): "; cin >> container;
+	cout << "Nhap ngay thang nam sinh (co dang dd/mm/yyyy): "; cin >> container;
 	a.birth = getNS(container);
+	cin.ignore();
 	cout << "Nhap so can cuoc cong dan: "; getline(cin, a.socialID);
 }
 
@@ -266,7 +294,7 @@ bool addStudentToCourse(Student st, Course& c) // fname = courseid_classname_sem
 	st.no = countNodes(c.stuList.head) + 1;
 	Node<Student>* node = new Node<Student>; node->init(st);
 	addLast(c.stuList, node);
-	string fname = generateFileName(c, st.cl, c.sem);
+	string fname = generateFileName(c, c.lop, c.sem);
 	ofstream fp;
 	fp.open(fname, ios::app);
 	if (!fp.is_open())
@@ -276,13 +304,14 @@ bool addStudentToCourse(Student st, Course& c) // fname = courseid_classname_sem
 		countNoInStudentList(c.stuList);
 		fp << "\n" << node->data.no << ","
 			<< st.stuID << ","
-			<< st.firstName << " " << st.lastName << ",";
+			<< st.firstName << "," << st.lastName << ",";
 		if (st.gender)
 			fp << "nam,";
 		else
 			fp << "nu,";
 		fp << st.birth.day << "/" << st.birth.month << "/" << st.birth.year << ","
 			<< st.socialID;
+		fp << ",0,0,0,0";
 		fp.close();
 		return true;
 	}
@@ -290,16 +319,27 @@ bool addStudentToCourse(Student st, Course& c) // fname = courseid_classname_sem
 
 bool removeStudentFromCourse(Student st, Course& c)
 {
-	st.no = 0;
-	removeRandomNode(c.stuList, st);
-	string fname = generateFileName(c, st.cl, c.sem);
+	Node<Student>* i = c.stuList.head; bool deleted = false;
+	for (;i; i = i->next)
+		if (!i->data.stuID.compare(st.stuID))
+		{
+			removeRandomNode(c.stuList, i);
+			deleted = true;
+			break;
+		}
+	if (!deleted)
+		return false;
+	string fname = generateFileName(c, c.lop, c.sem);
 	return writeStudentsInCourse(fname, c);
 }
 
 bool removeCourse(Course c, Semester sem)
 {
-	removeRandomNode(systems.allCourse[sem.number - 1], c);
-	string fname = "all_course_" + sem.sy.schYr + ".txt";
+	Node<Course>* node = findCourse(c.id, c.lop.cls, sem.number);
+	if (!node)
+		return false;
+	removeRandomNode(systems.allCourse[sem.number - 1], node);
+	string fname = "all_courses_" + sem.sy.schYr + ".txt";
 	return writeAllCourses(fname);
 }
 

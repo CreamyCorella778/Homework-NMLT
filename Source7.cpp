@@ -11,10 +11,11 @@ bool addStudentsToCourse(string fname, Course &cour)  // fname = courseid_classn
 	else
 	{
 		string container = ""; getline(fp, container, '\n');
-		while (!fp.eof())
+		cour.stuList.init();
+		while (getline(fp, container, ','))
 		{
 			Student stu;
-			getline(fp, container, ','); stu.no = atoi(container.c_str());
+			stu.no = atoi(container.c_str());
 			getline(fp, stu.stuID, ',');
 			getline(fp, stu.firstName, ',');
 			getline(fp, stu.lastName, ',');
@@ -37,6 +38,8 @@ bool addStudentsToCourse(string fname, Course &cour)  // fname = courseid_classn
 
 bool writeStudentsInCourse(string fname, Course cour) // fname = courseid_classname_semnumber.txt
 {
+	if (cour.stuList.head == cour.stuList.tail && !cour.stuList.head)
+		return false;
 	ofstream fp;
 	fp.open(fname, ios::trunc); 
 	if (!fp.is_open())
@@ -44,31 +47,23 @@ bool writeStudentsInCourse(string fname, Course cour) // fname = courseid_classn
 	else
 	{
 		fp << "No,Student ID,First name,Last name,Gender,Date of Birth,SocialID,MidTerm,Final,Other,Total\n";
-		if (cour.stuList.head == cour.stuList.tail && cour.stuList.head == nullptr)
+		for (Node<Student>* i = cour.stuList.head; i; i = i->next)
 		{
-			fp.close();
-			return false;
+			fp << i->data.no << ","
+				<< i->data.stuID << ","
+				<< i->data.firstName << ","
+				<< i->data.lastName << ",";
+			if (i->data.gender)
+				fp << "nam,";
+			else
+				fp << "nu,";
+			fp << i->data.birth.day << "/" << i->data.birth.month << "/" << i->data.birth.year << ","
+				<< i->data.socialID;
+			if (i->next)
+				fp << "\n";
 		}
-		else
-		{
-			for (Node<Student>* i = cour.stuList.head; i != nullptr; i = i->next)
-			{
-				fp << i->data.no << ","
-					<< i->data.stuID << ","
-					<< i->data.firstName << ","
-					<< i->data.lastName << ",";
-				if (i->data.gender)
-					fp << "nam,";
-				else
-					fp << "nu,";
-				fp << i->data.birth.day << "/" << i->data.birth.month << "/" << i->data.birth.year << ","
-					<< i->data.socialID;
-				if (i->next != nullptr)
-					fp << "\n";
-			}
-			fp.close();
-			return true;
-		}
+		fp.close();
+		return true;
 	}
 }
 

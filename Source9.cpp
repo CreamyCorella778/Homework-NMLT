@@ -49,6 +49,7 @@ bool readStaffList(string fname)
 			getline(fp, a.lastName, '\n');
 			Node<Staff>* node = new Node<Staff>; node->init(a);
 			addLast(systems.allStaff, node);
+			node->data.courses.init();
 		}
 		fp.close();
 		return true;
@@ -83,6 +84,12 @@ SchoolYear extractSchoolyear(string fname) // fname = all_courses_schoolyear.txt
 
 bool writeAllCourses(string fname) // fname = all_courses_schoolyear.txt
 {
+	int count_empty = 0;
+	for (int index = 0; index < 3; ++index)
+		if (systems.allCourse[index].head == systems.allCourse[index].tail && !systems.allCourse[index].head)
+			++count_empty;
+	if (count_empty == 3)
+		return false;
 	ofstream fp;
 	fp.open(fname, ios::trunc);
 	if (!fp.is_open())
@@ -90,32 +97,25 @@ bool writeAllCourses(string fname) // fname = all_courses_schoolyear.txt
 	else
 	{
 		fp << "No,ID,Course name,Teacher's id,Class,Credits,Capacity,Day in week,Session,Semester number\n";
-		bool written = false;
+		int j = 1;
 		for (int index = 0; index < 3; ++index)
-			if (systems.allCourse[index].head == systems.allCourse[index].tail && !systems.allCourse[index].head)
-				continue;
-			else
+			for (Node<Course>* i = systems.allCourse[index].head; i; i = i->next, ++j)
 			{
-				int j = 1;
-				for (Node<Course>* i = systems.allCourse[index].head; i != nullptr; i = i->next, ++j)
-				{
-					fp << j << ","
-						<< i->data.id << ","
-						<< i->data.courseName << ","
-						<< i->data.teacher.id << ","
-						<< i->data.lop.cls << ","
-						<< i->data.credits << ","
-						<< i->data.capacity << ","
-						<< i->data.dayInWeek << ","
-						<< i->data.session << ","
-						<< i->data.sem.number;
-					if (!(i->next == nullptr && index == 2))
-						fp << "\n";
-				}
-				written = true;
+				fp << j << ","
+					<< i->data.id << ","
+					<< i->data.courseName << ","
+					<< i->data.teacher.id << ","
+					<< i->data.lop.cls << ","
+					<< i->data.credits << ","
+					<< i->data.capacity << ","
+					<< i->data.dayInWeek << ","
+					<< i->data.session << ","
+					<< i->data.sem.number;
+				if (!(!i->next && index == 2))
+					fp << "\n";
 			}
 		fp.close();
-		return written;
+		return true;
 	}
 }
 

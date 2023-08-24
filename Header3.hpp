@@ -24,14 +24,19 @@ int countNodes(Node<a>* head)
 }
 
 template <class a>
-void removeRandomNode(LList<a>& l, a data)
+void removeRandomNode(LList<a>& l, Node<a>* &i)
 {
-	Node<a>* i = l.head;
-	for (i; !i->data.isEqual(data); i = i->next);
-	Node<a>* i_prev = l.head;
-	for (i_prev; i_prev->next != i; i_prev = i_prev->next);
-	i_prev->next = i->next;
-	i->next = nullptr;
+	if (!i)
+		return;
+	else if (i == l.head)
+		l.head = i->next;
+	else
+	{
+		Node<a>* i_prev = l.head;
+		for (i_prev; i_prev->next != i; i_prev = i_prev->next);
+		i_prev->next = i->next;
+		i->next = nullptr;
+	}
 	delete i;
 	i = nullptr;
 }

@@ -135,6 +135,7 @@ bool task16();
 bool task17(Semester currSem);
 bool task18(Semester currSem);
 bool task19(Semester currSem);
+bool task20(string email);
 
 //---------------------------------------------------------------------
 
