@@ -58,7 +58,7 @@ bool writeStudentsInCourse(string fname, Course cour) // fname = courseid_classn
 			else
 				fp << "nu,";
 			fp << i->data.birth.day << "/" << i->data.birth.month << "/" << i->data.birth.year << ","
-				<< i->data.socialID;
+				<< i->data.socialID << ",0,0,0,0";
 			if (i->next)
 				fp << "\n";
 		}

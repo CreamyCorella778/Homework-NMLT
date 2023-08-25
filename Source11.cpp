@@ -24,7 +24,7 @@ bool writeAllSemester(string fname) // fname = all_semester.txt // fname might b
 				<< i->data.sy.schYr << ","
 				<< i->data.startDate.day << "/" << i->data.startDate.month << "/" << i->data.startDate.year << ","
 				<< i->data.endDate.day << "/" << i->data.endDate.month << "/" << i->data.endDate.year;
-			if (!i->next)
+			if (i->next)
 				fp << "\n";
 		}
 		fp.close();
@@ -165,13 +165,22 @@ Date Reverse_ThuTu(int yyyy, int n)
 Date* divideSemester(Semester sem)
 {
 	Date* parts = new Date[4];
-	int* parts_thutu = divideInto3Parts(ThuTu(sem.startDate), ThuTu(sem.endDate));
-	parts_thutu[1] += ((0 < dayOfWeek(sem.startDate) + 1) && (dayOfWeek(sem.startDate) + 1 < 5)) ? 1 - dayOfWeek(sem.startDate) : 
-		(dayOfWeek(sem.startDate) == 0 ? 1 : 8 - dayOfWeek(sem.startDate));
-	parts_thutu[2] += ((0 < dayOfWeek(sem.startDate) + 1) && (dayOfWeek(sem.startDate) + 1 < 5)) ? 1 - dayOfWeek(sem.endDate) :
-		(dayOfWeek(sem.endDate) == 0 ? 1 : 8 - dayOfWeek(sem.endDate));
+	int thutu_start = ThuTu(sem.startDate),
+		thutu_end = ThuTu(sem.endDate),
+		dayOfW_start = dayOfWeek(sem.startDate),
+		dayOfW_end = dayOfWeek(sem.endDate);
+	int* parts_thutu = divideInto3Parts(thutu_start,
+		thutu_end < thutu_start ? thutu_end + 365 + Check_Nhuan(sem.startDate) : thutu_end);
+	parts_thutu[1] += ((0 < dayOfW_start + 1) && (dayOfW_start + 1 < 5)) ? 
+		1 - dayOfW_start : 
+		(dayOfW_start == 0 ? 1 : 8 - dayOfW_start);
+	parts_thutu[2] += ((0 < dayOfW_start + 1) && (dayOfW_start + 1 < 5)) ? 
+		1 - dayOfW_end :
+		(dayOfW_end == 0 ? 1 : 8 - dayOfW_end);
 	for (int i = 0; i < 4; ++i)
-		parts[i] = Reverse_ThuTu(sem.startDate.year, parts_thutu[i]);
+		parts[i] = Reverse_ThuTu(sem.startDate.year, 
+			parts_thutu[i] > 365 + Check_Nhuan(sem.startDate) ? 
+			parts_thutu[i] - 365 - Check_Nhuan(sem.startDate) : parts_thutu[i]);
 	return parts;
 }
 

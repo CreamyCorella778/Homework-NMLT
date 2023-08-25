@@ -16,6 +16,7 @@ int testing7(string email, Semester currSem)
 			<< "5. Cac chuc nang khac" << endl
 			<< "Cac so khac. Dang xuat: ";
 		cin >> func;
+		cin.ignore();
 		switch (func)
 		{
 		case 1:

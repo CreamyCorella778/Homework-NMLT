@@ -208,6 +208,7 @@ bool readAllClasses(string fname)
 			a = createClass(container2);
 			Node<Class>* node = new Node<Class>; node->init(a);
 			addLast(systems.allClass, node);
+			node->data.stuList.init();
 		}
 		fp.close();
 		return true;

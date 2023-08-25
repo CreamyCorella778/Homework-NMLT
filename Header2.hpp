@@ -101,7 +101,7 @@ bool readAllCourses(string fname);
 
 bool writeAllCoursesOfStudent(string fname);
 bool writeAllCourses(string fname);
-
+bool writeAllSemester(string fname);
 
 //----------------------------------------------------------------------
 

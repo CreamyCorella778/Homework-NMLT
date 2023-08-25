@@ -71,7 +71,7 @@ int testing3(string& email)
 
 void main3()
 {
-	string email = "21098765@teacher.hcmuf.edu.vn";
+	string email = "22120004@teacher.hcmuf.edu.vn";
 	initSystems();
 	cout << readStaffList("all_staffs.txt") << endl;
 	cout << readAllSemester("all_semester.txt") << endl;

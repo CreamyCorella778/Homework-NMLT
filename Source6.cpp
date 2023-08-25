@@ -4,13 +4,15 @@
 
 void viewClasses()
 {
-	for (Node<Class>* i = systems.allClass.head; i != nullptr; i = i->next)
+	for (Node<Class>* i = systems.allClass.head; ; i = i->next)
 	{
 		cout << i->data.cls;
-		if (i->next != nullptr && i->data.eduProgr.compare(i->next->data.eduProgr) != 0)
-			cout << endl;
-		else
+		if (!i->next)
+			break;
+		else if (!i->data.eduProgr.compare(i->next->data.eduProgr))
 			cout << ", ";
+		else
+			cout << endl;
 	}
 	cout << endl << endl;
 }

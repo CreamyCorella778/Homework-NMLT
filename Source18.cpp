@@ -43,6 +43,7 @@ void task2()
     viewSemester(curr);
     Node<Semester>* node = new Node<Semester>; node->init(curr);
     addLast(systems.allSemester, node);
+    writeAllSemester("all_semester.txt");
 }
 
 // tao mot khoa hoc moi
@@ -258,6 +259,7 @@ bool task9()
             cin >> option;
             if (option == 1)
                 cout << "Lop moi them la: " << node->data.cls;
+            node->data.stuList.init();
             return true;
         }
         else
@@ -296,9 +298,25 @@ void task12(SchoolYear &sy)
     string eduProgram = ""; int start = 0, end = 0;
     getClassIn4(sy, eduProgram, start, end);
     Class* classes = createClasses(sy, eduProgram, start, end);
-    cout << "Cac lop vua duoc tao la: " << endl;
-    for (int i = 0; i < end - start + 1; ++i)
-        cout << classes[i].cls << endl;
+    if (!classes)
+    {
+        cout << "Tao lop that bai do sai chuong trinh hoc. Chuc ban may man lan sau." << endl;
+        return;
+    }
+    int option = 0;
+    cout << "Tao thanh cong. Ban co muon xem cac lop moi tao khong?" << endl
+    << "Chon so thu tu tuong ung voi lua chon:" << endl
+    << "1. Co                        2. Khong: ";
+    cin >> option;
+    if (option == 1)
+    {
+        cout << "Cac lop vua duoc tao la: " << endl;
+        for (int i = 0; i < end - start + 1; ++i)
+        {
+            cout << classes[i].cls << endl;
+            classes[i].stuList.init();
+        }
+    }
 }
 
 // them hoc sinh vao lop tu ban phim
@@ -307,12 +325,12 @@ bool task13()
     Student stu;
     getStudentIn4(stu);
     string cls = "";  int option = 0;
-    cout << "Nhap ten lop: "; getline(cin, cls);
+    cout << "Nhap ten lop cua hoc sinh: "; getline(cin, cls);
     Node<Class>* node = findCLass(cls);
     if (!node)
     {
         cout << "Ban co muon tao lop moi voi ten vua roi khong? Chon so thu tu tuong ung voi lua chon: " << endl
-            << "1. Co                                          2. Khong: "; 
+            << "1. Co                                                                        2. Khong: "; 
         cin >> option;
         if (option == 1)
         {
@@ -324,6 +342,7 @@ bool task13()
             cin >> option;
             if (option == 1)
                 cout << "Lop moi them la: " << node->data.cls;
+            node->data.stuList.init();
             return true;
         }
         else
@@ -381,8 +400,10 @@ bool task15(Semester currSem)
 {
     cout << "Phan lay thong tin cua khoa hoc: " << endl;
     Node<Course>* course = task3_5(currSem);
-	string fname = course->data.id + "_" + course->data.lop.cls + "_" + to_string(currSem.number) + ".txt";
+	string fname1 = course->data.id + "_" + course->data.lop.cls + "_" + to_string(currSem.number) + ".txt"; 
+    string fname = ""; cout << "Nhap ten tep can xuat: "; getline(cin, fname); 
     if (!course) return false;
+    addStudentsToCourse(fname1, course->data);
     if (!writeStudentsInCourse(fname, course->data))
     {
         cout << "Loi he thong. Chuc ban may man lan sau." << endl;

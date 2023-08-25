@@ -30,16 +30,39 @@ SchoolYear createSchoolYear(string schy)
 
 void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end)
 {
-	int year = 0, n = 0;
-	cout << "Nhap nam nhap hoc cua hoc sinh nam nay: "; cin >> year;
-	sy = createSchoolYear(year, year + 1);
-	cout << "Chon so thu tu tuong ung voi loai chuong trinh day hoc: " << endl
-		<< "1. APCS" << endl
-		<< "2. CLC" << endl
-		<< "3. Viet-Phap" << endl
-		<< "4. Chuan, dai tra" << endl
-		<< "5. Tien tien, de an" << endl;
+	int times = 0, n = 0;
+	cout << "Ban muon su dung nam hoc hien tai hay tao nam hoc moi cho cac lop nay?" << endl
+	<< "Chon so thu tu tuong ung voi lua chon:" << endl
+	<< "1. Tao moi     Cac so khac. De nguyen: ";
 	cin >> n;
+	if (n == 1)
+	{
+		int year = 0;
+		cout << "Nhap nam nhap hoc cua hoc sinh nam nay: "; cin >> year;
+		sy = createSchoolYear(year, year + 1);
+	}
+	do
+	{
+		cout << "Chon so thu tu tuong ung voi chuong trinh hoc:" << endl
+		<< "1. APCS" << endl
+		<< "2. Chat luong cao" << endl
+		<< "3. Viet-Phap" << endl
+		<< "4. Viet-Nhat" << endl
+		<< "5. Chuan, dai tra" << endl
+		<< "6. Tien tien, de an" << endl
+		<< "7. Lien thong dai hoc" << endl
+		<< "8. Hoan chinh dai hoc" << endl
+		<< "9. Cao dang: "; cin >> n;
+		--times;
+		if (n > 9 || n < 1)
+			cout << "Nhap sai roi. Ban con " << times << " lan nhap." << endl;
+	} while ((n > 9 || n < 1) && times > 0);
+	if (n > 9 || n < 1)
+	{
+		cout << "Nhap khong hop le. Chuc ban may man lan sau." << endl;
+		eduProg.assign("invalid");
+		return;
+	}
 	switch (n)
 	{
 	case 1:
@@ -52,14 +75,23 @@ void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end)
 		eduProg.assign("VP");
 		break;
 	case 4:
-		eduProg.assign("CTT");
+		eduProg.assign("VN");
 		break;
 	case 5:
-		eduProg.assign("DA");
+		eduProg.assign("CTT");
 		break;
-	default:
-		cout << "Nhap sai roi. Chuc ban may man lan sau.";
-		return;
+	case 6:
+		eduProg.assign("CNS");
+		break;
+	case 7:
+		eduProg.assign("B");
+		break;
+	case 8:
+		eduProg.assign("HCB");
+		break;
+	case 9:
+		eduProg.assign("CD");
+		break;
 	}
 	cout << "So thu tu cua lop bat dau tu dau?:"; cin >> start;
 	cout << "Can tao bao nhieu lop?: "; cin >> end;
@@ -68,6 +100,8 @@ void getClassIn4(SchoolYear& sy, string& eduProg, int& start, int& end)
 
 Class* createClasses(SchoolYear sy, string eduProg, int start, int end)
 {
+	if (!eduProg.compare("invalid"))
+		return nullptr;
 	Class* a = new Class[end - start + 1];
 	for (int i = 0; i < end - start + 1; ++i)
 	{
@@ -122,7 +156,8 @@ Class createClass(string cl)
 Class createCLass(string fname)
 {
 	string a = ""; a.assign(fname, 0, fname.find_last_of('.'));
-	return createClass(a);
+	Class lop = createClass(a);
+	return lop;
 }
 
 Date getNS(string birth) 
