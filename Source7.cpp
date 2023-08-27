@@ -30,6 +30,7 @@ bool addStudentsToCourse(string fname, Course &cour)  // fname = courseid_classn
 			getline(fp, container, '\n');
 			Node<Student>* node = new Node<Student>; node->init(stu);
 			addLast(cour.stuList, node);
+			node->data.marks.init();
 		}
 		fp.close();
 		return true;
@@ -82,34 +83,38 @@ bool readScoreBoard(string fname) // fname = courseid_classname_semnumber.txt
 	{
 		string container = "";
 		getline(fp, container, '\n');
-		while (!fp.eof())
+		while (getline(fp, container, ','))
 		{
-			Scoreboard a; Node<Course>* cour = findCourse(in4[0], in4[1], atoi(in4[2].c_str()));
-			if (!cour)
+			Scoreboard a;
+			a.course = c->data;
+			getline(fp, a.student.stuID, ',');
+			Node<Student>* n0de = c->data.stuList.head;
+			for (; n0de && n0de->data.stuID.compare(a.student.stuID); n0de = n0de->next);
+			if (!n0de)
 			{
 				fp.close();
-				break;
 				return false;
 			}
-			a.course = cour->data;
-			getline(fp, container, ','); a.student.no = atoi(container.c_str());
-			getline(fp, a.student.stuID, ',');
-			getline(fp, a.student.firstName, ',');
-			getline(fp, a.student.lastName, ',');
-			getline(fp, container, ',');
-			if (!_stricmp("nam", container.c_str()))
-				a.student.gender = true;
 			else
-				a.student.gender = false;
-			getline(fp, container, ',');
-			a.student.birth = getNS(container);
-			getline(fp, a.student.socialID, ',');
+				a.student = n0de->data;
+			for (int i = 0; i < 5; ++i)
+				getline(fp, container, ',');
 			getline(fp, container, ','); a.midTerm = atof(container.c_str());
 			getline(fp, container, ','); a.Final = atof(container.c_str());
 			getline(fp, container, ','); a.Other = atof(container.c_str());
 			getline(fp, container, '\n'); a.Total = atof(container.c_str());
 			Node<Scoreboard>* node = new Node<Scoreboard>; node->init(a);
 			addLast(c->data.score, node);
+			Node<Scoreboard>* noDe = n0de->data.marks.head;
+			for (; noDe && noDe->data.course.id.compare(c->data.id); noDe = noDe->next)
+				continue;
+			if (!noDe)
+			{
+				noDe = new Node<Scoreboard>; noDe->init(a);
+				addLast(n0de->data.marks, noDe);
+			}
+			else
+				noDe->data = a;
 		}
 		fp.close();
 		return true;

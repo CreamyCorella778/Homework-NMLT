@@ -73,13 +73,9 @@ int findSecondOccurrenceOfChar(const char* str, char c)
 SchoolYear extractSchoolyear(string fname) // fname = all_courses_schoolyear.txt
 {
 	string res = ""; int startPoint = findSecondOccurrenceOfChar(fname.c_str(), '_') + 1;
-	for (int i = startPoint; i - startPoint < 2; ++i)
+	for (int i = startPoint; fname[i] != '.'; ++i)
 		res.push_back(fname[i]);
-	int c = atoi(res.c_str());
-	if (c >= 77)
-		return createSchoolYear(1900 + c, 1901 + c);
-	else
-		return createSchoolYear(2000 + c, 2001 + c);
+	return createSchoolYear(res);
 }
 
 bool writeAllCourses(string fname) // fname = all_courses_schoolyear.txt
@@ -160,6 +156,9 @@ bool readAllCourses(string fname)
 			getline(fp, container, ','); a.session = atoi(container.c_str());
 			getline(fp, container, '\n'); a.sem.number = atoi(container.c_str());
 			a.sem.sy = extractSchoolyear(fname);
+			for (Node<Semester>* i = systems.allSemester.head; i; i = i->next)
+				if (i->data.number == a.sem.number && i->data.sy.isEqual(a.sem.sy))
+					a.sem = i->data;
 			Node<Course>* noDe = new Node<Course>; noDe->init(a);
 			addLast(systems.allCourse[a.sem.number - 1], noDe);
 		}

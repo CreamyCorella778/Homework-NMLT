@@ -4,10 +4,16 @@
 
 float calculateSemGPA(Student &stu)
 {
-	stu.semGPA = 0.0;
+	stu.semGPA = 0.0; float sumCredit = 0;
 	for (Node<Scoreboard>* i = stu.marks.head; i != nullptr; i = i->next)
+	{
 		stu.semGPA += i->data.Total * float(i->data.course.credits);
-	stu.semGPA /= float(countNodes(stu.marks.head));
+		sumCredit += float(i->data.course.credits);
+	}
+	if (!sumCredit)
+		stu.semGPA == 0;
+	else
+		stu.semGPA /= sumCredit;
 	return stu.semGPA;
 }
 
@@ -15,7 +21,7 @@ LList<Course> findCoursesOfClass(Class cl, Semester sem)
 {
 	LList<Course> courseList; courseList.init();
 	for (Node<Course>* i = systems.allCourse[sem.number - 1].head; i != nullptr; i = i->next)
-		if (i->data.lop.isEqual(cl) && i->data.sem.isEqual(sem))
+		if (!i->data.lop.cls.compare(cl.cls) && i->data.sem.isEqual(sem))
 		{
 			Node<Course>* node = new Node<Course>; node->init(i->data);
 			addLast(courseList, node);
@@ -44,7 +50,8 @@ void countNoInStudentList(LList<Student> &l)
 		i->data.no = index;
 }
 
-bool writeGPAofClassInSem(string fname, Class cl, Semester sem) // fname = gpa_classname_semnumber.txt (gpa is a literally a word)
+// fname = gpa_classname_semnumber_schoolyear.txt (gpa is a literally a word)
+bool writeGPAofClassInSem(string fname, Class cl, Semester sem) 
 { 
 	ofstream fp;
 	fp.open(fname, ios::trunc);
@@ -94,7 +101,8 @@ string* generateMoreFileNames(Class cl, Semester currentSem)
 	return fnameList;
 }
 
-string* extractCl_sno_schy(string fname) // fname = gpa_classname_semnumber.txt (gpa is a literally a word)
+// fname = gpa_classname_semnumber_schoolyear.txt (gpa is a literally a word)
+string* extractCl_sno_schy(string fname) 
 {
 	int j = 4; string* res = new string[2];
 	for (int i = 0; i < 2; ++i)
@@ -103,7 +111,8 @@ string* extractCl_sno_schy(string fname) // fname = gpa_classname_semnumber.txt 
 	return res;
 }
 
-bool readGPAofClassInSem(string fname, LList<float>& semGPA) // fname = gpa_classname_semnumber.txt (gpa is a literally a word)
+// fname = gpa_classname_semnumber_schoolyear.txt (gpa is a literally a word)
+bool readGPAofClassInSem(string fname, LList<float>& semGPA) 
 {
 	ifstream fp;
 	fp.open(fname, ios::in);
@@ -114,16 +123,16 @@ bool readGPAofClassInSem(string fname, LList<float>& semGPA) // fname = gpa_clas
 		string* container = new string[2];
 		string className = extractCl_sno_schy(fname)[0];
 		Node<Class>* n0de = findCLass(className); semGPA.init();
-		if (n0de == nullptr)
+		if (!n0de)
 		{
 			fp.close();
 			return false;
 		}
 		Node<Student>* node = n0de->data.stuList.head;
-		while (!fp.eof())
+		getline(fp, container[0], '\n');
+		while (getline(fp, container[0], ','))
 		{
 			float score = 0.0;
-			getline(fp, container[0], ',');
 			getline(fp, container[1], ',');
 			getline(fp, container[0], '\n'); score = atof(container[0].c_str());
 			node->data.semGPA = score;
@@ -172,10 +181,13 @@ float* countOverallGPAInClass(Class cl, Semester currentSem)
 			return nullptr;
 		}
 	int numberOfStu = countNodes(semGPA[0].head);
-	float* overallGPA = new float[numberOfStu];
+	float* overallGPA = new float[numberOfStu]; 
 	for (int i = 0; i < numberOfStu; ++i)
+	{
+		overallGPA[i] = 0.0;
 		for (int j = 0; j < numberOfSem; ++j)
 			overallGPA[i] += findNodeByIndex(semGPA[j], i)->data;
+	}
 	Node<Student>* node = cl.stuList.head;
 	for (int i = 0; i < numberOfStu && node != nullptr; ++i, node = node->next)
 	{

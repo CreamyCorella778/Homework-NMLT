@@ -151,7 +151,7 @@ void addLast(LList<a>& l, Node<a>* insert);
 template <class a>
 int countNodes(Node<a>* head);
 template <class a>
-void removeRandomNode(LList<a>& l, a data);
+void removeRandomNode(LList<a>& l, Node<a>*& i);
 template <class a>
 Node<a>* findNode(LList<a> l, a data);
 template <class a>
@@ -174,6 +174,7 @@ void countNoInStudentList(LList<Student>& l);
 bool writeAllCourses(string fname);
 Node<Class>* findCLass(string name);
 Node<Student>* findStudent(string id);
+Node<Student>* findStudent(string id, Class cl);
 Node<Semester>* identifySemesterByToday(Date today);
 int compareDate(Date dey1, Date dey2) ;
 SchoolYear extractSchoolYear(string fname);

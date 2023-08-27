@@ -55,7 +55,9 @@ template <class a>
 Node<a>* findNodeByIndex(LList<a> l, int index)
 {
 	Node<a>* i = l.head; int j = 0;
-	for (i; j != index; i = i->next)
+	if ((!l.head && !l.tail) || index < 0 || index + 1 > countNodes(l.head))
+		return nullptr;
+	for (i, j; i && j < index; i = i->next, ++j)
 		continue;
 	return i;
 }

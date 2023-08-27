@@ -246,6 +246,7 @@ bool addStudentsToClass(string fname) // fname = classname.txt
 			getline(fp, stu.socialID, '\n');
 			Node<Student>* n0de = new Node<Student>; n0de->init(stu);
 			addLast(node->data.stuList, n0de);
+			n0de->data.marks.init();
 		}
 		fp.close();
 		return true;

@@ -129,28 +129,32 @@ void viewOverallGPAInClass(Class cl, Semester currentSem)
 void viewScoreBoards(Class cl, Semester sem)
 {
 	cout << "Bang diem cua lop " << cl.cls << ": " << endl;
-	for (int i = 0; i < 40; ++i)
-		cout << " ";
-
+	for (int i = 0; i < 5; ++i)
+		cout << "     ";
+	//------------------------------------------------------------------------------------
 	LList<Course> courseList = findCoursesOfClass(cl, sem);
-	for (Node<Course>* i = courseList.head; i != nullptr; ++i)
-		cout << setw(50) << setfill('-') << left << i->data.courseName;
-	cout << setw(30) << setfill('-') << left << "Semester GPA";
-	cout << setw(30) << setfill('-') << left << "Overall GPA" << endl;
-
+	for (Node<Course>* i = courseList.head; i != nullptr; i = i->next)
+		cout << setw(40) << setfill('-') << left << i->data.courseName;
+	cout << setw(20) << setfill('-') << left << "Semester GPA";
+	cout << "Overall GPA" << endl;
+	//------------------------------------------------------------------------------------
 	for (Node<Student>* index1 = cl.stuList.head; index1 != nullptr; index1 = index1->next)
 	{
-		cout << setw(40) << index1->data.firstName << " " << index1->data.lastName;
+		int nameLen = index1->data.firstName.length() + 1 + index1->data.lastName.length();
+		cout << index1->data.firstName << " " << index1->data.lastName << setw(25 - nameLen) << setfill('-') << "";
 		for (Node<Course>* index2 = courseList.head; index2 != nullptr; index2 = index2->next)
 		{
 			Node<Scoreboard>* node = index1->data.marks.head;
-			for (; node->data.course.id.compare(index2->data.id) != 0; node = node->next)
+			for (; node && node->data.course.id.compare(index2->data.id); node = node->next)
 				continue;
-			cout << setw(50) << left << node->data.Final;
+			if (!node)
+				cout << setw(40) << "";
+			else
+				cout << setw(40) << left << node->data.Final;
 		}
-		cout << setw(30) << left << index1->data.semGPA;
-		cout << setw(30) << left << index1->data.GPA;
-		if (index1->next != nullptr)
+		cout << setw(20) << left << index1->data.semGPA;
+		cout << index1->data.GPA;
+		if (index1->next)
 			cout << endl;
 	}
 	cout << endl << endl;

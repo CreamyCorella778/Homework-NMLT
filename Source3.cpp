@@ -294,6 +294,7 @@ bool addStudentToCourse(Student st, Course& c) // fname = courseid_classname_sem
 	st.no = countNodes(c.stuList.head) + 1;
 	Node<Student>* node = new Node<Student>; node->init(st);
 	addLast(c.stuList, node);
+	st.marks.init();
 	string fname = generateFileName(c, c.lop, c.sem);
 	ofstream fp;
 	fp.open(fname, ios::app);

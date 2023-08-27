@@ -400,10 +400,9 @@ bool task15(Semester currSem)
 {
     cout << "Phan lay thong tin cua khoa hoc: " << endl;
     Node<Course>* course = task3_5(currSem);
-	string fname1 = course->data.id + "_" + course->data.lop.cls + "_" + to_string(currSem.number) + ".txt"; 
-    string fname = ""; cout << "Nhap ten tep can xuat: "; getline(cin, fname); 
+	string fname = course->data.id + "_" + course->data.lop.cls + "_" + to_string(currSem.number) + ".txt"; 
+    //string fname = ""; cout << "Nhap ten tep can xuat: "; getline(cin, fname); 
     if (!course) return false;
-    addStudentsToCourse(fname1, course->data);
     if (!writeStudentsInCourse(fname, course->data))
     {
         cout << "Loi he thong. Chuc ban may man lan sau." << endl;
@@ -551,6 +550,32 @@ bool task18(Semester currSem)
     }
 }
 
+// chuyen du lieu tu cac hoc sinh trong khoa hoc sang cac hoc sinh trong lop
+void task18_5(Class cls, Semester currSem)
+{
+    for (Node<Course>* k = findCoursesOfClass(cls, currSem).head; k; k = k->next)
+        for (Node<Student>* i = k->data.stuList.head; i; i = i->next)
+        {
+            Node<Student>* j = findStudent(i->data.stuID, cls);
+            if (!j)
+                continue;
+            else
+                j->data = i->data;
+        }
+    countNoInStudentList(cls.stuList);
+}
+
+// tinh semGPA hang loat
+void task18_75(Class cls, Semester currSem)
+{
+    for (Node<Student>* i = cls.stuList.head; i; i = i->next)
+    {
+        i->data.semGPA = 0;
+        calculateSemGPA(i->data);
+    }
+    writeGPAofClassInSem("gpa_22CTT2_3_2022-2023.txt", cls, currSem);
+}
+
 // xem bang diem cua mot lop
 bool task19(Semester currSem)
 {
@@ -580,6 +605,9 @@ bool task19(Semester currSem)
             return false;
         }
     }
+    task18_5(node->data, currSem);
+    task18_75(node->data, currSem);
+    countOverallGPAInClass(node->data, currSem);
     viewScoreBoards(node->data, currSem);
     return true;
 }
