@@ -189,3 +189,7 @@ string generateFileName(Course c, Class cl, Semester sem);
 string generateFileName(Class cl, Semester sem);
 LList<Course> findCoursesOfClass(Class cl, Semester sem);
 float* countOverallGPAInClass(Class cl, Semester currentSem);
+void addCoursesToStaff(Staff &staff);
+Node<Scoreboard>* findScoreboard(Student stu, Course cour);
+Node<Course>* findCourse(string courseID, string className, int semNum, LList<Course> course);
+Node<Scoreboard>* findScoreboard(string stuID, Course cour, LList<Scoreboard> list);

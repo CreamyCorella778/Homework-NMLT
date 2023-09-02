@@ -4,7 +4,7 @@
 
 bool writeAllCoursesOfStudent(string fname) // fname = studentid.txt
 {
-	string stuID = ""; stuID.assign(fname, fname.find_last_of('.') + 1);
+	string stuID = ""; stuID.assign(fname, 0, fname.find_last_of('.'));
 	Node<Student>* node = findStudent(stuID);
 	if (!node && ((node->data.courses.head == node->data.courses.tail && !node->data.courses.head) 
 		|| (node->data.marks.head == node->data.marks.tail && !node->data.marks.head)))
@@ -62,7 +62,12 @@ bool readAllCoursesOfStudent(string fname)
 		{
 			Course a;
 			getline(fp, a.id, ',');
-			getline(fp, a.courseName, ',');
+			if (!getline(fp, a.courseName, ','))
+			{
+				node->data.semGPA = atof(container.c_str());
+				node->data.GPA = atof(a.id.c_str());
+				break;
+			}
 			getline(fp, container, ','); a.teacher = findStaff(container)->data;
 			getline(fp, container, ','); a.lop = createClass(container);
 			getline(fp, container, ','); a.credits = atoi(container.c_str());
@@ -90,8 +95,6 @@ bool readAllCoursesOfStudent(string fname)
 			Node<Scoreboard>* nodE = new Node<Scoreboard>; nodE->init(c);
 			addLast(node->data.marks, nodE);
 		}
-		getline(fp, container, ','); node->data.semGPA = atof(container.c_str());
-		getline(fp, container); node->data.GPA = atof(container.c_str());
 		fp.close();
 		return true;
 	}

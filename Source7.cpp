@@ -12,6 +12,7 @@ bool addStudentsToCourse(string fname, Course &cour)  // fname = courseid_classn
 	{
 		string container = ""; getline(fp, container, '\n');
 		cour.stuList.init();
+		Node<Course>* course = new Node<Course>; course->init(cour);
 		while (getline(fp, container, ','))
 		{
 			Student stu;
@@ -28,6 +29,7 @@ bool addStudentsToCourse(string fname, Course &cour)  // fname = courseid_classn
 			stu.birth = getNS(container);
 			getline(fp, stu.socialID, ',');
 			getline(fp, container, '\n');
+			stu.courses.init(); addLast(stu.courses, course);
 			Node<Student>* node = new Node<Student>; node->init(stu);
 			addLast(cour.stuList, node);
 			node->data.marks.init();
@@ -121,6 +123,45 @@ bool readScoreBoard(string fname) // fname = courseid_classname_semnumber.txt
 	}
 }
 
+bool writeScoreBoard(string fname, Course cour) // fname = courseid_classname_semnumber.txt
+{
+	if (cour.stuList.head == cour.stuList.tail && !cour.stuList.head)
+		return false;
+	ofstream fp;
+	fp.open(fname, ios::trunc);
+	if (!fp.is_open())
+		return false;
+	else
+	{
+		fp << "No,Student ID,First name,Last name,Gender,Date of Birth,SocialID,MidTerm,Final,Other,Total\n";
+		for (Node<Student>* i = cour.stuList.head; i; i = i->next)
+		{
+			fp << i->data.no << ","
+				<< i->data.stuID << ","
+				<< i->data.firstName << ","
+				<< i->data.lastName << ",";
+			if (i->data.gender)
+				fp << "nam,";
+			else
+				fp << "nu,";
+			fp << i->data.birth.day << "/" << i->data.birth.month << "/" << i->data.birth.year << ","
+				<< i->data.socialID;
+			Node<Scoreboard>* scb = findScoreboard(i->data, cour);
+			if (!scb)
+			{
+				fp.close();
+				return false;
+			}
+			fp << "," << scb->data.midTerm << "," << scb->data.Final << ","
+				<< scb->data.Other << "," << scb->data.Total;
+			if (i->next)
+				fp << "\n";
+		}
+		fp.close();
+		return true;
+	}
+}
+
 template <class T>
 T* realloc(T* ptr, size_t old_size, size_t new_size) {
 	if (ptr == nullptr) 
@@ -141,7 +182,7 @@ void getUpdateScbIn4(int*& option, float*& in4, int& n)
 	option = new int[4]; in4 = new float[4]; n = 0; int temp = 0; bool yamete_kudasai = false; 
 	do
 	{
-		cout << "Ban muon cap nhat diem nao cua sinh vien? Chon so thu tu tuong ung: " << endl;
+		cout << "Ban muon cap nhat diem nao cua sinh vien? Chon so thu tu tuong ung voi lua chon: " << endl;
 		cout << "1. Diem giua ki" << endl;
 		cout << "2. Diem cuoi ki" << endl;
 		cout << "3. Diem khac" << endl;
@@ -150,9 +191,9 @@ void getUpdateScbIn4(int*& option, float*& in4, int& n)
 		cout << "Nhap diem moi: "; cin >> in4[n]; ++n;
 		if (n == 4)
 			break;
-		cout << "Ban chi co toi da 4 lan cap nhat. So lan ban da dung la " << n << endl;
-		cout << "Ban co muon tiep tuc cap nhat nua khong? Chon so tuong ung: " <<
-			"1. Co                            2. Khong: ";
+		cout << "Ban chi co the cap nhat toi da 4 truong. So lan ban da dung la " << n << endl;
+		cout << "Ban co muon tiep tuc cap nhat nua khong? Chon so thu tu tuong ung voi lua chon:" << endl <<
+			    "1. Co                                                                 2. Khong: ";
 		cin >> temp;
 		yamete_kudasai = temp == 2 ? false : true;
 	} while (yamete_kudasai);
@@ -166,9 +207,8 @@ void getUpdateScbIn4(int*& option, float*& in4, int& n)
 bool updateScoreBoard_aStudent(Student& stu, Course cour, int* option, float* in4, int n)
 {
 	Node<Scoreboard>* node = stu.marks.head;
-	for (; node != nullptr; node = node->next)
-		if (node->data.course.id == cour.id)
-			break;
+	for (; node && node->data.course.id.compare(cour.id); node = node->next)
+		continue;
 	if (!node)
 		return false;
 	for (int i = 0; i < n; i++)
@@ -193,9 +233,8 @@ bool updateScoreBoard_aStudent(Student& stu, Course cour, int* option, float* in
 bool updateScoreBoard_aCourse(Student& stu, Course& cour, int* option, float* in4, int n)
 {
 	Node<Scoreboard>* node = cour.score.head;
-	for (; node != nullptr; node = node->next)
-		if (node->data.student.stuID == stu.stuID)
-			break;
+	for (; node && node->data.student.stuID.compare(stu.stuID); node = node->next)
+		continue;
 	if (!node)
 		return false;
 	for (int i = 0; i < n; i++)
@@ -225,33 +264,41 @@ bool updateScoreBoard_aStaff(Student& stu, Course& cour, int* option, float* in4
 	return false;
 }
 
-bool updateScoreBoard(Student& stu, Course& cour, Semester currSem, int* option, float* in4, int n) // Watch out this one, change the course scb too
+bool updateScoreBoard(Student& stu, Course& cour, Semester currSem, int* option, float* in4, int n)
 {
+	// tim kiem hoc sinh trong he thong bang ma so 
+	Node<Student>* node = findStudent(stu.stuID);
+	if (!node)
+		return false;
+	bool isEqual = node->data.isEqual(stu) ? true : false;
 	// cap nhat bang diem cua mot hoc sinh
 	if (!updateScoreBoard_aStudent(stu, cour, option, in4, n))
 		return false;
 	// cap nhat bang diem trong lop trong he thong
-	if (!updateScoreBoard_aStudent(findStudent(stu.stuID)->data, cour, option, in4, n))
-		return false;
+	if (!isEqual)
+		if (!updateScoreBoard_aStudent(node->data, cour, option, in4, n))
+			return false;
 	// cap nhat bang diem cua khoa hoc trong he thong
 	if (!updateScoreBoard_aCourse(stu, cour, option, in4, n))
 		return false;
 	// cap nhat bang diem cua khoa hoc trong tep
-	if (!writeStudentsInCourse(generateFileName(cour, stu.cl, currSem), cour))
+	if (!writeScoreBoard(generateFileName(cour, stu.cl, currSem), cour))
 		return false;
 	// cap nhat semGPA cua hoc sinh
 	stu.semGPA = calculateSemGPA(stu);
 	// cap nhat semGPA cua ca lop trong he thong
-	findStudent(stu.stuID)->data.semGPA = calculateSemGPA(stu);
+	if (!isEqual)
+		node->data.semGPA = calculateSemGPA(stu);
 	// cap nhat semGPA cua ca lop trong tep
 	if(!writeGPAofClassInSem(generateFileName(stu.cl, currSem), stu.cl, currSem))
 		return false;
 	// cap nhat gpa cua hoc sinh
-	if (calculateOverallGPA(stu, currSem) < 0)
+	if (calculateOverallGPA(stu, currSem) < 0 || calculateOverallGPA(stu, currSem) > 10)
 		return false;
 	// cap nhat gpa cua ca lop trong tep
-	if (calculateOverallGPA(findStudent(stu.stuID)->data, currSem) < 0)
-		return false;
+	if (!isEqual)
+		if (calculateOverallGPA(node->data, currSem) < 0 || calculateOverallGPA(node->data, currSem) > 10)
+			return false;
 	// cap nhat bang diem cua khoa hoc cua giao vien day
 	if (!updateScoreBoard_aStaff(stu, cour, option, in4, n))
 		return false;

@@ -79,6 +79,7 @@ void main3()
 	cout << readAllCourses("all_courses_2022-2023.txt") << endl;
 	cout << addStudentsToClass("22CTT2.txt") << endl;
 	cout << addStudentsToCourse("BAA000012_22CTT2_3.txt", systems.allCourse[2].head->data) << endl;
-	//cout << writeGPAofClassInSem("")
+	cout << readScoreBoard("BAA000012_22CTT2_3.txt") << endl;
+	cout << readAllCoursesOfStudent("21098765.txt") << endl;
 	cout << testing3(email);
 }

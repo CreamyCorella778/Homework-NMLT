@@ -101,6 +101,8 @@ void viewScoreboards(Student a)
 		cout << "Hoc phan " << i->data.course.courseName << ":" << endl;
 		viewScoreBoard(i->data);
 	}
+	cout << "Diem trung binh hoc ky la " << a.semGPA << endl
+		<< "Diem trung binh tich luy la " << a.GPA << endl;
 }
 
 void viewScoreBoards(Course a)

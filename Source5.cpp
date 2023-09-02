@@ -33,6 +33,14 @@ Node<Course>* findCourse(string courseID, string className, int semNum)
 	return nullptr;
 }
 
+Node<Course>* findCourse(string courseID, string className, int semNum, LList<Course> course)
+{
+	for (Node<Course>* i = course.head; i; i = i->next)
+		if (!i->data.id.compare(courseID) && !i->data.lop.cls.compare(className))
+			return i;
+	return nullptr;
+}
+
 Node<Student>* findStudent(string id, Class cl)
 { 
 	for (Node<Student>* i = cl.stuList.head; i; i = i->next)
@@ -66,3 +74,18 @@ Node<Staff>* findStaff(string id)
 	return nullptr;
 }
 
+Node<Scoreboard>* findScoreboard(Student stu, Course cour)
+{
+	for (Node<Scoreboard>* i = stu.marks.head; i; i = i->next)
+		if (!i->data.course.id.compare(cour.id) && !i->data.course.lop.cls.compare(cour.lop.cls))
+			return i;
+	return nullptr;
+} 
+
+Node<Scoreboard>* findScoreboard(string stuID, Course cour, LList<Scoreboard> list)
+{
+	for (Node<Scoreboard>* i = list.head; i; i = i->next)
+		if (!i->data.course.id.compare(cour.id) && !i->data.course.lop.cls.compare(cour.lop.cls) && !i->data.student.stuID.compare(stuID))
+			return i;
+	return nullptr;
+}

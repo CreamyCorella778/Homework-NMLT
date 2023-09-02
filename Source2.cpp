@@ -244,9 +244,11 @@ bool addStudentsToClass(string fname) // fname = classname.txt
 			getline(fp, container, ',');
 			stu.birth = getNS(container);
 			getline(fp, stu.socialID, '\n');
+			stu.cl = node->data;
 			Node<Student>* n0de = new Node<Student>; n0de->init(stu);
 			addLast(node->data.stuList, n0de);
 			n0de->data.marks.init();
+			n0de->data.courses.init();
 		}
 		fp.close();
 		return true;
@@ -284,4 +286,16 @@ bool writeStudentsInClass(string fname) // fname = classname.txt
 		fp.close();
 		return true;
 	}
+}
+
+// them khoa hoc vao mot giao vien
+void addCoursesToStaff(Staff &staff)
+{
+	for (int i = 0; i < 3; ++i)
+		for (Node<Course>* node = systems.allCourse[i].head; node; node = node->next)
+			if (!node->data.teacher.id.compare(staff.id))
+			{
+				Node<Course>* course = new Node<Course>; course->init(node->data);
+				addLast(staff.courses, course);
+			}
 }

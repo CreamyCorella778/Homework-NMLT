@@ -4,14 +4,14 @@
 
 float calculateSemGPA(Student &stu)
 {
-	stu.semGPA = 0.0; float sumCredit = 0;
+	stu.semGPA = 0.0; float sumCredit = 0.0;
 	for (Node<Scoreboard>* i = stu.marks.head; i != nullptr; i = i->next)
 	{
 		stu.semGPA += i->data.Total * float(i->data.course.credits);
 		sumCredit += float(i->data.course.credits);
 	}
 	if (!sumCredit)
-		stu.semGPA == 0;
+		stu.semGPA == 0.0;
 	else
 		stu.semGPA /= sumCredit;
 	return stu.semGPA;
@@ -66,7 +66,7 @@ bool writeGPAofClassInSem(string fname, Class cl, Semester sem)
 			fp << i->data.no << ","
 				<< i->data.stuID << ","
 				<< i->data.semGPA;
-			if (i != cl.stuList.tail)
+			if (i->next)
 				fp << "\n";
 		}
 		fp.close();
@@ -159,10 +159,12 @@ float calculateOverallGPA(Student &stu, Semester currentSem)
 			fnameList = nullptr;
 			return -1.0;
 		}
+	stu.GPA = 0;
 	for (int j = 0; j < numberOfSem; ++j)
-		stu.GPA += findNodeByIndex(semGPA[j], stu.no)->data;
+		stu.GPA += findNodeByIndex(semGPA[j], stu.no - 1)->data;
 	stu.GPA /= float(numberOfSem);
 	delete[] semGPA;
+	delete[] fnameList;
 	return stu.GPA;
 }
 
